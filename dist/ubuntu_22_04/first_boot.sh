@@ -33,7 +33,7 @@ wget https://www.mellanox.com/downloads/firmware/mlxup/4.20.0/SFX/linux_x64/mlxu
 chmod +x
 sudo ./mlxup --online -y -u
 
-wget mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
+#wget mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
 tar -zxf mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
 cd mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64/DEBS_ETH
 sudo apt-get install dkms
