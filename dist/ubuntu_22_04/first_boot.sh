@@ -22,3 +22,20 @@ sudo meson install -C builddir
 
 # uninstall xNVMe
 # cd builddir && meson --internal uninstall
+
+
+#
+# Mellanox
+# warning: below update only works if firmware not too old due to changed nvidia nameing
+
+wget https://www.mellanox.com/downloads/firmware/mlxup/4.20.0/SFX/linux_x64/mlxup
+#./mlxup --download-default -y --download-os Linux_x64 --download-type self_extractor
+chmod +x
+sudo ./mlxup --online -y -u
+
+wget mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
+tar -zxf mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
+cd mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64/DEBS_ETH
+sudo apt-get install dkms
+sudo dpkg -i mlnx-en-eth-only_5.6-2.0.9.0_all.deb mlnx-tools_5.2.0-0.56209_amd64.deb mstflint_4.16.1-2.56209_amd64.deb mlnx-en-eth-only_5.6-2.0.9.0_all.deb  mlnx-en-dkms_5.6-2.0.9.0.g9e75856_all.deb mlnx-en-eth-only_5.6-2.0.9.0_all.deb mlnx-en-utils_5.6-2.0.9.0.g9e75856_amd64.deb ofed-scripts_5.6-OFED.5.6.2.0.9_amd64.deb
+
