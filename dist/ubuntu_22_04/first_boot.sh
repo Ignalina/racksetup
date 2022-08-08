@@ -34,8 +34,8 @@ chmod +x mlxsup
 sudo ./mlxup --online -y -u
 
 #wget mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
-tar -zxf mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
-cd mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64
+tar -zxf mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64.tgz
+cd mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64
 sudo apt-get install dkms python2
 sudo ./install --eth-only
 #sudo dpkg -i ../DEBS/mlnx-ofed-kernel-utils_5.6-OFED.5.6.2.0.9.1_amd64.deb mlnx-en-eth-only_5.6-2.0.9.0_all.deb mlnx-tools_5.2.0-0.56209_amd64.deb mstflint_4.16.1-2.56209_amd64.deb mlnx-en-dkms_5.6-2.0.9.0.g9e75856_all.deb mlnx-en-eth-only_5.6-2.0.9.0_all.deb mlnx-en-utils_5.6-2.0.9.0.g9e75856_amd64.deb ofed-scripts_5.6-OFED.5.6.2.0.9_amd64.deb
