@@ -2,10 +2,10 @@
 
 sudo apt update
 sudo apt install -y ifupdown net-tools
-cp grub /etc/default/grub
+sodu cp grub /etc/default/grub
 sudo update-grub
 
-cp interfaces /etc/network/interfaces
+sudo cp interfaces /etc/network/interfaces
 
 sudo ifdown --force eth0
 sudo ifup eth0
