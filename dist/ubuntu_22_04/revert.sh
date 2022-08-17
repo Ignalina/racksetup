@@ -13,7 +13,7 @@ sudo ifup eth0
 sudo unlink /etc/resolv.conf
 sudo echo nameserver 8.8.8.8 >> /etc/resolv.conf
 
-sudo dpkg -P cloud-init
+#sudo dpkg -P cloud-init
 sudo rm -fr /etc/cloud/
 
 sudo systemctl disable --now systemd-resolved
