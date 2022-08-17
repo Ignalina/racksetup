@@ -34,13 +34,18 @@ sudo meson install -C builddir
 #sudo ./mlxup --online -y -u
 wget https://www.mellanox.com/downloads/MFT/mft-4.21.0-99-x86_64-deb.tgz
 tar -zxf mft-4.21.0-99-x86_64-deb.tgz
-cd mft-4.21.0-99-x86_64-deb$ 
+cd mft-4.21.0-99-x86_64-deb
 sudo ./install.sh
 cd ..
-#wget mlnx-en-5.6-2.0.9.0-ubuntu22.04-x86_64.tgz
+wget mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64.tgz
 tar -zxf mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64.tgz
 cd mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64
 sudo apt-get install dkms python2
 sudo ./install --eth-only
 
 # sudo mlnx_tune <-- gives info
+
+
+# For ubuntu , turn back to  interfaces
+
+source revert.sh
