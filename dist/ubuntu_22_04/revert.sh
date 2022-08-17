@@ -2,7 +2,7 @@
 
 sudo apt update
 sudo apt install -y ifupdown net-tools
-sodu cp grub /etc/default/grub
+sudo cp grub /etc/default/grub
 sudo update-grub
 
 sudo cp interfaces /etc/network/interfaces
