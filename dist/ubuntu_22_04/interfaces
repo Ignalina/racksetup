@@ -7,3 +7,4 @@ iface lo inet loopback
 # The primary network interface
 allow-hotplug eth0
 iface eth0 inet dhcp
+
