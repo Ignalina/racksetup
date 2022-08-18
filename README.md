@@ -9,3 +9,6 @@ Automate OS+DRIVER+MESH setup for servers built on Supermicro+Samsung 1733/1735+
 Since all of above is fairly automated/scripted I can now proceed to teardown
 
 3) setup boot disk + os (cloudinit) via IPMI / redfish
+
+### LICENSE
+ALl software packages are fetched and licensed from NVIDIA. 
