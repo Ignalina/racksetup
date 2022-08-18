@@ -15,7 +15,7 @@ iface eth1 inet manual
 
 # Connected to Node1 (.50)
 auto eth2
-iface ens18 inet static
+iface eth2 inet static
         address  10.15.15.52
         netmask  255.255.255.0
         up ip route add 10.15.15.50/32 dev eth2
@@ -23,7 +23,7 @@ iface ens18 inet static
 
 # Connected to Node2 (.51)
 auto eth3
-iface ens19 inet static
+iface eth3 inet static
         address  10.15.15.52
         netmask  255.255.255.0
         up ip route add 10.15.15.51/32 dev eth3
