@@ -1,5 +1,6 @@
-# racksetup
+# racksetup X14 minicompute
 Automate OS+DRIVER+MESH setup for servers built on Supermicro+Samsung 1733/1735+Mellanox ConnectX-6
+![mesh](https://user-images.githubusercontent.com/33436048/185506672-ce6c84ed-4419-404d-95bf-624016278cbb.svg)
 
 
 0) DONE install xnvme + Mellanox , see dist/ubuntu_22_04/first_boot.sh
