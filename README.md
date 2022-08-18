@@ -12,4 +12,9 @@ Since all of above is fairly automated/scripted I can now proceed to teardown
 3) setup boot disk + os (cloudinit) via IPMI / redfish
 
 ### LICENSE
-ALl software packages are fetched and licensed from NVIDIA. 
+NVIDIA licensed software fetched and available in this repo as git LFS.
+
+* mft-4.21.0-99-x86_64-deb.tgz 
+* mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64.tgz 
+
+xnvme license https://github.com/OpenMPDK/xNVMe/blob/main/LICENSE
