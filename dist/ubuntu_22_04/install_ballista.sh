@@ -6,7 +6,13 @@ cd arrow-ballista
 echo "$HOME/.cargo/env"
 source "$HOME/.cargo/env"
 cargo build --release
-#RUST_LOG=info ./target/release/ballista-scheduler
-#RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50051
-#RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50052
 
+#host 1
+#RUST_LOG=info ./target/release/ballista-scheduler
+#sudo RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.1.1.10
+
+#host2
+#sudo RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.1.1.10
+
+#host3
+#sudo RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.1.1.10
