@@ -49,3 +49,6 @@ sudo ./install --eth-only
 # For ubuntu , turn back to  interfaces
 
 source revert.sh
+
+# Mount 
+sudo mkfs.ext4 /dev/nvme2n1
