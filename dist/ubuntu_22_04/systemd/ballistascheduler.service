@@ -1,0 +1,23 @@
+[Unit]
+Description=Arrow Ballista Scheduler
+ConditionPathExists=/nvme/s1735_1/ballista                         
+After=network.target
+ 
+[Service]
+Type=simple
+User=ballistascheduler
+Group=ballista    
+LimitNOFILE=10240
+
+Restart=on-failure
+RestartSec=10
+
+WorkingDirectory=/nvme/s1735_1/ballista/arrow-ballista
+ExecStart=/nvme/s1735_1/ballista/arrow-ballista/target/release/ballista-scheduler
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+SyslogIdentifier=ballista-schedulerservice
+ 
+[Install]
+WantedBy=multi-user.target

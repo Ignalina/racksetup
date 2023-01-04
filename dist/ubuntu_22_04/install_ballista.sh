@@ -1,7 +1,10 @@
 cd /nvme/s1735_1/
 mkdir ballista
 cd ballista
-adduser ballista
+#adduser ballista
+groupadd ballista
+useradd -s /sbin/nologin -M ballistascheduler -G ballista
+useradd -s /sbin/nologin -M ballistaexecuter -G ballista
 
 apt install -y curl build-essential gcc make cmake 
 
@@ -23,11 +26,11 @@ echo "$HOME/.cargo/env"
 source "$HOME/.cargo/env"
 cargo build --release
 
-chown -R ballista: ../arrow-ballista
+chown -R ballistascheduler: ../arrow-ballista
 
 #host 1
-RUST_LOG=info ./target/release/ballista-scheduler
-sudo RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.1.1.10
+#RUST_LOG=info ./target/release/ballista-scheduler
+#sudo RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.1.1.10
 
 #host2
 #sudo RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.1.1.10
