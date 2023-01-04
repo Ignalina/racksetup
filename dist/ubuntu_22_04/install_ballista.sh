@@ -1,6 +1,7 @@
 cd /nvme/s1735_1/
 mkdir ballista
 cd ballista
+adduser ballista
 
 apt install -y curl build-essential gcc make cmake 
 
@@ -21,6 +22,8 @@ cd arrow-ballista
 echo "$HOME/.cargo/env"
 source "$HOME/.cargo/env"
 cargo build --release
+
+chown -R ballista: ../arrow-ballista
 
 #host 1
 RUST_LOG=info ./target/release/ballista-scheduler
