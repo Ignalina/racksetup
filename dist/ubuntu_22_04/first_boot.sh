@@ -28,5 +28,7 @@ sudo ./install --eth-only
 
 source revert.sh
 
-# Mount 
-sudo mkfs.ext4 /dev/nvme2n1
+# Mount 1735 main storage
+sudo mkfs.ext4 -f /dev/nvme1n1
+mkdir -p /nvme/s1735_1
+mount /dev/nvme1n1 /nvme/s1735_1
