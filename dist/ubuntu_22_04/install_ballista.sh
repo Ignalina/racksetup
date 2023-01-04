@@ -1,3 +1,7 @@
+cd /nvme/s1735_1/
+mkdir ballista
+cd ballista
+
 apt install -y curl build-essential gcc make cmake 
 
 export PROTO_ZIP="protoc-21.4-linux-x86_64.zip"
