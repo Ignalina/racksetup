@@ -10,7 +10,7 @@ update-grub
 # Figure out which machine in mesh
 #
 h=$(hostname)
-interface=interface${h: -1}
+interface=interfaces${h: -1}
 
 cp ${interface} /etc/network/interfaces
 
