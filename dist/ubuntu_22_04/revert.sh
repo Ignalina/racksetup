@@ -1,11 +1,18 @@
+
+
 # For ubuntu , turn back to  interfaces
 export NEEDRESTART_MODE=a
 apt update
 apt install -y ifupdown net-tools
 cp grub /etc/default/grub
 update-grub
+#
+# Figure out which machine in mesh
+#
+h=$(hostname)
+interface=interface${h: -1}
 
-cp interfaces /etc/network/interfaces
+cp ${interface} /etc/network/interfaces
 
 ifdown --force eth0
 ifup eth0
