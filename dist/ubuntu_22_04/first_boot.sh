@@ -1,5 +1,8 @@
 # before cloning and running git is needed by "sudo apt-get install -y nano git git-lfs"
 
+# in future create the md0 here instead of ubuntu installer
+# mdadm --create --verbose /dev/md0 --level=0 /dev/nvme1n1 /dev/nvme2n1
+# mdadm --detail --scan >> /etc/mdadm.conf
 
 mkfs.xfs -f /dev/md0
 mkdir /mnt/newvar
