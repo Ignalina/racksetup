@@ -1,4 +1,4 @@
-cd /nvme/s1735_1/
+cd /usr/lib/x14
 mkdir ballista
 cd ballista
 #adduser ballista
