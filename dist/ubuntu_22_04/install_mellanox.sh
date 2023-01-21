@@ -16,7 +16,7 @@ cd ..
 wget https://www.mellanox.com/downloads/ofed/MLNX_EN-5.7-1.0.2.0/mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64.tgz
 tar -zxf mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64.tgz
 cd mlnx-en-5.7-1.0.2.0-ubuntu22.04-x86_64
-./install --eth-only
+./install --eth-only --force
 
 
 # to load directly /etc/init.d/mlnx-en.d restart
