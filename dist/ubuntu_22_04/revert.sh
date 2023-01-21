@@ -1,5 +1,5 @@
 # For ubuntu , turn back to  interfaces
-
+export NEEDRESTART_MODE=a
 apt update
 apt install -y ifupdown net-tools
 cp grub /etc/default/grub
