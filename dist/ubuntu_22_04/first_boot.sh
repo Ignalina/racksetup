@@ -28,7 +28,8 @@ sudo ./install --eth-only
 
 source revert.sh
 
+## OBSELETE use raid md0 instead
 # Mount 1735 main storage
-sudo mkfs.ext4 -f /dev/nvme1n1
-mkdir -p /nvme/s1735_1
-mount /dev/nvme1n1 /nvme/s1735_1
+#sudo mkfs.ext4 -f /dev/nvme1n1
+##mkdir -p /nvme/s1735_1
+##mount /dev/nvme1n1 /nvme/s1735_1
