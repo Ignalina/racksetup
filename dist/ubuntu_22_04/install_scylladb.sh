@@ -2,7 +2,7 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys d0a112e06
 sudo wget -O /etc/apt/sources.list.d/scylla.list http://downloads.scylladb.com/deb/debian/scylla-5.0.list
 sudo apt-get update
 sudo apt-get install -y scylla 
-sudo scylla_setup --disks /dev/nvme1n1 --online-discard --nic eth2 \
+sudo scylla_setup --disks /dev/nvme1n1,/dev/nvme2n1 --online-discard 1 --nic eth2 --nic eth3 \
                  --no-kernel-check --no-verify-package \
                  --no-coredump-setup --io-setup 1 --no-memory-setup \
                  --no-rsyslog-setup
