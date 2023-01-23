@@ -9,11 +9,11 @@ Group=x14
 Type=forking
 SuccessExitStatus=143
 
-WorkingDirectory=/usr/lib/spark/spark-3.3.1-bin-hadoop3-scala2.13/sbin
-EnvironmentFile=/usr/lib/spark/spark-3.3.1-bin-hadoop3-scala2.13/etc/env
-ExecStartPost=/bin/bash -c "echo $MAINPID > /usr/lib/spark/spark-3.3.1-bin-hadoop3-scala2.13/etc/spark-slave.pid"
-ExecStart=/usr/lib/spark/spark-3.3.1-bin-hadoop3-scala2.13/sbin/start-slave.sh spark://valkyria1:7077
-ExecStop=/usr/lib/spark/spark-3.3.1-bin-hadoop3-scala2.13/sbin/stop-slave.sh
+WorkingDirectory=/usr/lib/x14/spark/spark-3.3.1-bin-hadoop3-scala2.13/sbin
+EnvironmentFile=/usr/lib/x14/spark/spark-3.3.1-bin-hadoop3-scala2.13/etc/env
+ExecStartPost=/bin/bash -c "echo $MAINPID > /usr/lib/x14/spark/spark-3.3.1-bin-hadoop3-scala2.13/etc/spark-slave.pid"
+ExecStart=/usr/lib/x14/spark/spark-3.3.1-bin-hadoop3-scala2.13/sbin/start-slave.sh spark://valkyria1:7077
+ExecStop=/usr/lib/x14/spark/spark-3.3.1-bin-hadoop3-scala2.13/sbin/stop-slave.sh
 
 [Install]
 WantedBy=multi-user.target
