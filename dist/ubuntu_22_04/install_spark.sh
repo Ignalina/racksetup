@@ -16,6 +16,7 @@ pushd spark-3.3.1-bin-hadoop3-scala2.13
 # todo copy to env file
 popd
 popd 
+chown -R spark:x14 spark
 popd
 
 # TODO in case of first node only
