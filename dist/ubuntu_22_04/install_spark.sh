@@ -1,4 +1,5 @@
 apt-get install -y openjdk-17-jdk-headless zip
+useradd -s /sbin/nologin -M spark -G x14
 
 cd /usr/lib/x14
 mkdir spark
