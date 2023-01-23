@@ -98,14 +98,12 @@ Disk stats (read/write):
     md0: ios=899787/0, merge=0/0, ticks=55216/0, in_queue=55216, util=99.91%, aggrios=450683/0, aggrmerge=0/0, aggrticks=28200/0, aggrin_queue=28200, aggrutil=99.83%
   nvme2n1: ios=450672/0, merge=0/0, ticks=28199/0, in_queue=28198, util=99.83%
   nvme1n1: ios=450695/0, merge=0/0, ticks=28202/0, in_queue=28203, util=99.83%
+
 ```
+
+## Random 4K read QD1
 ## 2 x Samsung 1733 pci 4.0 (aoc supermicro card x4) iouring raid0 ext4
 ```bash
-
-## Sequential READ speed with big blocks QD32
-## 2 x Samsung 1733 pci 4.0 (aoc supermicro card x4) libaio raid0 ext4
-```bash
-
 rickard@valkyria3:/var$ fio --name TEST --eta-newline=5s --filename=fio-tempfile.dat --rw=randread --size=500m --io_size=10g --blocksize=4k --ioengine=libaio --fsync=1 --iodepth=1 --direct=1 --numjobs=1 --runtime=60 --group_reporting 
 TEST: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=1
 fio-3.28
@@ -149,6 +147,10 @@ Disk stats (read/write):
   nvme2n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
   nvme1n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
 ```
+
+## Sequential READ speed with big blocks QD32
+## 2 x Samsung 1733 pci 4.0 (aoc supermicro card x4) libaio raid0 ext4
+```bash
 
 rickard@valkyria3:/var$ fio --name TEST --eta-newline=5s --filename=fio-tempfile.dat --rw=read --size=500m --io_size=10g --blocksize=1024k --ioengine=libaio --fsync=10000 --iodepth=32 --direct=1 --numjobs=1 --runtime=60 --group_reporting
 TEST: (g=0): rw=read, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=32
