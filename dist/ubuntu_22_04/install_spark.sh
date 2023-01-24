@@ -14,10 +14,15 @@ wget https://dlcdn.apache.org/spark/spark-3.3.1/spark-3.3.1-bin-hadoop3-scala2.1
 tar -zxf spark-3.3.1-bin-hadoop3-scala2.13.tgz
 pushd spark-3.3.1-bin-hadoop3-scala2.13
 # todo copy to env file
+mkdir etc
+touch etc/env
 popd
 popd 
+
 chown -R spark:x14 spark
 popd
+
+
 
 # TODO in case of first node only
 mesh_machine_nr
