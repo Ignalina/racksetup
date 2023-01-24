@@ -1,4 +1,5 @@
 source helper.sh
+cp spark.env /tmp
 
 apt-get install -y openjdk-17-jdk-headless zip
 useradd -s /sbin/nologin -M spark -G x14
@@ -15,7 +16,21 @@ tar -zxf spark-3.3.1-bin-hadoop3-scala2.13.tgz
 pushd spark-3.3.1-bin-hadoop3-scala2.13
 # todo copy to env file
 mkdir etc
-touch etc/env
+
+mv /tmp/spark.env etc/env
+
+mesh_machine_nr
+if [[ $? -eq 1 ]]
+then 
+    mesh_machine_meship
+    sed -i -e "s/SPARK_MASTER_HOST_REPLACE/$?/g" etc/env
+fi
+
+
+mesh_machine_meship
+sed -i -e "s/SPARK_LOCAL_IP_REPLACE/$?/g" etc/env
+
+
 popd
 popd 
 
