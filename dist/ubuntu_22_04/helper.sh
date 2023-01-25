@@ -11,13 +11,3 @@ mesh_machine_nr () {
 }
 
 mesh_ip=("10.15.15.0" "10.15.15.50" "10.15.15.51" "10.15.15.52")
-
-mesh_machine_meship () {
-mesh_machine_nr
-
-  return mesh_ip[${nr}]
-}
-
-mesh_machine_meship_master () {
-  return mesh_ip[1]
-}
