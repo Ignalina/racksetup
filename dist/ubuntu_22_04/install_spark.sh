@@ -22,13 +22,10 @@ mv /tmp/spark.env etc/env
 mesh_machine_nr
 if [[ $? -eq 1 ]]
 then 
-    mesh_machine_meship
-    sed -i -e "s/SPARK_MASTER_HOST_REPLACE/$?/g" etc/env
+    sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${mesh_ip[1]}/g" etc/env
 fi
 
-
-mesh_machine_meship
-sed -i -e "s/SPARK_LOCAL_IP_REPLACE/$?/g" etc/env
+sed -i -e "s/SPARK_LOCAL_IP_REPLACE/${mesh_ip[$?]}/g" etc/env
 
 
 popd
