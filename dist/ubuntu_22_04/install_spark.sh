@@ -24,6 +24,10 @@ nr=$?
 if [[ $nr -eq 1 ]]
 then
    echo "I AM MASTER"
+mv conf/conf/spark-defaults.conf.template conf/conf/spark-defaults.conf
+echo "spark.ui.reverseProxy=true" >> conf/conf/spark-defaults.conf
+echo "spark.ui.reverseProxyUrl=https://spark.x14.se" >> conf/conf/spark-defaults.conf
+
 fi
 
 sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${mesh_ip[1]}/g" etc/env
