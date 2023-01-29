@@ -1,3 +1,4 @@
+pushd installation_kits/minio
 wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20230125001954.0.0_amd64.deb -O minio.deb
 sudo dpkg -i minio.deb
 
@@ -9,3 +10,4 @@ chown minio-user:minio-user /var/lib/x14/minio/disk1
 
 cp minio.service /etc/systemd/system/
 systemctl enable minio
+popd
