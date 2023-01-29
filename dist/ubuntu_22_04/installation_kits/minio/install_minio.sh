@@ -8,3 +8,4 @@ useradd -M -r -g minio-user minio-user
 chown minio-user:minio-user /var/lib/x14/minio/disk1
 
 cp minio.service /etc/systemd/system/
+systemctl enable minio
