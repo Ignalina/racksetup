@@ -7,6 +7,9 @@ useradd -s /sbin/nologin -M x14 -g x14
 mkdir /usr/lib/x14
 chown -R x14:x14 /usr/lib/x14
 
+cat append.hosts >> /etc/hosts
+
+
 source install_mellanox.sh
 # reverting ubuntus network to traditional for the mesh
 source revert.sh
