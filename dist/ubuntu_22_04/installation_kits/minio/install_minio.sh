@@ -8,6 +8,10 @@ groupadd -r minio-user
 useradd -M -r -g minio-user minio-user
 chown minio-user:minio-user /var/lib/x14/minio/disk1
 
+cp default.minio /etc/default/minio
+
 cp minio.service /etc/systemd/system/
 systemctl enable minio
+
+systemctl start minio.service
 popd
