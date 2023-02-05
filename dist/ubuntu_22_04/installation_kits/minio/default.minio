@@ -7,7 +7,7 @@
 # The command includes the port that each MinIO server listens on
 # (default 9000)
 
-MINIO_VOLUMES="http://v{1...4}:9000/var/lib/x14/minio/mnt/disk{1...4}/minio"
+MINIO_VOLUMES="http://v{1...3}:9000/var/lib/x14/minio/mnt/disk{1...4}/minio"
 
 # Set all MinIO server options
 #
