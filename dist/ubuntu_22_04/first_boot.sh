@@ -9,10 +9,8 @@ chown -R x14:x14 /usr/lib/x14
 
 cat append.hosts >> /etc/hosts
 
-
-source install_mellanox.sh
-# reverting ubuntus network to traditional for the mesh
-source revert.sh
+install_app mellanox
+install_app revert
 
 # in future create the md0 here instead of ubuntu installer
 # mdadm --create --verbose /dev/md0 --level=0 /dev/nvme1n1 /dev/nvme2n1
