@@ -22,7 +22,7 @@ iface {{.eth2}} inet static
         down ip route del 10.15.15.51/32
 
 # Connected to Node3 (.52)
-auto {{.eth3}
+auto {{.eth3}}
 iface eth3 inet static
         address  10.15.15.50
         netmask  255.255.255.0
