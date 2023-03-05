@@ -18,9 +18,7 @@ cat append.hosts >> /etc/hosts
 
 
 init 1
-
-
-./install_app createvar
+./install_app.sh createvar
 reboot
 
 
