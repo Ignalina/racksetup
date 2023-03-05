@@ -12,9 +12,9 @@ chown -R x14:x14 /usr/lib/x14
 
 cat append.hosts >> /etc/hosts
 
-./install_app mellanox
-./install_app revert
-./install_app datadisk
+./install_app.sh mellanox
+./install_app.sh revert
+./install_app.sh datadisk
 
 
 init 1
