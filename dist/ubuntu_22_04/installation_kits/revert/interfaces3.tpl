@@ -34,6 +34,6 @@ iface vmbr0 inet static
         address  192.168.2.52
         netmask  255.255.240.0
         gateway  192.168.2.1
-        bridge_ports {{.eth1}}
+        bridge_ports eth1
         bridge_stp off
         bridge_fd 0
