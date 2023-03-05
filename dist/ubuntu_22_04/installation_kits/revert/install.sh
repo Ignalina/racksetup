@@ -12,7 +12,7 @@ update-grub
 h=$(hostname -s)
 interface=interfaces${h: -1}
 
-$brokkr_gotplexe ${interface}.tpl --set eth0=${brokkr_mesh_interface_name["eth0"]} --set eth1=${brokkr_mesh_interface_name["eth1"]} --set eth2=${brokkr_mesh_interface_name["eth2"]} --set eth2=${brokkr_mesh_interface_name["eth2"]} > /etc/network/interfaces
+$brokkr_gotplexe ${interface}.tpl --set eth0=${brokkr_mesh_interface_name["eth0"]} --set eth1=${brokkr_mesh_interface_name["eth1"]} --set eth2=${brokkr_mesh_interface_name["eth2"]} --set eth3=${brokkr_mesh_interface_name["eth3"]} > /etc/network/interfaces
 
 eth0=${brokkr_mesh_interface_name["eth0"]}
 ifdown --force ${eth0}

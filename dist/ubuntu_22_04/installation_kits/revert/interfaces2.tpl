@@ -5,25 +5,25 @@ auto lo
 iface lo inet loopback
 
 # The primary network interface
-allow-hotplug {{.eth0}}
-iface {{.eth0}} inet dhcp
+allow-hotplug eth0
+iface eth0 inet dhcp
 
 
 # MESH
 
-iface {{.eth1}} inet manual
+iface eth1 inet manual
 
 
 # Connected to Node3 (.52)
-auto {{.eth2}}
-iface {{.eth2}} inet static
+auto eth2
+iface eth2 inet static
         address  10.15.15.51
         netmask  255.255.255.0
         up ip route add 10.15.15.52/32 dev {{.eth2}}
         down ip route del 10.15.15.52/32
 
 # Connected to Node1 (.50)
-auto {{.eth3}}
+auto eth3
 iface eth3 inet static
         address  10.15.15.51
         netmask  255.255.255.0
