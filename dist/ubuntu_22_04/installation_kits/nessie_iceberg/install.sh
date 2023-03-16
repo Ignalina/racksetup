@@ -24,14 +24,15 @@ then
 
 
    wget https://github.com/projectnessie/nessie/releases/download/nessie-0.51.1/nessie-quarkus-0.51.1-runner
-   chmod +x
+   chmod +x nessie-quarkus-0.51.1-runner
    popd
    popd
    cp nessie.service /etc/systemd/system/
    systemctl enable nessie
 
    chown -R nessie:x14 /usr/lib/x14/nessie
+   systemctl stop spark
    systemctl start nessie
-
+   systemctl start spark
 
 fi
