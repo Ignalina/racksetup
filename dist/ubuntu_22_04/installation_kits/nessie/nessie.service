@@ -1,0 +1,18 @@
+[Unit]
+Description=Project Nessie 0.51.1
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=nessie
+Group=x14
+Type=simple
+Restart=always
+RestartSec=5
+
+WorkingDirectory=/usr/lib/x14/nessie/
+#EnvironmentFile=/usr/lib/x14/nessie/etc/env
+ExecStart=/usr/lib/x14/nessie/nessie-quarkus-0.51.1-runner -Dnessie.version.store.type=ROCKS -Dnessie.version.store.rocks.db-path=/tmp/rocks-nessie
+
+[Install]
+WantedBy=multi-user.target
