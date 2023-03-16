@@ -1,5 +1,6 @@
 # before cloning and running git is needed by "sudo apt-get install -y nano git git-lfs"
 # TODO configurable x14 project/companyname
+apt-get update
 apt-get -y install golang-go
 go install github.com/belitre/gotpl@latest
 
