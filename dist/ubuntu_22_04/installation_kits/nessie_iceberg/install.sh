@@ -1,13 +1,8 @@
-
-mesh_machine_nr
-nr=$?
-if [[ $nr -eq 1 ]]
-then
-   echo "I AM MASTER"
-   useradd -s /sbin/nologin -M nessie -G x14
-
-
    apt-get -y install rocksdb-tools ant
+
+#
+# Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
+#
    cp build.xml /tmp
    cp ivy.xml /tmp
    pushd /usr/lib/x14
@@ -16,6 +11,7 @@ then
    pushd nessie
 
    wget https://dlcdn.apache.org//ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
+   rm -rf *.zip
    unzip apache-ivy-2.5.1-bin-with-deps.zip
    cp /tmp/build.xml .
    cp /tmp/ivy.xml .
@@ -49,25 +45,26 @@ then
    echo 'export AWS_SECRET_ACCESS_KEY=password' >> etc/spark.env
    #export AWS_REGION=xxxxxxxxxxxx
 
-
-
    popd
-
-
-   wget https://github.com/projectnessie/nessie/releases/download/nessie-0.51.1/nessie-quarkus-0.51.1-runner
-   chmod +x nessie-quarkus-0.51.1-runner
-
-   popd
-   popd
-   cp nessie.service /etc/systemd/system/
-   systemctl enable nessie
-
-   chown -R nessie:x14 /usr/lib/x14/nessie
-
-
 
    systemctl stop spark
-   systemctl start nessie
-   systemctl start spark
 
-fi
+
+   mesh_machine_nr
+   nr=$?
+   if [[ $nr -eq 1 ]]
+   then
+      echo "I AM MASTER"
+      useradd -s /sbin/nologin -M nessie -G x14
+
+      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.51.1/nessie-quarkus-0.51.1-runner
+      chmod +x nessie-quarkus-0.51.1-runner
+
+      cp nessie.service /etc/systemd/system/
+      systemctl enable nessie
+
+      chown -R nessie:x14 /usr/lib/x14/nessie
+      systemctl start nessie
+   fi
+
+   systemctl start spark

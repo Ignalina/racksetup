@@ -31,7 +31,7 @@ sed -i -e "s/SPARK_LOCAL_IP_REPLACE/${mesh_ip[$nr]}/g" etc/env
 
 
 popd
-popd 
+popd
 
 chown -R spark:x14 spark
 popd
