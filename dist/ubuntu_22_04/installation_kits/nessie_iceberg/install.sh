@@ -41,8 +41,8 @@
    echo 'spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog' >> con/conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO' >> con/conf/spark-defaults.conf
 
-   echo 'export AWS_ACCESS_KEY_ID=labb' >> etc/spark.env
-   echo 'export AWS_SECRET_ACCESS_KEY=password' >> etc/spark.env
+   echo 'export AWS_ACCESS_KEY_ID=labb' >> etc/env
+   echo 'export AWS_SECRET_ACCESS_KEY=password' >> etc/env
    #export AWS_REGION=xxxxxxxxxxxx
 
    popd
