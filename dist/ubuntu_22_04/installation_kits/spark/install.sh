@@ -20,9 +20,9 @@ nr=$?
 if [[ $nr -eq 1 ]]
 then
    echo "I AM MASTER"
-mv conf/conf/spark-defaults.conf.template conf/conf/spark-defaults.conf
-echo "spark.ui.reverseProxy=true" >> conf/conf/spark-defaults.conf
-echo "spark.ui.reverseProxyUrl=https://spark.x14.se" >> conf/conf/spark-defaults.conf
+   mv conf/spark-defaults.conf.template conf/spark-defaults.conf
+   echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
+   echo "spark.ui.reverseProxyUrl=https://spark.x14.se" >> conf/spark-defaults.conf
 
 fi
 
