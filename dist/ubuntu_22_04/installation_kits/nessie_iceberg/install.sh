@@ -20,7 +20,7 @@ then
    cp /tmp/build.xml .
    cp /tmp/ivy.xml .
    ant resolve
-   
+
    cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
    pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/
    chown -R spark:x14 jars/
@@ -38,18 +38,21 @@ then
 #--conf spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO
 
    echo 'spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"' >> con/conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie.uri=$NESSIE_URI' >> con/conf/spark-defaults.conf
+   echo 'spark.sql.catalog.nessie.uri=http://localhost:19120/api/v1' >> con/conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> con/conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog' >> con/conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie.warehouse=$WAREHOUSE' >> con/conf/spark-defaults.conf
+   echo 'spark.sql.catalog.nessie.warehouse=s3a://10.1.1.68:9000/nessie-catalogue' >> con/conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog' >> con/conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO' >> con/conf/spark-defaults.conf
 
+   echo 'export AWS_ACCESS_KEY_ID=labb' >> etc/spark.env
+   echo 'export AWS_SECRET_ACCESS_KEY=password' >> etc/spark.env
+   #export AWS_REGION=xxxxxxxxxxxx
 
-   echo '' >> con/conf/spark-defaults.conf
 
 
    popd
+
 
    wget https://github.com/projectnessie/nessie/releases/download/nessie-0.51.1/nessie-quarkus-0.51.1-runner
    chmod +x nessie-quarkus-0.51.1-runner
