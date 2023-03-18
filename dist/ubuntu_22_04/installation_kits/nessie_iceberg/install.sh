@@ -37,7 +37,7 @@
 #--conf spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO
 
    echo 'spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"' >> conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie.uri=http://localhost:19120/api/v1' >> conf/spark-defaults.conf
+   echo 'spark.sql.catalog.nessie.uri=http://${brokkr_mesh_ip[1]}:19120/api/v1' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.warehouse=s3a://10.1.1.68:9000/nessie-catalogue' >> conf/spark-defaults.conf
