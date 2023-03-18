@@ -19,17 +19,19 @@ mesh_machine_nr
 nr=$?
 if [[ $nr -eq 1 ]]
 then
-   echo "I AM MASTER"
+   echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
    mv conf/spark-defaults.conf.template conf/spark-defaults.conf
    echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
    echo "spark.ui.reverseProxyUrl=https://iceberg.x14.se" >> conf/spark-defaults.conf
 
 fi
 
-echo "SPARK_LOCAL_IP=${mesh_ip[$nr]}" >> conf/spark-env.sh
+exit
 
-sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${mesh_ip[1]}/g" etc/env
-sed -i -e "s/SPARK_LOCAL_IP_REPLACE/${mesh_ip[$nr]}/g" etc/env
+#echo "SPARK_LOCAL_IP=${brokkr_mesh_ip[$nr]}" >> conf/spark-env.sh
+
+sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${brokkr_mesh_ip[1]}/g" etc/env
+sed -i -e "s/SPARK_LOCAL_IP_REPLACE/${brokkr_mesh_ip[$nr]}/g" etc/env
 
 
 popd
