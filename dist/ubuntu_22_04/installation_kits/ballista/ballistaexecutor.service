@@ -1,19 +1,20 @@
 [Unit]
-Description=Arrow Ballista Scheduler
+Description=Arrow Ballista Executor
 ConditionPathExists=/usr/lib/x14/ballista/arrow-ballista/target/release
 After=network.target
  
 [Service]
 Type=simple
-User=ballistascheduler
-Group=ballista    
+User=ballistaexecutor
+Group=ballista
 LimitNOFILE=10240
 
 Restart=on-failure
 RestartSec=10
 
 WorkingDirectory=/usr/lib/x14/ballista/arrow-ballista/target/release
-ExecStart=/usr/lib/x14/ballista/arrow-ballista/target/release/ballista-scheduler
+ExecStart=/usr/lib/x14/ballista/arrow-ballista/target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.15.15.50
+
 # make sure log directory exists and owned by syslog
 PermissionsStartOnly=true
 SyslogIdentifier=ballista-schedulerservice

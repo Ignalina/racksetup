@@ -27,7 +27,7 @@ source "$HOME/.cargo/env"
 cargo build --release
 
 popd
-chown -R ballistascheduler: arrow-ballista
+chown -R ballistascheduler:x14 arrow-ballista
 
 # NOTE Fix to use mesh network instead
 
@@ -41,3 +41,15 @@ chown -R ballistascheduler: arrow-ballista
 #host3
 #sudo RUST_LOG=info ./target/release/ballista-executor -c 2 -p 50050 --scheduler-host 10.1.1.10
 popd
+
+mkdir /var/lib/x14/ballista
+
+if [[ $? -eq 1 ]]
+then 
+    cp ballistascheduler.service /etc/systemd/system/
+    systemctl enable ballistascheduler
+
+fi
+
+    cp ballistaexecutor.service /etc/systemd/system/
+    systemctl enable ballistaexecutor
