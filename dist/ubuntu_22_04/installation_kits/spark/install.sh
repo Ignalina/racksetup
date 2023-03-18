@@ -22,9 +22,11 @@ then
    echo "I AM MASTER"
    mv conf/spark-defaults.conf.template conf/spark-defaults.conf
    echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
-   echo "spark.ui.reverseProxyUrl=https://spark.x14.se" >> conf/spark-defaults.conf
+   echo "spark.ui.reverseProxyUrl=https://iceberg.x14.se" >> conf/spark-defaults.conf
 
 fi
+
+echo "SPARK_LOCAL_IP=${mesh_ip[$nr]}" >> conf/spark-env.sh
 
 sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${mesh_ip[1]}/g" etc/env
 sed -i -e "s/SPARK_LOCAL_IP_REPLACE/${mesh_ip[$nr]}/g" etc/env
