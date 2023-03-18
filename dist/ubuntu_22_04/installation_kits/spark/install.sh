@@ -21,12 +21,10 @@ if [[ $nr -eq 1 ]]
 then
    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
    mv conf/spark-defaults.conf.template conf/spark-defaults.conf
-   echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
-   echo "spark.ui.reverseProxyUrl=https://iceberg.x14.se" >> conf/spark-defaults.conf
 
 fi
 
-exit
+
 
 #echo "SPARK_LOCAL_IP=${brokkr_mesh_ip[$nr]}" >> conf/spark-env.sh
 

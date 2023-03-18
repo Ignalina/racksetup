@@ -5,6 +5,9 @@
 #
    cp build.xml /tmp
    cp ivy.xml /tmp
+   cp *.cfg /tmp
+   cp nessie.service /tmp
+
    pushd /usr/lib/x14
 
    mkdir nessie
@@ -41,30 +44,39 @@
    echo 'spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO' >> conf/spark-defaults.conf
 
-   echo 'export AWS_ACCESS_KEY_ID=labb' >> etc/env
-   echo 'export AWS_SECRET_ACCESS_KEY=password' >> etc/env
+   echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
+   echo "spark.ui.reverseProxyUrl=https://iceberg.x14.se" >> conf/spark-defaults.conf
+
+   echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
+   echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env
    #export AWS_REGION=xxxxxxxxxxxx
 
    popd
 
-   systemctl stop spark
-
+   systemctl stop spark-slave
 
    mesh_machine_nr
    nr=$?
    if [[ $nr -eq 1 ]]
    then
       echo "I AM MASTER"
+      systemctl stop spark-master
+
       useradd -s /sbin/nologin -M nessie -G x14
 
       wget https://github.com/projectnessie/nessie/releases/download/nessie-0.51.1/nessie-quarkus-0.51.1-runner
       chmod +x nessie-quarkus-0.51.1-runner
 
-      cp nessie.service /etc/systemd/system/
+      cp /tmp/nessie.service /etc/systemd/system/
       systemctl enable nessie
 
       chown -R nessie:x14 /usr/lib/x14/nessie
       systemctl start nessie
+      systemctl start spark-master
    fi
 
-   systemctl start spark
+
+   cp /tmp/iceberg.cfg /etc/nginx/sites-enabled
+   cp /tmp/nessie.cfg /etc/nginx/sites-enabled
+
+   systemctl restart nginx
