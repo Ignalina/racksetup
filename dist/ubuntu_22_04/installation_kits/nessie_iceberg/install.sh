@@ -20,7 +20,7 @@
    cp /tmp/ivy.xml .
    ant resolve
 
-   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
+#   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
    pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/
    chown -R spark:x14 jars/
    
@@ -35,7 +35,6 @@
 #--conf spark.sql.catalog.nessie.warehouse=$WAREHOUSE \
 #--conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \
 #--conf spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO
-
    echo 'spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.uri=http://${brokkr_mesh_ip[1]}:19120/api/v1' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> conf/spark-defaults.conf
@@ -80,3 +79,8 @@
    cp /tmp/nessie.cfg /etc/nginx/sites-enabled
 
    systemctl restart nginx
+
+
+# TEST WITH
+#./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.51.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
+
