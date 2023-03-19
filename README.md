@@ -6,11 +6,15 @@ Automated setup for fast data applience.
 | Iceberg  | y |    y |  n|
 | Delta | n | n | n|
 | Minio-S3 | y | n | n|
-| Mesh  | y | n | n|
-| Mellanox  | y | y | y|
-| Redfish OS install | n | n | n|
 
-Either on VM or baremetall (Tested with built on Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6)
+Optimal setup on baremetall (X14 v2023 using Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6)
+
+| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.1 |
+| :------------ |:---------------:| -----:| -----:|
+| Redfish OS install | n | n | n|
+| Mellanox  | y | y | y|
+| Mesh  | y | n | n|
+
 ![mesh](https://user-images.githubusercontent.com/33436048/185506672-ce6c84ed-4419-404d-95bf-624016278cbb.svg)
 
 
