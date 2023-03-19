@@ -17,6 +17,8 @@ Automated OS+DRIVER+MESH setup for servers built on Supermicro+Samsung 9a3/1733/
 0) DONE install Mellanox , see dist/ubuntu_22_04/first_boot.sh
 1) DONE revert ubuntu 22.0 to interfaces instead of netplan
 2) DONE Configure mesh according to https://pve.proxmox.com/wiki/Full_Mesh_Network_for_Ceph_Server
+3) TODO Instead of revering , use network manager for mesh config.
+4) TODO cleanup remove hardcoded IP etc
 
 Since all of above is fairly automated/scripted I can now proceed to teardown
 
