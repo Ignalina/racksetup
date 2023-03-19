@@ -1,7 +1,17 @@
 # racksetup X14 minicompute
-Automate OS+DRIVER+MESH setup for servers built on Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6
+Automated OS+DRIVER+MESH setup for servers built on Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6
 ![mesh](https://user-images.githubusercontent.com/33436048/185506672-ce6c84ed-4419-404d-95bf-624016278cbb.svg)
 
+
+
+
+| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.1 |
+| :------------ |:---------------:| -----:| -----:|
+| Redfish OS install | n | n | n|
+| Mellanox mesh      | y | y | n|
+| Iceberg  | y        |    y |  n|
+| Delta | n        |    n | n|
+| Minio | y        |    n | n|
 
 ### TODO list
 0) DONE install Mellanox , see dist/ubuntu_22_04/first_boot.sh
