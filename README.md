@@ -8,10 +8,10 @@ Automated OS+DRIVER+MESH setup for servers built on Supermicro+Samsung 9a3/1733/
 | Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.1 |
 | :------------ |:---------------:| -----:| -----:|
 | Redfish OS install | n | n | n|
-| Mellanox mesh      | y | y | n|
-| Iceberg  | y        |    y |  n|
-| Delta | n        |    n | n|
-| Minio | y        |    n | n|
+| Mellanox mesh | y | y | n|
+| Iceberg  | y |    y |  n|
+| Delta | n | n | n|
+| Minio-S3 | y | n | n|
 
 ### TODO list
 0) DONE install Mellanox , see dist/ubuntu_22_04/first_boot.sh
