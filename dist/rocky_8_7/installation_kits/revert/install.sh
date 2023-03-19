@@ -1,11 +1,15 @@
 
 
 # For ubuntu , turn back to  interfaces
-export NEEDRESTART_MODE=a
-apt update
-apt install -y ifupdown net-tools bridge-utils
-cp grub /etc/default/grub
-update-grub
+#export NEEDRESTART_MODE=a
+yum -y install network-scripts
+systemctl stop NetworkManager
+systemctl disable NetworkManager
+
+
+#apt install -y ifupdown net-tools bridge-utils
+#cp grub /etc/default/grub
+#update-grub
 #
 # Figure out which machine in mesh
 #
@@ -21,7 +25,9 @@ unlink /etc/resolv.conf
 echo nameserver 8.8.8.8 >> /etc/resolv.conf
 
 #sudo dpkg -P cloud-init
-rm -fr /etc/cloud/
+#rm -fr /etc/cloud/
 
-systemctl disable --now systemd-resolved
+#systemctl disable --now systemd-resolved
 
+systemctl enable network
+service network restart
