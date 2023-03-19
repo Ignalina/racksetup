@@ -1,5 +1,6 @@
 # racksetup X14 minicompute
-Automated OS+DRIVER+MESH setup for servers built on Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6
+Automated OS+DRIVER+MESH+APPLICATION setup for fast data applience.  
+Either on VM or baremetall (Tested with built on Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6)
 ![mesh](https://user-images.githubusercontent.com/33436048/185506672-ce6c84ed-4419-404d-95bf-624016278cbb.svg)
 
 
