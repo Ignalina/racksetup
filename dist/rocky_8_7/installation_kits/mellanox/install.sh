@@ -1,11 +1,11 @@
 # DONT FORGET TO SET AFTER UPDATE OR NEW CARD 
 # lspci | grep -i mellanox
 # sudo mstconfig -d 41:00.0 set LINK_TYPE_P1=2
-dnf install perl-sigtrap perl-File-*
+dnf install perl-sigtrap perl-File-* 
 
 #
 # Mellanox
-yum install -y gcc make lsof pciutils  python2
+yum install -y gcc make lsof pciutils  python2 python36
 
 mkdir /usr/lib/x14/mellanox
 chown x14:x14 /usr/lib/x14/mellanox
