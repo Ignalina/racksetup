@@ -1,12 +1,12 @@
 # DONT FORGET TO SET AFTER UPDATE OR NEW CARD 
 # lspci | grep -i mellanox
 # sudo mstconfig -d 41:00.0 set LINK_TYPE_P1=2
-
+dnf install perl-sigtrap perl-File-*
 
 #
 # Mellanox
-export NEEDRESTART_MODE=a
-apt-get install -y gcc make dkms python2
+yum install -y gcc make lsof pciutils  python2
+
 mkdir /usr/lib/x14/mellanox
 chown x14:x14 /usr/lib/x14/mellanox
 pushd /usr/lib/x14/mellanox
