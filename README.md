@@ -4,7 +4,8 @@ Automated setup for fast data applience.
 | Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.1 |
 | :------------ |:---------------:| -----:| -----:|
 | Redfish OS install | n | n | n|
-| Mellanox mesh | y | y | n|
+| Mellanox  | y | y | y|
+| Mesh  | y | n | n|
 | Iceberg  | y |    y |  n|
 | Delta | n | n | n|
 | Minio-S3 | y | n | n|
