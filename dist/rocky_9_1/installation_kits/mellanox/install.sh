@@ -17,7 +17,7 @@ rpm -i mft-4.23.0-104.x86_64.rpm
 wget https://www.mellanox.com/downloads/ofed/MLNX_EN-5.9-0.5.6.0/mlnx-en-5.9-0.5.6.0-rhel9.1-x86_64.tgz
 
 tar -zxf mlnx-en-5.9-0.5.6.0-rhel9.1-x86_64.tgz
-pushd mlnx-en-5.9-0.5.6.0-rhel9.1-x86_64.tgz
+pushd mlnx-en-5.9-0.5.6.0-rhel9.1-x86_64
 ./install --eth-only --force
 popd
 
