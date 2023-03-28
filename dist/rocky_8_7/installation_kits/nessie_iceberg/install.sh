@@ -76,13 +76,16 @@ dnf install epel-release rocksdb ant
       chown -R nessie:x14 /usr/lib/x14/nessie
       systemctl start nessie
       systemctl start spark-master
+
+      mv -f /tmp/iceberg.cfg /etc/nginx/sites-enabled/
+      mv -f /tmp/nessie.cfg /etc/nginx/sites-enabled/
+
+      systemctl restart nginx
+
+
    fi
 
 
-   mv -f /tmp/iceberg.cfg /etc/nginx/sites-enabled/
-   mv -f /tmp/nessie.cfg /etc/nginx/sites-enabled/
-
-   systemctl restart nginx
 
 
 # TESTED AND WORKED WITH
