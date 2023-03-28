@@ -1,4 +1,4 @@
-Install rocky 9.1
+Install rocky 8.7
 
 
 -----------------------
