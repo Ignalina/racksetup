@@ -1,29 +1,31 @@
-   apt-get -y install rocksdb-tools ant
-
+dnf install epel-release rocksdb ant
+ 
 #
 # Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
 #
-   cp build.xml /tmp
-   cp ivy.xml /tmp
-   cp *.cfg /tmp
-   cp nessie.service /tmp
+   mv -f build.xml /tmp
+   mv -f ivy.xml /tmp
+   mv -f *.cfg /tmp
+   mv -f nessie.service /tmp
 
    pushd /usr/lib/x14
 
    mkdir nessie
    pushd nessie
 
+# Fetch jars for future offline installation
    wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
    unzip apache-ivy-2.5.1-bin-with-deps.zip
    rm -rf *.zip
-   cp /tmp/build.xml .
-   cp /tmp/ivy.xml .
+   mv -f /tmp/build.xml .
+   mv -f /tmp/ivy.xml .
    ant resolve
-
+# Disabled current fetched jars to much probs.
 #   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
+
    pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/
    chown -R spark:x14 jars/
-   
+
 #spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
 #spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
 #--conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions" \
@@ -68,7 +70,7 @@
       wget https://github.com/projectnessie/nessie/releases/download/nessie-0.51.1/nessie-quarkus-0.51.1-runner
       chmod +x nessie-quarkus-0.51.1-runner
 
-      cp /tmp/nessie.service /etc/systemd/system/
+      mv -f /tmp/nessie.service /etc/systemd/system/
       systemctl enable nessie
 
       chown -R nessie:x14 /usr/lib/x14/nessie
@@ -77,12 +79,12 @@
    fi
 
 
-   cp /tmp/iceberg.cfg /etc/nginx/sites-enabled
-   cp /tmp/nessie.cfg /etc/nginx/sites-enabled
+   mv -f /tmp/iceberg.cfg /etc/nginx/sites-enabled/
+   mv -f /tmp/nessie.cfg /etc/nginx/sites-enabled/
 
    systemctl restart nginx
 
 
-# TEST WITH
+# TESTED AND WORKED WITH
 #./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.51.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
 
