@@ -2,6 +2,8 @@ dnf -y install epel-release
 dnf -y install ant 
 dnf -y groupinstall "Development Tools"
 pushd /tmp
+git clone https://github.com/facebook/rocksdb.git
+cd rocksdb
 make static_lib -j8
 make install
 popd
