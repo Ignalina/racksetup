@@ -1,4 +1,5 @@
-dnf install epel-release rocksdb ant
+dnf -y install epel-release
+dnf -y install ant rocksdb
  
 #
 # Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
