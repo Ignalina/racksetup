@@ -1,6 +1,10 @@
 dnf -y install epel-release
-dnf -y install ant rocksdb
- 
+dnf -y install ant 
+dnf -y groupinstall "Development Tools"
+pushd /tmp
+make static_lib -j8
+make install
+popd
 #
 # Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
 #
