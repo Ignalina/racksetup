@@ -1,6 +1,12 @@
-wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20230125001954.0.0_amd64.deb -O minio.deb
-dpkg -i minio.deb
-rm minio.deb
+pushd /tmp
+wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio-20230324214123.0.0.x86_64.rpm -O minio.rpm
+rpm -Uvh minio.rpm
+rm minio.rpm
+popd
+firewall-cmd --zone=public --add-port=9000/tcp --permanent
+firewall-cmd --zone=public --add-port=9001/tcp --permanent
+firewall-cmd --reload
+
 
 mkdir -p /var/lib/x14/minio/mnt/disk1/minio
 mkdir -p /var/lib/x14/minio/mnt/disk2/minio

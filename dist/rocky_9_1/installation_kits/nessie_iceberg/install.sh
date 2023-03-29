@@ -1,6 +1,5 @@
 dnf -y install epel-release
 dnf -y install ant rocksdb
-dnf -y groupinstall "Development Tools"
 
 #
 # Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
@@ -16,12 +15,12 @@ dnf -y groupinstall "Development Tools"
    pushd nessie
 
 # Fetch jars for future offline installation
-   wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
-   unzip apache-ivy-2.5.1-bin-with-deps.zip
-   rm -rf *.zip
-   mv -f /tmp/build.xml .
-   mv -f /tmp/ivy.xml .
-   ant resolve
+#   wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
+#   unzip apache-ivy-2.5.1-bin-with-deps.zip
+#   rm -rf *.zip
+#   mv -f /tmp/build.xml .
+#   mv -f /tmp/ivy.xml .
+#   ant resolve
 # Disabled current fetched jars to much probs.
 #   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
 
@@ -83,7 +82,6 @@ dnf -y groupinstall "Development Tools"
       mv -f /tmp/nessie.cfg /etc/nginx/sites-enabled/
 
       systemctl restart nginx
-
 
    fi
 

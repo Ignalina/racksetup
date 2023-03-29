@@ -6,7 +6,8 @@ mkdir ballista
 chown -R x14:x14 ballista
 pushd ballista
 
-apt install -y curl build-essential gcc make cmake
+dnf -y install cmake curl unzip
+dnf -y groupinstall "Development Tools" 
 
 export PROTO_ZIP="protoc-21.4-linux-x86_64.zip"
 curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v21.4/$PROTO_ZIP
