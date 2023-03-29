@@ -22,7 +22,7 @@ if [[ $nr -eq 1 ]]
 then
    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
 fi
-   mv -f conf/spark-defaults.conf.template conf/spark-defaults.conf
+  mv -f conf/spark-defaults.conf.template conf/spark-defaults.conf
  echo "spark.sql.streaming.stateStore.providerClass=org.apache.spark.sql.execution.streaming.state.RocksDBStateStoreProvider" >> conf/spark-defaults.conf
 
  mkdir /var/lib/x14/spark/spark.local.dir
@@ -47,4 +47,14 @@ popd
 chown -R spark:x14 spark
 popd
 
+# TODO in case of first node only
+mesh_machine_nr
+if [[ $? -eq 1 ]]
+then 
+    mv -f spark-master.service /etc/systemd/system/
+    systemctl enable spark-master
+fi
+
+mv -f spark-slave.service /etc/systemd/system/
+systemctl enable spark-slave
 
