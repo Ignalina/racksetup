@@ -48,14 +48,3 @@ chown -R spark:x14 spark
 popd
 
 
-
-# TODO in case of first node only
-mesh_machine_nr
-if [[ $? -eq 1 ]]
-then 
-    mv -f spark-master.service /etc/systemd/system/
-    systemctl enable spark-master
-fi
-
-mv -f spark-slave.service /etc/systemd/system/
-systemctl enable spark-slave

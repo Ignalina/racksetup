@@ -16,6 +16,17 @@ mesh_machine_nr () {
   nr=${h: -1}
   return ${nr}
 }
+
+mesh_gen_hosts () {
+  length=${#brokkr_mesh_name[@]}
+ 
+# use C style for loop syntax to read all values and indexes
+  for (( j=1; j<length; j++ ));
+  do
+    echo  "${brokkr_mesh_ip[$j]} ${brokkr_mesh_name[$j]}" >> /etc/hosts
+  done
+}
+
 brokkr_app=$1
 
 #
@@ -31,6 +42,8 @@ declare -A brokkr_mesh_interface_name
 brokkr_mesh_interface_name+=( ["eth0"]=enp6s18 ["eth1"]=enp6s19 ["eth2"]=enp6s20 ["eth3"]=enp6s21 )
 #brokkr_md0_device=("nvme1n1" "nvme2n1")
 brokkr_md0_device=("vdb" "vdc")
+
+
 
 
 pushd installation_kits/${brokkr_app}
