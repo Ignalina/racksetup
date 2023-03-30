@@ -1,5 +1,9 @@
 dnf -y update
 dnf -y install golang wget tar
+setenforce 0
+SELINUX=disabled
+SELINUXTYPE=targeted
+
 go install github.com/belitre/gotpl@latest
 
 
