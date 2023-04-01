@@ -1,15 +1,14 @@
 # before cloning and running git is needed by "sudo yum install -y nano git git-lfs"
 # TODO configurable x14 project/companyname
 
-./install_app.sh init
-./install_app.sh mellanox
-#./install_app.sh revert
-./install_app.sh datadisk md0
+config=$(realpath default_config)
+
+./install_app.sh init ${config} 
+#./install_app.sh ${config} mellanox ${config}
+#./install_app.sh ${config} revert ${config}
+./install_app.sh datadisk ${config}
 
 
 init 1
-./install_app.sh createvar md0
+./install_app.sh createvar ${config}
 reboot
-
-
-
