@@ -18,22 +18,19 @@ mv /tmp/spark.env etc/env
 
 mesh_machine_nr
 nr=$?
-if [[ $nr -eq 1 ]]
-then
-   echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
-fi
-   mv conf/spark-defaults.conf.template conf/spark-defaults.conf
- echo "spark.sql.streaming.stateStore.providerClass=org.apache.spark.sql.execution.streaming.state.RocksDBStateStoreProvider" >> conf/spark-defaults.conf
 
- mkdir /var/lib/x14/spark/spark.local.dir
- mkdir /var/lib/x14/spark/SPARK_LOCAL_DIRS
- mkdir /var/lib/x14/spark/eventLog.dir
- mkdir /var/lib/x14/spark/SPARK_WORKER_DIR
- chown -R spark: /var/lib/x14/spark/
+mv conf/spark-defaults.conf.template conf/spark-defaults.conf
+echo "spark.sql.streaming.stateStore.providerClass=org.apache.spark.sql.execution.streaming.state.RocksDBStateStoreProvider" >> conf/spark-defaults.conf
 
- echo "spark.local.dir=/var/lib/x14/spark/spark.local.dir" >> conf/spark-defaults.conf
- echo "spark.eventLog.dir=/var/lib/x14/spark/eventLog.dir" >> conf/spark-defaults.conf
- echo "spark.serializer=org.apache.spark.serializer.KryoSerializer" >> conf/spark-defaults.conf
+mkdir /var/lib/x14/spark/spark.local.dir
+mkdir /var/lib/x14/spark/SPARK_LOCAL_DIRS
+mkdir /var/lib/x14/spark/eventLog.dir
+mkdir /var/lib/x14/spark/SPARK_WORKER_DIR
+chown -R spark: /var/lib/x14/spark/
+
+echo "spark.local.dir=/var/lib/x14/spark/spark.local.dir" >> conf/spark-defaults.conf
+echo "spark.eventLog.dir=/var/lib/x14/spark/eventLog.dir" >> conf/spark-defaults.conf
+echo "spark.serializer=org.apache.spark.serializer.KryoSerializer" >> conf/spark-defaults.conf
 
 
 sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${brokkr_mesh_ip[1]}/g" etc/env
@@ -50,9 +47,9 @@ popd
 
 
 # TODO in case of first node only
-mesh_machine_nr
-if [[ $? -eq 1 ]]
+if [[ ${nr} -eq 1 ]]
 then 
+    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
     cp spark-master.service /etc/systemd/system/
     systemctl enable spark-master
 fi
