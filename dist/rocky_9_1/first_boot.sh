@@ -3,10 +3,10 @@
 
 config=$(realpath default_config)
 
-#./install_app.sh init ${config} 
+./install_app.sh init ${config} 
 #./install_app.sh ${config} mellanox ${config}
 #./install_app.sh ${config} revert ${config}
-#./install_app.sh datadisk ${config}
+./install_app.sh datadisk ${config}
 
 init 1
 ./install_app.sh createvar ${config}
