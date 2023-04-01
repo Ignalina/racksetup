@@ -1,8 +1,8 @@
-device=$1
 
-mkfs.xfs -f /dev/${device}
+
+mkfs.xfs -f /dev/${brokkr_md0}
 mkdir /mnt/newvar
-mount  /dev/${device} /mnt/newvar
+mount  /dev/${brokkr_md0} /mnt/newvar
  
 # move existing var and create x14 
 # init 1 needed for below
