@@ -74,13 +74,20 @@
       chown -R nessie:x14 /usr/lib/x14/nessie
       systemctl start nessie
       systemctl start spark-master
+
+      FILE=/etc/nginx
+      if [ -d "$FILE" ]; then
+          mv -f /tmp/iceberg.cfg /etc/nginx/sites-enabled/
+          mv -f /tmp/nessie.cfg /etc/nginx/sites-enabled/
+          systemctl restart nginx
+      fi
+
+
+
    fi
 
 
-   cp /tmp/iceberg.cfg /etc/nginx/sites-enabled
-   cp /tmp/nessie.cfg /etc/nginx/sites-enabled
 
-   systemctl restart nginx
 
 
 # TEST WITH
