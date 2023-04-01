@@ -97,3 +97,11 @@ dnf -y install ant rocksdb
 # TESTED AND WORKED WITH
 #./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.51.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
 
+
+# export AWS_ACCESS_KEY_ID=labb
+# export AWS_SECRET_ACCESS_KEY=password
+# export AWS_REGION=us-east-1
+
+#./spark-sql --master spark://10.1.1.93:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.51.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
+# use nessie;
+# CREATE TABLE demo3 (id bigint, data string) ;
