@@ -1,5 +1,5 @@
-brokkr_mesh_ip=("10.15.15.0" "10.15.15.50" "10.15.15.51" "10.15.15.52")
-brokkr_mesh_name=("vmvalkyria" "vmvalkyria1" "vmvalkyria2" "vmvalkyria3")
+brokkr_mesh_ip=("10.1.1.0" "10.1.1.93" "10.1.1.94" "10.1.1.95")
+brokkr_mesh_name=("r9v1.x14.se" "r9v2.x14.se" "r9v2.x14.se" "r9v3.x14.se")
 brokkr_mesh_interface=("eth" "eth0" "eth1" "eth2")
 declare -A brokkr_mesh_interface_name
 brokkr_mesh_interface_name+=( ["eth0"]=enp6s18 ["eth1"]=enp6s19 ["eth2"]=enp6s20 ["eth3"]=enp6s21 )
