@@ -8,9 +8,9 @@ mkdir -p /var/lib/x14/spark/
 mkdir spark
 pushd spark
 
-wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
-tar -zxf spark-3.3.2-bin-hadoop3-scala2.13.tgz
-pushd spark-3.3.2-bin-hadoop3-scala2.13
+wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.12.tgz
+tar -zxf spark-3.3.2-bin-hadoop3-scala2.12.tgz
+pushd spark-3.3.2-bin-hadoop3-scala2.12
 # todo copy to env file
 mkdir etc
 
