@@ -10,7 +10,7 @@ pushd spark
 
 wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz
 tar -zxf spark-3.3.2-bin-hadoop3.tgz
-pushd spark-3.3.2-bin-hadoop3.12
+pushd spark-3.3.2-bin-hadoop3
 # todo copy to env file
 mkdir etc
 
