@@ -1,35 +1,15 @@
-[Unit]
-Description=MinIO
-Documentation=https://min.io/docs/minio/linux/index.html
-Wants=network-online.target
-After=network-online.target
-AssertFileIsExecutable=/usr/local/bin/minio
+upstream minio_servers {
+    server v1:9000;
+    server v2:9000;
+    server v3:9000;
+}
 
-[Service]
-WorkingDirectory=/usr/local
+server {
+    listen 10.15.15.50:9009;
+    server_name v1;
 
-User=minio-user
-Group=minio-user
-ProtectProc=invisible
-
-EnvironmentFile=-/etc/default/minio
-ExecStartPre=/bin/bash -c "if [ -z \"${MINIO_VOLUMES}\" ]; then echo \"Variable MINIO_VOLUMES not set in /etc/default/minio\"; exit 1; fi"
-ExecStart=/usr/local/bin/minio server $MINIO_OPTS $MINIO_VOLUMES
-
-# Let systemd restart this service always
-Restart=always
-
-# Specifies the maximum file descriptor number that can be opened by this process
-LimitNOFILE=65536
-
-# Specifies the maximum number of threads this process can create
-TasksMax=infinity
-
-# Disable timeout logic and wait until process is stopped
-TimeoutStopSec=infinity
-SendSIGKILL=no
-
-[Install]
-WantedBy=multi-user.target
-
-# Built for ${project.name}-${project.version} (${project.name})
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass       http://minio_servers;
+    }
+}
