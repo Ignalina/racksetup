@@ -6,6 +6,7 @@ Automated setup for fast data applience.
 | Iceberg  | y |    n |  y|
 | Delta | n | n | n|
 | Minio-S3 | y | n | n|
+| Single Minio-S3 | y | y | y|
 
 Optimal setup on baremetall (X14 v2023 using Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6)
 
