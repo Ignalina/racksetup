@@ -24,7 +24,7 @@ dnf -y install ant rocksdb
 # Disabled current fetched jars to much probs.
 #   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
 
-   pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.12/
+   pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/
    chown -R spark:x14 jars/
 
 #spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
