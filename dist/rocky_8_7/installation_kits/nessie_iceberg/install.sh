@@ -10,9 +10,9 @@ popd
 #
 # Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
 #
-   mv -f build.xml /tmp
-   mv -f ivy.xml /tmp
-   mv -f *.cfg /tmp
+#   mv -f build.xml /tmp
+#   mv -f ivy.xml /tmp
+   mv -f *.conf /tmp
    mv -f nessie.service /tmp
 
    pushd /usr/lib/x14
@@ -21,12 +21,12 @@ popd
    pushd nessie
 
 # Fetch jars for future offline installation
-   wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
-   unzip apache-ivy-2.5.1-bin-with-deps.zip
-   rm -rf *.zip
-   mv -f /tmp/build.xml .
-   mv -f /tmp/ivy.xml .
-   ant resolve
+#   wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
+#   unzip apache-ivy-2.5.1-bin-with-deps.zip
+#   rm -rf *.zip
+#   mv -f /tmp/build.xml .
+#   mv -f /tmp/ivy.xml .
+#   ant resolve
 # Disabled current fetched jars to much probs.
 #   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
 
@@ -89,8 +89,8 @@ popd
 
       FILE=/etc/nginx
       if [ -d "$FILE" ]; then
-          mv -f /tmp/iceberg.cfg /etc/nginx/config.d/
-          mv -f /tmp/nessie.cfg /etc/nginx/config.d/
+          mv -f /tmp/iceberg.conf /etc/nginx/conf.d/
+          mv -f /tmp/nessie.conf /etc/nginx/conf.d/
           systemctl restart nginx
       fi
 
@@ -101,5 +101,5 @@ popd
 
 
 # TESTED AND WORKED WITH
-#./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.51.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
+#./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.44.0,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.257,software.amazon.awssdk:url-connection-client:2.17.257 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
 

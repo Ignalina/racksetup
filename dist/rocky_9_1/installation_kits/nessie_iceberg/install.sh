@@ -6,7 +6,7 @@ dnf -y install ant rocksdb
 #
    mv -f build.xml /tmp
    mv -f ivy.xml /tmp
-   mv -f *.cfg /tmp
+   mv -f *.conf /tmp
    mv -f nessie.service /tmp
 
    pushd /usr/lib/x14
@@ -68,8 +68,8 @@ dnf -y install ant rocksdb
 
       useradd -s /sbin/nologin -M nessie -G x14
 
-      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.51.1/nessie-quarkus-0.51.1-runner
-      chmod +x nessie-quarkus-0.51.1-runner
+      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.44.0/nessie-quarkus-0.44.0-runner
+      chmod +x nessie-quarkus-0.44.0-runner
       mkdir /var/lib/x14/nessie
       chown nessie: /var/lib/x14/nessie
 
@@ -83,8 +83,8 @@ dnf -y install ant rocksdb
 
       FILE=/etc/nginx
       if [ -d "$FILE" ]; then
-          mv -f /tmp/iceberg.cfg /etc/nginx/config.d/
-          mv -f /tmp/nessie.cfg /etc/nginx/config.d/
+          mv -f /tmp/iceberg.conf /etc/nginx/config.d/
+          mv -f /tmp/nessie.conf /etc/nginx/config.d/
           systemctl restart nginx
       fi
 
@@ -95,13 +95,13 @@ dnf -y install ant rocksdb
 
 
 # TESTED AND WORKED WITH
-#./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.51.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
+#./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.44.0,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.257,software.amazon.awssdk:url-connection-client:2.17.257 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
 
 
 # export AWS_ACCESS_KEY_ID=labb
 # export AWS_SECRET_ACCESS_KEY=password
 # export AWS_REGION=us-east-1
 
-#./spark-sql --master spark://10.1.1.93:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.51.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
+#./spark-sql --master spark://10.1.1.93:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.44.0,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.267,software.amazon.awssdk:url-connection-client:2.17.257 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
 # use nessie;
 # CREATE TABLE demo3 (id bigint, data string) ;
