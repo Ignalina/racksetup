@@ -4,16 +4,18 @@ if [[ $nr -eq 1 ]]
 then
    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
 
-   yum install -y java-11-openjdk-headless zip pip
+   yum install -y java-1.8.0-openjdk zip pip
    pip install pandas matplotlib keras tensorflow pyspark
-   pip install pipupgrade
-   pipupgrade --verbose --latest --yes
+#   pip install pipupgrade
+#   pipupgrade --verbose --latest --yes
 
    useradd -s /sbin/nologin -M zeppelin -G x14
-
+   cp zeppelin.service /tmp
    pushd /usr/lib/x14
      mkdir -p /var/lib/x14/zeppelin/
+     chown -R zeppelin:x14 /var/lib/x14/zeppelin/
      mkdir -p zeppelin
+     chown -R zeppelin:x14 zeppelin
        pushd zeppelin
        wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-all.tgz
        tar -zxf zeppelin-0.10.1-bin-all.tgz
@@ -30,10 +32,11 @@ then
          echo "export ZEPPELIN_LOCAL_IP=10.1.1.9" >> conf/zeppeline-env.sh
          echo "export SPARK_HOME=/usr/lib/x14/spark/spark-3.3.2-bin-hadoop3" >> conf/zeppeline-env.sh
 
-         cp zeppelin.service /etc/systemd/system/zeppelin.service
-         systemctl enable zeppelin.serive
+         cp /tmp/zeppelin.service /etc/systemd/system/zeppelin.service
+         systemctl enable zeppelin.service
         
-         popd
+         popd        
        popd
+       chown -R zeppelin:x14
    popd
 fi
