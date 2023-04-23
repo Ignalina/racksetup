@@ -40,10 +40,10 @@ then
        superset init
 
        # Build javascript assets
-       pushd superset-frontend
-       npm ci
-       npm run build
-       popd
+#       pushd superset-frontend
+#       npm ci
+#       npm run build
+#       popd
 
 
        cp /tmp/superset.service /etc/systemd/system/
