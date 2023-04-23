@@ -5,7 +5,7 @@ After=syslog.target network.target
 [Service]
 User=superset
 Type=oneshot
-ExecStart=superset run -p 8088 --with-threads --reload --debugger
+ExecStart=/usr/lib/x14/superset/start.sh
 #ExecStop=/usr/lib/x14/zeppelin/zeppelin-0.10.1-bin-all/bin/zeppelin-daemon.sh stop
 RemainAfterExit=yes
 
