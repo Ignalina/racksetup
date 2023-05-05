@@ -59,7 +59,7 @@
       mkdir /var/lib/x14/nessie
       chown nessie:x14 /var/lib/x14/nessie
 
-      mf -f /tmp/nessie.service /etc/systemd/system/
+      mv -f /tmp/nessie.service /etc/systemd/system/
       systemctl enable nessie
 
       chown -R nessie:x14 /usr/lib/x14/nessie
