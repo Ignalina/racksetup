@@ -25,7 +25,7 @@
    chown -R spark:x14 jars/
    
    echo 'spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"' >> conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie.uri=http://${brokkr_mesh_ip[1]}:19120/api/v1' >> conf/spark-defaults.conf
+   echo 'spark.sql.catalog.nessie.uri=http://localhost:19120/api/v1' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.warehouse=s3a://nessie-catalogue' >> conf/spark-defaults.conf
@@ -33,8 +33,6 @@
    echo 'spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.s3.endpoint=http://10.1.1.68:9000' >> conf/spark-defaults.conf
 
-   echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
-   echo "spark.ui.reverseProxyUrl=https://iceberg.x14.se" >> conf/spark-defaults.conf
 
    echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
    echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env
