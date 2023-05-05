@@ -14,7 +14,7 @@ pushd spark-3.3.2-bin-hadoop3
 # todo copy to env file
 mkdir etc
 
-mv /tmp/spark.env etc/env
+mv -f /tmp/spark.env etc/env
 
 mesh_machine_nr
 nr=$?
