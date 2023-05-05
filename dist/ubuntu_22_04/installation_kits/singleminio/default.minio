@@ -22,12 +22,12 @@ MINIO_OPTS="--console-address :9001"
 #
 # Defer to your organizations requirements for superadmin user name.
 
-MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_USER=labb
 
 # Set the root password
 #
 # Use a long, random, unique string that meets your organizations
 # requirements for passwords.
 
-MINIO_ROOT_PASSWORD=changeme
+MINIO_ROOT_PASSWORD=password
 
