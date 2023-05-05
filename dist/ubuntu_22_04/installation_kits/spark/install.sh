@@ -1,6 +1,6 @@
 cp spark.env /tmp
 
-apt-get install -y openjdk-17-jdk-headless zip
+apt-get install -y openjdk-11-jdk-headless zip
 useradd -s /sbin/nologin -M spark -G x14
 
 pushd /usr/lib/x14
@@ -8,9 +8,9 @@ mkdir -p /var/lib/x14/spark/
 mkdir spark
 pushd spark
 
-wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3-scala2.13.tgz
-tar -zxf spark-3.3.2-bin-hadoop3-scala2.13.tgz
-pushd spark-3.3.2-bin-hadoop3-scala2.13
+wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz
+tar -zxf spark-3.3.2-bin-hadoop3.tgz
+pushd spark-3.3.2-bin-hadoop3
 # todo copy to env file
 mkdir etc
 
@@ -50,9 +50,9 @@ popd
 if [[ ${nr} -eq 1 ]]
 then 
     echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
-    cp spark-master.service /etc/systemd/system/
+    mv -f spark-master.service /etc/systemd/system/
     systemctl enable spark-master
 fi
 
-cp spark-slave.service /etc/systemd/system/
+mv -f spark-slave.service /etc/systemd/system/
 systemctl enable spark-slave

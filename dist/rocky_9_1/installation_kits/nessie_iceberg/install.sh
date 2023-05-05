@@ -71,7 +71,7 @@ dnf -y install ant rocksdb
       wget https://github.com/projectnessie/nessie/releases/download/nessie-0.54.0/nessie-quarkus-0.54.0-runner
       chmod +x nessie-quarkus-0.54.0-runner
       mkdir /var/lib/x14/nessie
-      chown nessie: /var/lib/x14/nessie
+      chown nessie:x14 /var/lib/x14/nessie
 
       mv -f /tmp/nessie.service /etc/systemd/system/
       systemctl enable nessie

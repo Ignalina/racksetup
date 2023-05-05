@@ -5,8 +5,8 @@
 #
 #   cp build.xml /tmp
 #   cp ivy.xml /tmp
-   cp *.conf /tmp
-   cp nessie.service /tmp
+   mv -f *.conf /tmp
+   mv -f nessie.service /tmp
 
    pushd /usr/lib/x14
 
@@ -21,20 +21,9 @@
 #   ant resolve
 
 #   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
-   pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/
+   pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/
    chown -R spark:x14 jars/
    
-#spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
-#spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
-#--conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions" \
-#--conf spark.sql.catalog.nessie.uri=$NESSIE_URI \
-#--conf spark.sql.catalog.nessie.ref=main \
-#--conf spark.sql.catalog.nessie.authentication.type=BEARER \
-#--conf spark.sql.catalog.nessie.authentication.token=$TOKEN \
-#--conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog \
-#--conf spark.sql.catalog.nessie.warehouse=$WAREHOUSE \
-#--conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \
-#--conf spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO
    echo 'spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.uri=http://${brokkr_mesh_ip[1]}:19120/api/v1' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> conf/spark-defaults.conf
@@ -65,13 +54,12 @@
 
       useradd -s /sbin/nologin -M nessie -G x14
 
-      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.44.0/nessie-quarkus-0.44.0-runner
-      chmod +x nessie-quarkus-0.44.0-runner
-
+      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.54.0/nessie-quarkus-0.54.0-runner
+      chmod +x nessie-quarkus-0.54.0-runner
       mkdir /var/lib/x14/nessie
-      chown nessie: /var/lib/x14/nessie
+      chown nessie:x14 /var/lib/x14/nessie
 
-      cp /tmp/nessie.service /etc/systemd/system/
+      mf -f /tmp/nessie.service /etc/systemd/system/
       systemctl enable nessie
 
       chown -R nessie:x14 /usr/lib/x14/nessie
@@ -93,6 +81,8 @@
 
 
 
-# TEST WITH
-#./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.13:0.44.0,org.apache.iceberg:iceberg-spark-runtime-3.3_2.13:1.1.0,software.amazon.awssdk:bundle:2.17.257,software.amazon.awssdk:url-connection-client:2.17.257 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"
+# TESTED WITH
+#./spark-shell --master spark://10.15.15.50:7077 --packages org.projectnessie:nessie-spark-extensions-3.3_2.12:0.54.0,org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1>
+
+
 
