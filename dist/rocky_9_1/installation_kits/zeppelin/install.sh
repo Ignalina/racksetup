@@ -37,6 +37,8 @@ then
         
          popd        
        popd
-       chown -R zeppelin:x14
+       chown -R zeppelin:x14 zeppelin
+       mkdir -p /usr/lib/x14/zeppelin/zeppelin-0.10.1-bin-all/logs
+       chmod -R og+w /usr/lib/x14/zeppelin/zeppelin-0.10.1-bin-all/logs
    popd
 fi
