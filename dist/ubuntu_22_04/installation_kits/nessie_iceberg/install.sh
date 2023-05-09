@@ -1,10 +1,5 @@
    apt-get -y install rocksdb-tools ant
 
-#
-# Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
-#
-#   cp build.xml /tmp
-#   cp ivy.xml /tmp
    mv -f *.conf /tmp
    mv -f nessie.service /tmp
 
@@ -13,17 +8,10 @@
    mkdir nessie
    pushd nessie
 
-#   wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
-#   unzip apache-ivy-2.5.1-bin-with-deps.zip
-#   rm -rf *.zip
-#   cp /tmp/build.xml .
-#   cp /tmp/ivy.xml .
-#   ant resolve
-
-#   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
    pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/
    chown -R spark:x14 jars/
    
+   echo 'spark.jars.packages=org.mariadb.jdbc:mariadb-java-client:3.1.3,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.3_2.12:0.54.0,org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.2.0,software.amazon.awssdk:sts:2.20.18,software.amazon.awssdk:s3:2.20.18,software.amazon.awssdk:url-connection-client:2.20.18' >> conf/spark-defaults.conf
    echo 'spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.uri=http://localhost:19120/api/v1' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> conf/spark-defaults.conf
@@ -31,8 +19,8 @@
    echo 'spark.sql.catalog.nessie.warehouse=s3a://nessie-catalogue' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO' >> conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie.s3.endpoint=http://10.1.1.68:9000' >> conf/spark-defaults.conf
-
+   echo 'spark.sql.catalog.nessie.s3.endpoint=http://locahost:9000' >> conf/spark-defaults.conf
+   echo 'spark.sql.defaultCatalog=nessie' >> conf/spark-defaults.conf
 
    echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
    echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env

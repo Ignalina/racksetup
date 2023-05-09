@@ -30,6 +30,11 @@ echo "spark.hadoop.fs.s3a.secret.key=password"  >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.endpoint=http://192.168.8.12:9000"  >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"  >> conf/spark-defaults.conf
 
+echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
+echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env
+echo 'AWS_REGION=us-east-1' >> etc/env 
+
+
 
 # JDBC to 
 echo "spark.jdbc.driver.url=jdbc:mariadb://192.168.8.11:3306/database" >> conf/spark-defaults.conf

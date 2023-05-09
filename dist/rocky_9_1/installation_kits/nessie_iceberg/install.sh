@@ -27,17 +27,6 @@ dnf -y install ant rocksdb
    pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/
    chown -R spark:x14 jars/
 
-#spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
-#spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
-#--conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions" \
-#--conf spark.sql.catalog.nessie.uri=$NESSIE_URI \
-#--conf spark.sql.catalog.nessie.ref=main \
-#--conf spark.sql.catalog.nessie.authentication.type=BEARER \
-#--conf spark.sql.catalog.nessie.authentication.token=$TOKEN \
-#--conf spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog \
-#--conf spark.sql.catalog.nessie.warehouse=$WAREHOUSE \
-#--conf spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog \
-#--conf spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO
    echo 'spark.jars.packages=org.mariadb.jdbc:mariadb-java-client:3.1.3,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.3_2.12:0.54.0,org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.2.0,software.amazon.awssdk:sts:2.20.18,software.amazon.awssdk:s3:2.20.18,software.amazon.awssdk:url-connection-client:2.20.18' >> conf/spark-defaults.conf
    echo 'spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.uri=http://${brokkr_mesh_ip[1]}:19120/api/v1' >> conf/spark-defaults.conf
@@ -53,10 +42,6 @@ dnf -y install ant rocksdb
    echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
    echo "spark.ui.reverseProxyUrl=https://iceberg.x14.se" >> conf/spark-defaults.conf
 
-   echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
-   echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env
-   echo 'AWS_REGION=us-east-1' >> etc/env 
-   #export AWS_REGION=xxxxxxxxxxxx
 
    popd
 

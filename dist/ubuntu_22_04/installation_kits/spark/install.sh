@@ -33,6 +33,29 @@ echo "spark.eventLog.dir=/var/lib/x14/spark/eventLog.dir" >> conf/spark-defaults
 echo "spark.serializer=org.apache.spark.serializer.KryoSerializer" >> conf/spark-defaults.conf
 
 
+echo "spark.hadoop.fs.s3a.path.style.access=true" >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.access.key=labb"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.secret.key=password"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.endpoint=http://localhost:9000"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"  >> conf/spark-defaults.conf
+
+echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
+echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env
+echo 'AWS_REGION=us-east-1' >> etc/env 
+
+
+
+# JDBC access
+#echo "spark.jdbc.driver.url=jdbc:mariadb://localhost:3306/database" >> conf/spark-defaults.conf
+#echo "spark.jdbc.driver.class=org.mariadb.jdbc.Driver" >> conf/spark-defaults.conf
+#echo "spark.jdbc.host=localhost" >> conf/spark-defaults.conf
+#echo "spark.jdbc.port=3306" >> conf/spark-defaults.conf
+#echo "spark.jdbc.user=root" >> conf/spark-defaults.conf
+#echo "spark.jdbc.password=password" >> conf/spark-defaults.conf
+
+ 
+echo "spark.sql.execution.arrow.pyspark.enabled=true" >> conf/spark-defaults.conf
+
 sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${brokkr_mesh_ip[1]}/g" etc/env
 sed -i -e "s/SPARK_LOCAL_IP_REPLACE/${brokkr_mesh_ip[$nr]}/g" etc/env
 echo "SPARK_LOCAL_DIRS=/var/lib/x14/spark/SPARK_LOCAL_DIRS" >> etc/env
