@@ -26,11 +26,29 @@ mkdir /var/lib/x14/spark/spark.local.dir
 mkdir /var/lib/x14/spark/SPARK_LOCAL_DIRS
 mkdir /var/lib/x14/spark/eventLog.dir
 mkdir /var/lib/x14/spark/SPARK_WORKER_DIR
-chown -R spark: /var/lib/x14/spark/
+chown -R spark:x14 /var/lib/x14/spark/
 
 echo "spark.local.dir=/var/lib/x14/spark/spark.local.dir" >> conf/spark-defaults.conf
 echo "spark.eventLog.dir=/var/lib/x14/spark/eventLog.dir" >> conf/spark-defaults.conf
 echo "spark.serializer=org.apache.spark.serializer.KryoSerializer" >> conf/spark-defaults.conf
+
+echo "spark.hadoop.fs.s3a.path.style.access=true" >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.access.key=labb"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.secret.key=password"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.endpoint=http://192.168.8.12:9000"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"  >> conf/spark-defaults.conf
+
+
+# JDBC to 
+echo "spark.jdbc.driver.url=jdbc:mariadb://192.168.8.11:3306/database" >> conf/spark-defaults.conf
+echo "spark.jdbc.driver.class=org.mariadb.jdbc.Driver" >> conf/spark-defaults.conf
+echo "spark.jdbc.host=192.168.8.11" >> conf/spark-defaults.conf
+echo "spark.jdbc.port=3306" >> conf/spark-defaults.conf
+echo "spark.jdbc.user=root" >> conf/spark-defaults.conf
+echo "spark.jdbc.password=password" >> conf/spark-defaults.conf
+
+
+echo "spark.sql.execution.arrow.pyspark.enabled=true" >> conf/spark-defaults.conf
 
 
 sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${brokkr_mesh_ip[1]}/g" etc/env
