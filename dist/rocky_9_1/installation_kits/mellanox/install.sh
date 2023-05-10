@@ -18,7 +18,7 @@ wget https://www.mellanox.com/downloads/ofed/MLNX_EN-5.9-0.5.6.0/mlnx-en-5.9-0.5
 
 tar -zxf mlnx-en-5.9-0.5.6.0-rhel9.1-x86_64.tgz
 pushd mlnx-en-5.9-0.5.6.0-rhel9.1-x86_64
-yum -y install perl-sigtrap perl-File-Compare perl-File-Copy
+yum install -y perl-sigtrap perl-File-Compare perl-File-Copy
 ./install --eth-only --force
 popd
 
