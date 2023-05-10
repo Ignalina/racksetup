@@ -16,7 +16,8 @@ systemctl disable NetworkManager
 h=$(hostname -s)
 interface=interfaces${h: -1}
 
-$brokkr_gotplexe ${interface}.tpl --set eth0=${brokkr_mesh_interface_name["eth0"]} --set eth1=${brokkr_mesh_interface_name["eth1"]} --set eth2=${brokkr_mesh_interface_name["eth2"]} --set eth3=${brokkr_mesh_interface_name["eth3"]} > /etc/network/interfaces
+$brokkr_gotplexe ${interface}18.nmconnection --set eth0=${brokkr_mesh_interface_name["eth0"]} --set eth1=${brokkr_mesh_interface_name["eth1"]} --set eth2=${brokkr_mesh_interface_name["eth2"]} --set eth3=${brokkr_mesh_interface_name["eth3"]} > /etc/NetworkManager/system-connections/${interface}18.nmconnection
+$brokkr_gotplexe ${interface}19.nmconnection --set eth0=${brokkr_mesh_interface_name["eth0"]} --set eth1=${brokkr_mesh_interface_name["eth1"]} --set eth2=${brokkr_mesh_interface_name["eth2"]} --set eth3=${brokkr_mesh_interface_name["eth3"]} > /etc/NetworkManager/system-connections/${interface}19.nmconnection
 
 ifdown --force eth0
 ifup eth0
