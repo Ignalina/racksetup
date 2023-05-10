@@ -1,4 +1,5 @@
 yum install -y mdadm
+mdadm --stop /dev/md*
 
 mdadm --create --verbose /dev/${brokkr_md0} --raid-devices=2 --level=0 /dev/${brokkr_md0_device[0]} /dev/${brokkr_md0_device[1]}
 mdadm --detail --scan >> /etc/mdadm.conf
