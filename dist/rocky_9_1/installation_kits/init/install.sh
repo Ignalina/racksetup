@@ -13,5 +13,7 @@ useradd -s /sbin/nologin -M x14 -g x14
 mkdir /usr/lib/x14
 chown -R x14:x14 /usr/lib/x14
 
+systemctl stop firewalld.service
+systemctl disable firewalld.service
 
 mesh_gen_hosts
