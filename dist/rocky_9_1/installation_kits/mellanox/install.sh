@@ -1,7 +1,7 @@
 # DONT FORGET TO SET AFTER UPDATE OR NEW CARD 
 # lspci | grep -i mellanox
 # sudo mstconfig -d 41:00.0 set LINK_TYPE_P1=2
-dnf install perl-sigtrap perl-File-* 
+dnf install -y perl-sigtrap perl-File-* 
 
 #
 # Mellanox
