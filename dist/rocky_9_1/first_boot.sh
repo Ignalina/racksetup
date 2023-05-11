@@ -4,8 +4,8 @@
 config=$(realpath default_config)
 
 ./install_app.sh init ${config} 
-#./install_app.sh ${config} mellanox ${config}
-#./install_app.sh ${config} mesh ${config}
+./install_app.sh mellanox ${config}
+#./install_app.sh mesh ${config}
 ./install_app.sh datadisk ${config}
 
 init 1
