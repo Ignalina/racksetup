@@ -10,7 +10,7 @@ interface-name={{.eth3}}
 [ipv4]
 address1=10.15.15.52/24
 method=manual
-route1=10.15.15.50/32
+route1=10.15.15.51/32
 
 [ipv6]
 addr-gen-mode=eui64
