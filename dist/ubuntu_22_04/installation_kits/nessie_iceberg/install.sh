@@ -23,10 +23,7 @@
    echo 'spark.sql.catalog.nessie.s3.path-style-access=true' >> conf/spark-defaults.conf
    echo 'spark.sql.defaultCatalog=nessie' >> conf/spark-defaults.conf
 
-   echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
-   echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env
-   echo 'AWS_REGION=us-east-1' >> etc/env 
-   #export AWS_REGION=xxxxxxxxxxxx
+
 
    popd
 
