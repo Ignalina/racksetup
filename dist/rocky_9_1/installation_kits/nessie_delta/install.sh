@@ -4,8 +4,6 @@ dnf -y install ant rocksdb
 #
 # Use Ivy/ant to Download depdend jars described in ivy.xml into spark jars directory
 #
-#   mv -f build.xml /tmp
-#   mv -f ivy.xml /tmp
    mv -f *.conf /tmp
    mv -f nessie.service /tmp
 
@@ -14,27 +12,20 @@ dnf -y install ant rocksdb
    mkdir nessie
    pushd nessie
 
-# Fetch jars for future offline installation
-#   wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.zip
-#   unzip apache-ivy-2.5.1-bin-with-deps.zip
-#   rm -rf *.zip
-#   mv -f /tmp/build.xml .
-#   mv -f /tmp/ivy.xml .
-#   ant resolve
-# Disabled current fetched jars to much probs.
-#   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
 
    pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/
    chown -R spark:x14 jars/
 
-   echo 'spark.jars.packages=org.apache.hadoop:hadoop-aws:3.3.2,org.mariadb.jdbc:mariadb-java-client:3.1.3,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.3_2.12:0.58.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.2.1,software.amazon.awssdk:sts:2.20.18,software.amazon.awssdk:s3:2.20.18,software.amazon.awssdk:url-connection-client:2.20.18' >> conf/spark-defaults.conf
-   echo 'spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' >> conf/spark-defaults.conf
+   echo 'spark.jars.packages=org.apache.hadoop:hadoop-aws:3.3.2,org.mariadb.jdbc:mariadb-java-client:3.1.3,org.projectnessie.nessie-integrations:nessie-deltalake:0.58.1,org.projectnessie.nessie-integrations:nessie-spark-3.2-extensions:0.58.1,software.amazon.awssdk:sts:2.20.18,software.amazon.awssdk:s3:2.20.18,software.amazon.awssdk:url-connection-client:2.20.18' >> conf/spark-defaults.conf
+   echo 'spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension,org.projectnessie.spark.extensions.NessieSpark32SessionExtensions' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.uri=http://${brokkr_mesh_ip[1]}:19120/api/v1' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie.catalog-impl=org.apache.iceberg.nessie.NessieCatalog' >> conf/spark-defaults.conf
+#   echo 'spark.sql.catalog.nessie.catalog-impl=' >> conf/spark-defaults.conf
+   echo 'spark.delta.logStore.class=org.projectnessie.deltalake.NessieLogStore' >> conf/spark-defaults.conf
+   echo 'spark.delta.logFileHandler.class=org.projectnessie.deltalake.NessieLogFileMetaParser' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.warehouse=s3a://nessie-catalogue' >> conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie=org.apache.iceberg.spark.SparkCatalog' >> conf/spark-defaults.conf
-   echo 'spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO' >> conf/spark-defaults.conf
+   echo 'spark.sql.catalog.nessie=org.apache.spark.sql.delta.catalog.DeltaCatalog' >> conf/spark-defaults.conf
+#   echo 'spark.sql.catalog.nessie.io-impl=org.apache.iceberg.aws.s3.S3FileIO' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.s3.endpoint=http://10.1.1.68:9000' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.s3.path-style-access=true' >> conf/spark-defaults.conf
    echo 'spark.sql.defaultCatalog=nessie' >> conf/spark-defaults.conf
@@ -42,7 +33,7 @@ dnf -y install ant rocksdb
    
    
    echo "spark.ui.reverseProxy=true" >> conf/spark-defaults.conf
-   echo "spark.ui.reverseProxyUrl=https://iceberg.x14.se" >> conf/spark-defaults.conf
+   echo "spark.ui.reverseProxyUrl=https://delta.x14.se" >> conf/spark-defaults.conf
 
 
    popd
@@ -73,7 +64,7 @@ dnf -y install ant rocksdb
 
       FILE=/etc/nginx
       if [ -d "$FILE" ]; then
-          mv -f /tmp/iceberg.conf /etc/nginx/conf.d/
+          mv -f /tmp/delta.conf /etc/nginx/conf.d/
           mv -f /tmp/nessie.conf /etc/nginx/conf.d/
           systemctl restart nginx
       fi
