@@ -1,5 +1,5 @@
 [Unit]
-Description=Project Nessie 0.58.1
+Description=Project Nessie 0.59.0
 Wants=network-online.target
 After=network-online.target
 
@@ -12,7 +12,7 @@ RestartSec=5
 
 WorkingDirectory=/usr/lib/x14/nessie/
 #EnvironmentFile=/usr/lib/x14/nessie/etc/env
-ExecStart=/usr/lib/x14/nessie/nessie-quarkus-0.58.1-runner -Dnessie.version.store.type=ROCKS -Dnessie.version.store.rocks.db-path=/var/lib/x14/nessie/rocks-nessie -Dquarkus.http.host=10.1.1.93
+ExecStart=/usr/lib/x14/nessie/nessie-quarkus-0.59.0-runner -Dnessie.version.store.type=ROCKS -Dnessie.version.store.rocks.db-path=/var/lib/x14/nessie/rocks-nessie -Dquarkus.http.host=10.1.1.93
 
 [Install]
 WantedBy=multi-user.target
