@@ -19,15 +19,15 @@ mkfs.xfs /dev/nvme2n1 -L DISK2 -f
 mkfs.xfs /dev/nvme3n1 -L DISK3 -f
 mkfs.xfs /dev/nvme4n1 -L DISK4 -f
 
-mkdir /var/lib/x14/minio/mnt/disk1
-mkdir /var/lib/x14/minio/mnt/disk2
-mkdir /var/lib/x14/minio/mnt/disk3
-mkdir /var/lib/x14/minio/mnt/disk4
+mkdir -p /var/lib/x14/minio/mnt/disk1
+mkdir -p /var/lib/x14/minio/mnt/disk2
+mkdir -p /var/lib/x14/minio/mnt/disk3
+mkdir -p /var/lib/x14/minio/mnt/disk4
 
-chown minio-user:x14 /var/lib/x14/minio/mnt/disk1
-chown minio-user:x14 /var/lib/x14/minio/mnt/disk2
-chown minio-user:x14 /var/lib/x14/minio/mnt/disk3
-chown minio-user:x14 /var/lib/x14/minio/mnt/disk4
+chown -R minio-user:x14 /var/lib/x14/minio/mnt/disk1
+chown -R minio-user:x14 /var/lib/x14/minio/mnt/disk2
+chown -R minio-user:x14 /var/lib/x14/minio/mnt/disk3
+chown -R minio-user:x14 /var/lib/x14/minio/mnt/disk4
 cat fstab >> /etc/fstab
 mount -a
 
