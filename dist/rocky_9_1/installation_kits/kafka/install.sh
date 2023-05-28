@@ -1,7 +1,6 @@
-cp spark.env /tmp
 
 yum install -y java-11-openjdk-headless zip
-useradd -s /sbin/nologin -M kafka -G x14
+useradd -s /sbin/nologin -M kafka -g x14
 
 pushd /usr/lib/x14
 mkdir -p /var/lib/x14/kafka/
