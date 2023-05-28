@@ -1,3 +1,4 @@
+mv server.properties /tmp
 
 yum install -y java-11-openjdk-headless zip
 useradd -s /sbin/nologin -M kafka -g x14
@@ -17,7 +18,7 @@ pushd kafka_2.12-3.4.0
 mesh_machine_nr
 nr=$?
 
-
+mv /tmp/server.properties config/kraft/server.properties
 
 KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
 bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties
