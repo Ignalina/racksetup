@@ -1,4 +1,4 @@
-yum install -y java-17-openjdk-headless
+yum install -y java-17-openjdk-devel.x86_64
 
 pushd /usr/lib/x14
 mkdir -p /var/lib/x14/kafka/apicurio

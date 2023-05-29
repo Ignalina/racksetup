@@ -7,12 +7,12 @@ After=network-online.target
 User=kafka
 Group=x14
 Type=simple
-SuccessExitStatus=143
+SuccessExitStatus=0
 
-WorkingDirectory=/usr/lib/x14/kafka/apicurio/apicurio-registry/storage/kafkasql/target/apicurio-registry-storage-kafkasql-2.4.3-SNAPSHOT.jar
+WorkingDirectory=/usr/lib/x14/kafka/apicurio-registry/storage/kafkasql/target
 #EnvironmentFile=/usr/lib/x14/kafka_2.12-3.4.0/env
 ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/apicurio/apicurio.pid"
-ExecStart=/usr/lib/x14/kafka/apicurio/apicurio-registry/storage/kafkasql/target/apicurio-registry-storage-kafkasql-2.4.3-SNAPSHOT.jar
+ExecStart=java -jar /usr/lib/x14/kafka/apicurio-registry/storage/kafkasql/target/apicurio-registry-storage-kafkasql-2.4.3-SNAPSHOT-runner.jar
 #ExecStop=/usr/lib/x14/kafka/kafka_2.12-3.4.0/bin/kafka-server-stop.sh config/kraft/server.properties
 
 [Install]
