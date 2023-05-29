@@ -1,7 +1,4 @@
-cp spark.env /tmp
-
-#yum install -y java-11-openjdk-headless zip
-#useradd -s /sbin/nologin -M kafka -G x14
+yum install -y java-17-openjdk-headless
 
 pushd /usr/lib/x14
 mkdir -p /var/lib/x14/kafka/apicurio
