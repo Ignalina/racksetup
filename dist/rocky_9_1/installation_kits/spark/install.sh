@@ -8,9 +8,9 @@ mkdir -p /var/lib/x14/spark/
 mkdir spark
 pushd spark
 
-wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz
-tar -zxf spark-3.3.2-bin-hadoop3.tgz
-pushd spark-3.3.2-bin-hadoop3
+wget https://dlcdn.apache.org/spark/spark-3.4.0/spark-3.4.0-bin-hadoop3.tgz
+tar -zxf spark-3.4.0-bin-hadoop3.tgz
+pushd spark-3.4.0-bin-hadoop3
 # todo copy to env file
 mkdir etc
 
@@ -35,7 +35,7 @@ echo "spark.serializer=org.apache.spark.serializer.KryoSerializer" >> conf/spark
 echo "spark.hadoop.fs.s3a.path.style.access=true" >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.access.key=labb"  >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.secret.key=password"  >> conf/spark-defaults.conf
-echo "spark.hadoop.fs.s3a.endpoint=http://192.168.8.12:9000"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.endpoint=http://10.1.1.68:9000"  >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"  >> conf/spark-defaults.conf
 
 echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env

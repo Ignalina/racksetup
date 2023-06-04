@@ -1,5 +1,5 @@
 [Unit]
-Description=Apache 3.3.2 Spark Master Scala 2.12
+Description=Apache 3.4 Spark Master Scala 2.12
 Wants=network-online.target
 After=network-online.target
 
@@ -9,11 +9,11 @@ Group=x14
 Type=forking
 SuccessExitStatus=143
 
-WorkingDirectory=/usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/sbin
-EnvironmentFile=/usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/etc/env
-ExecStartPost=/bin/bash -c "echo $MAINPID > /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/etc/spark-master.pid"
-ExecStart=/usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/sbin/start-master.sh
-ExecStop=/usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/sbin/stop-master.sh
+WorkingDirectory=/usr/lib/x14/spark/spark-3.4.0-bin-hadoop3/sbin
+EnvironmentFile=/usr/lib/x14/spark/spark-3.4.0-bin-hadoop3/etc/env
+ExecStartPost=/bin/bash -c "echo $MAINPID > /usr/lib/x14/spark/spark-3.4.0-bin-hadoop3/etc/spark-master.pid"
+ExecStart=/usr/lib/x14/spark/spark-3.4.0-bin-hadoop3/sbin/start-master.sh
+ExecStop=/usr/lib/x14/spark/spark-3.4.0-bin-hadoop3/sbin/stop-master.sh
 
 [Install]
 WantedBy=multi-user.target

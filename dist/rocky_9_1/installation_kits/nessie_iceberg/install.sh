@@ -24,10 +24,10 @@ dnf -y install ant rocksdb
 # Disabled current fetched jars to much probs.
 #   cp lib/*.jar /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3-scala2.13/jars/
 
-   pushd /usr/lib/x14/spark/spark-3.3.2-bin-hadoop3/
+   pushd /usr/lib/x14/spark/spark-3.4.0-bin-hadoop3/
    chown -R spark:x14 jars/
 
-   echo 'spark.jars.packages=org.apache.hadoop:hadoop-aws:3.3.2,org.mariadb.jdbc:mariadb-java-client:3.1.3,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.3_2.12:0.58.1,org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.2.1,software.amazon.awssdk:sts:2.20.18,software.amazon.awssdk:s3:2.20.18,software.amazon.awssdk:url-connection-client:2.20.18' >> conf/spark-defaults.conf
+   echo 'spark.jars.packages=org.apache.hadoop:hadoop-aws:3.4.0,org.mariadb.jdbc:mariadb-java-client:3.1.3,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.4_2.12:0.60.1,org.apache.iceberg:iceberg-spark-runtime-3.4_2.12:1.3.0,software.amazon.awssdk:sts:2.20.18,software.amazon.awssdk:s3:2.20.18,software.amazon.awssdk:url-connection-client:2.20.18' >> conf/spark-defaults.conf
    echo 'spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.uri=http://${brokkr_mesh_ip[1]}:19120/api/v1' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.nessie.ref=main' >> conf/spark-defaults.conf
@@ -58,8 +58,8 @@ dnf -y install ant rocksdb
 
       useradd -s /sbin/nologin -M nessie -G x14
 
-      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.58.1/nessie-quarkus-0.58.1-runner
-      chmod +x nessie-quarkus-0.58.1-runner
+      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.60.1/nessie-quarkus-0.60.1-runner
+      chmod +x nessie-quarkus-0.60.1-runner
       mkdir /var/lib/x14/nessie
       chown nessie:x14 /var/lib/x14/nessie
 
