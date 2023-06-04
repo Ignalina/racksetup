@@ -56,7 +56,7 @@ dnf -y install ant rocksdb
       echo "I AM MASTER"
       systemctl stop spark-master
 
-      useradd -s /sbin/nologin -M nessie -G x14
+      useradd -s /sbin/nologin -M nessie -g x14
 
       wget https://github.com/projectnessie/nessie/releases/download/nessie-0.60.1/nessie-quarkus-0.60.1-runner
       chmod +x nessie-quarkus-0.60.1-runner
