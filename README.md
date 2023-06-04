@@ -26,12 +26,12 @@ Optimal setup on baremetall (X14 v2023 using Supermicro+Samsung 9a3/1733/1735+Me
 0) DONE install Mellanox , see dist/ubuntu_22_04/first_boot.sh
 1) DONE revert ubuntu 22.0 to interfaces instead of netplan
 2) DONE Configure mesh according to https://pve.proxmox.com/wiki/Full_Mesh_Network_for_Ceph_Server
-3) TODO Instead of revering , use network manager for mesh config.
+3) DONE Instead of reverting , use network manager for mesh config.
 4) TODO cleanup remove hardcoded IP etc
 
-Since all of above is fairly automated/scripted I can now proceed to teardown
+Since all of above is fairly automated/scripted I can now proceed bootstrap OS via IPMI
 
-3) setup boot disk + os (cloudinit) via IPMI / redfish
+5) setup boot disk + os (cloudinit) via IPMI / redfish
 
 ### LICENSE
 NVIDIA licensed software,Its either Fetched install time or/and available in this repo as git LFS.
