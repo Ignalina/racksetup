@@ -4,7 +4,9 @@
 git clone https://github.com/confluentinc/schema-registry.git
 cd schema-registry
 git checkout tags/v7.4.0 -b latest2
-mvn compile package -DskipTests
+mvn compile package -P standalone -DskipTests
+mv -f package-schema-registry/target/kafka-schema-registry-package-7.4.0-standalone.jar /usr/lib/x14/kafka/schema-registry/
+java -jar package-schema-registry/target/kafka-schema-registry-package-7.4.0-standalone.jar
 
 # From doc:
 #To migrate from ZooKeeper based to Kafka based primary election, make the following configuration changes in all Schema Registry nodes:
