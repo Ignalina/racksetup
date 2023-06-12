@@ -1,0 +1,18 @@
+[Unit]
+Description=Confluent Schema Registry  7.4.0 Scala 
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kafka
+Group=x14
+Type=simple
+SuccessExitStatus=0
+
+WorkingDirectory=/usr/lib/x14/kafka/schema-registry
+#EnvironmentFile=/usr/lib/x14/kafka_2.12-3.4.0/env
+ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/schema-registry-master.pid"
+ExecStart=java -jar /usr/lib/x14/kafka/schema-registry/kafka-schema-registry-package-7.4.0-standalone.jar  /usr/lib/x14/kafka/schema-registry/schema-registry.json
+
+[Install]
+WantedBy=multi-user.target
