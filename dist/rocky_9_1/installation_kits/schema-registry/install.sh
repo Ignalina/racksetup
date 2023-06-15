@@ -2,18 +2,19 @@
 
 # Use java 11
 git clone https://github.com/confluentinc/schema-registry.git
-cd schema-registry
+pushd schema-registry
 git checkout tags/v7.4.0 -b latest2
 mvn compile package -P standalone -DskipTests
 mkdir /usr/lib/x14/kafka/schema-registry/
-chown kafka:x14 /usr/lib/x14/kafka/schema-registry/
 mv -f package-schema-registry/target/kafka-schema-registry-package-7.4.0-standalone.jar /usr/lib/x14/kafka/schema-registry/
+
+popd
 echo "kafkastore.bootstrap.servers=10.1.1.93:9092" > schema-registry.json
-echo "listeners=http://10.1.1.93:8084" > schema-registry.json
-
-
-
-java -jar package-schema-registry/target/kafka-schema-registry-package-7.4.0-standalone.jar  schema-registry.json
+echo "listeners=http://10.1.1.93:8084" >> schema-registry.json
+chown -R kafka:x14 /usr/lib/x14/kafka/schema-registry/
+mv schema-registry.service /etc/systemd/system/
+systemctl enable schema-registry
+#java -jar package-schema-registry/target/kafka-schema-registry-package-7.4.0-standalone.jar  schema-registry.json
 
 # From doc:
 #To migrate from ZooKeeper based to Kafka based primary election, make the following configuration changes in all Schema Registry nodes:
