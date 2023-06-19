@@ -1,0 +1,10 @@
+kafka:
+  clusters:
+    -
+      name: local
+      bootstrapServers: 10.1.1.93:9092
+      schemaRegistry: http://10.1.1.93:8084
+      schemaRegistryAuth:
+        username: username
+        password: password
+#     schemaNameTemplate: "%s-value"
