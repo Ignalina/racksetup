@@ -8,7 +8,7 @@ systemctl stop NetworkManager
 h=$(hostname -s)
 interface=interfaces${h: -1}
 
-
+# to clear out existing
 rm -rf ${brokkr_mesh_interface_name["eth2"]}.nmconnection
 rm -rf ${brokkr_mesh_interface_name["eth3"]}.nmconnection
 
@@ -18,3 +18,5 @@ $brokkr_gotplexe ${interface}eth3.nmconnection --set eth0=${brokkr_mesh_interfac
 
 systemctl start NetworkManager
 nmcli connection reload
+nmcli con up ${brokkr_mesh_interface_name["eth2"]}
+nmcli con up ${brokkr_mesh_interface_name["eth3"]}
