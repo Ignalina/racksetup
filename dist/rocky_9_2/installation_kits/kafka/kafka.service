@@ -11,7 +11,7 @@ SuccessExitStatus=0
 
 WorkingDirectory=/usr/lib/x14/kafka/kafka_2.12-3.5.0
 #EnvironmentFile=/usr/lib/x14/kafka/kafka_2.12-3.4.0/env
-ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/spark-master.pid"
+ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/kafka.pid"
 ExecStart=/usr/lib/x14/kafka/kafka_2.12-3.5.0/bin/kafka-server-start.sh config/kraft/server.properties
 ExecStop=/usr/lib/x14/kafka/kafka_2.12-3.5.0/bin/kafka-server-stop.sh config/kraft/server.properties
 
