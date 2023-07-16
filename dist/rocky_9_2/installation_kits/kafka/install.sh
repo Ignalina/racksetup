@@ -6,6 +6,7 @@ useradd -s /sbin/nologin -M kafka -g x14
 pushd /usr/lib/x14
 mkdir -p /var/lib/x14/kafka/
 mkdir -p /var/lib/x14/kafka/kraft-combined-logs
+mkdir -p /var/lib/x14/kafka/metadata-logs
 chown -R kafka:x14 /var/lib/x14/kafka/
 
 mkdir kafka
