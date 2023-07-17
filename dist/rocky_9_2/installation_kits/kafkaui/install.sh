@@ -1,14 +1,16 @@
 #needs javac 17
-#update-alternatives -config javac 
+yum install -y java-17-openjdk-devel.x86_64
+#update-alternatives --config java
 
-pushd /tmp
-
+cp kafkaui.service /tmp
+mkdir /usr/lib/x14/kafka/kafkaui
+pushd /usr/lib/x14/kafka/kafkaui
 #git clone https://github.com/provectus/kafka-ui.git
 #cd kafkaui
 #./mvnw install -DskipTests=true
-wget https://github.com/provectus/kafka-ui/releases/download/v0.7.0/kafka-ui-api-v0.7.0.jar
-java -Dspring.config.additional-location=application-local.yml  --add-opens java.rmi/javax.rmi.ssl=ALL-UNNAMED -jar kafka-ui-api-v0.7.0.jar
-
-
+wget https://github.com/provectus/kafka-ui/releases/download/v0.7.1/kafka-ui-api-v0.7.1.jar
+#/usr/lib/jvm/java-17-openjd/java -Dspring.config.additional-location=application-local.yml  --add-opens java.rmi/javax.rmi.ssl=ALL-UNNAMED -jar kafka-ui-api-v0.7.1.jar
+mv -f kafkaui.serve /etc/systemd/system/
+systemctl enable kafkaui
+systemctl start kafkaui
 popd
-
