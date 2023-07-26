@@ -1,5 +1,5 @@
 dnf -y update
-dnf -y install golang wget tar
+dnf -y install golang wget tar NetworkManager-config-server
 setenforce 0
 echo "SELINUX=disabled" > /etc/selinux/config
 echo "SELINUXTYPE=targeted" >> /etc/selinux/config
