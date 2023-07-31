@@ -13,6 +13,7 @@ then
    useradd -s /sbin/nologin -M superset -g x14
    cp superset.service /tmp
    cp start.sh /tmp
+   cp superset_config.py /tmp
    pushd /usr/lib/x14
      mkdir -p /var/lib/x14/superset/
      chown -R superset:x14 /var/lib/x14/superset/
@@ -22,6 +23,7 @@ then
        cp /tmp/start.sh .
        chmod +x start.sh
        python3 -m venv venv
+       cp /tmp/superset_config.py venv/lib64/python3.9/site-packages/superset/
        . venv/bin/activate
        python3 -m pip install --upgrade pip
        pip install numpy apache-superset pillow
