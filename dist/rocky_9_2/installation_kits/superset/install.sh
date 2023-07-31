@@ -11,11 +11,14 @@ then
 
 
    useradd -s /sbin/nologin -M superset -g x14
+   mkdir /home/superset
+   chown superset:x14 /home/superset
    cp superset.service /tmp
    cp start.sh /tmp
    cp superset_config.py /tmp
    pushd /usr/lib/x14
      mkdir -p /var/lib/x14/superset/
+     
      chown -R superset:x14 /var/lib/x14/superset/
      mkdir -p superset
      chown -R superset:x14 superset
@@ -24,22 +27,20 @@ then
        chmod +x start.sh
        python3 -m venv venv
        cp /tmp/superset_config.py venv/lib64/python3.9/site-packages/superset/
-       . venv/bin/activate
-       python3 -m pip install --upgrade pip
-       pip install numpy apache-superset pillow
-       pip install sqlparse=='0.4.3'
-       export FLASK_APP=superset
-       superset db upgrade
+       sudo -u superset . venv/bin/activate
+       sudo -u superset python3 -m pip install --upgrade pip
+       sudo -u supersetpip install numpy apache-superset pillow
+       sudo -u superset pip install sqlparse=='0.4.3'
+       sudo -u superset FLASK_APP=superset superset db upgrade
 
 
        # Create an admin user in your metadata database (use `admin` as username to be able to load the examples)
-       superset fab create-admin
-
+       sudo -u superset superset fab create-admin
        # Load some data to play with
-       superset load_examples
+       sudo -u superset superset load_examples
 
        # Create default roles and permissions
-       superset init
+       sudo -u superset superset init
 
        # Build javascript assets
 #       pushd superset-frontend
@@ -55,3 +56,5 @@ then
        chown -R superset:x14  superset
    popd
 fi
+
+
