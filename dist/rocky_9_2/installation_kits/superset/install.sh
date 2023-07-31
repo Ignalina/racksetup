@@ -25,12 +25,12 @@ then
        . venv/bin/activate
        python3 -m pip install --upgrade pip
        pip install numpy apache-superset pillow
+       pip install sqlparse=='0.4.3'
+       export FLASK_APP=superset
        superset db upgrade
 
 
-
        # Create an admin user in your metadata database (use `admin` as username to be able to load the examples)
-       export FLASK_APP=superset
        superset fab create-admin
 
        # Load some data to play with
