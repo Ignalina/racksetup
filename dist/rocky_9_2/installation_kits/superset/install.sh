@@ -31,6 +31,7 @@ then
        sudo -u superset python3 -m pip install --upgrade pip
        sudo -u supersetpip install numpy apache-superset pillow
        sudo -u superset pip install sqlparse=='0.4.3'
+       sudo -u superset pip install marshmallow-enum
        sudo -u superset FLASK_APP=superset superset db upgrade
 
 
