@@ -15,7 +15,7 @@ then
    cp start.sh /tmp
    pushd /usr/lib/x14
      mkdir -p /var/lib/x14/superset/
-     chown -R zeppelin:x14 /var/lib/x14/superset/
+     chown -R superset:x14 /var/lib/x14/superset/
      mkdir -p superset
      chown -R superset:x14 superset
        pushd superset
