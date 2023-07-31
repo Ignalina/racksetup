@@ -10,7 +10,7 @@ then
    pip install virtualenv
 
 
-   useradd -s /sbin/nologin -M superset -G x14
+   useradd -s /sbin/nologin -M superset -g x14
    cp superset.service /tmp
    cp start.sh /tmp
    pushd /usr/lib/x14
