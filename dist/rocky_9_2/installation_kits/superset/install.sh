@@ -26,7 +26,7 @@ then
        cp /tmp/start.sh .
        chmod +x start.sh
        python3 -m venv venv
-       cp /tmp/superset_config.py venv/lib64/python3.9/site-packages/superset/
+       cp /tmp/superset_config.py venv/bin/
        sudo -u superset . venv/bin/activate
        sudo -u superset python3 -m pip install --upgrade pip
        sudo -u supersetpip install numpy apache-superset pillow
