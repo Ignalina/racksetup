@@ -4,7 +4,8 @@ yum install -y java-11-openjdk-headless zip
 useradd -s /sbin/nologin -M spark -g x14
 
 pushd /usr/lib/x14
-mkdir -p /var/lib/x14/spark/
+mkdir -p /var/lib/x14/spark/ivy
+
 mkdir spark
 pushd spark
 
@@ -23,6 +24,8 @@ mv -f conf/spark-env.sh.template conf/spark-env.sh
 echo "SPARK_LOG_DIR=/var/lib/x14/spark/logs" >> conf/spark-env.sh
 
 mv -f conf/spark-defaults.conf.template conf/spark-defaults.conf
+echo "spark.jars.ivy=/var/lib/x14/spark/ivy" >> conf/spark-defaults.conf
+
 echo "spark.sql.streaming.stateStore.providerClass=org.apache.spark.sql.execution.streaming.state.RocksDBStateStoreProvider" >> conf/spark-defaults.conf
 
 mkdir /var/lib/x14/spark/spark.local.dir
