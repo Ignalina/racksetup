@@ -28,6 +28,7 @@ brokkr_gotplexe=$(go env GOPATH)/bin/gotpl
 
 
 
+source installation_kits/x14scripts/pki.sh
 pushd installation_kits/${brokkr_app}
 source ${brokkr_app_param}
 source install.sh "${@:3}"
