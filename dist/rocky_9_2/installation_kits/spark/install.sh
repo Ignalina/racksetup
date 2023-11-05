@@ -9,9 +9,9 @@ mkdir -p /var/lib/x14/spark/ivy
 mkdir spark
 pushd spark
 
-wget https://dlcdn.apache.org/spark/spark-3.4.0/spark-3.4.0-bin-hadoop3.tgz
-tar -zxf spark-3.4.0-bin-hadoop3.tgz
-pushd spark-3.4.0-bin-hadoop3
+wget https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+tar -zxf spark-3.5.0-bin-hadoop3.tgz
+pushd spark-3.5.0-bin-hadoop3
 # todo copy to env file
 mkdir etc
 
