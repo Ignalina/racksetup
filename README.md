@@ -4,7 +4,7 @@ Automated setup for fast data applience.
 | Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.2 |
 | :------------ |:---------------:| -----:| -----:|
 | Iceberg  | y |    n |  y|
-| Delta | n | n | y|
+| Delta 3.0.0 | n | n | y|
 | Minio-S3 | y | n | y|
 | Single Minio-S3 | y | y | y|
 
