@@ -1,20 +1,20 @@
 # racksetup X14 minicompute
 Automated setup for fast data applience.
 
-| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.1 |
+| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.2 |
 | :------------ |:---------------:| -----:| -----:|
 | Iceberg  | y |    n |  y|
 | Delta | n | n | y|
-| Minio-S3 | y | n | n|
+| Minio-S3 | y | n | y|
 | Single Minio-S3 | y | y | y|
 
 Optimal setup on baremetall (X14 v2023 using Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6)
 
-| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.1 |
+| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.2 |
 | :------------ |:---------------:| -----:| -----:|
 | Redfish OS install | n | n | n|
 | Mellanox  | y | y | y|
-| Mesh  | y | n | n|
+| Mesh  | y | n | y|
 
 ![mesh](https://user-images.githubusercontent.com/33436048/185506672-ce6c84ed-4419-404d-95bf-624016278cbb.svg)
 
