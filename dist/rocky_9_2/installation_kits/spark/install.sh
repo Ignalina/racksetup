@@ -41,21 +41,12 @@ echo "spark.serializer=org.apache.spark.serializer.KryoSerializer" >> conf/spark
 echo "spark.hadoop.fs.s3a.path.style.access=true" >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.access.key=labb"  >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.secret.key=password"  >> conf/spark-defaults.conf
-echo "spark.hadoop.fs.s3a.endpoint=http://10.1.1.68:9000"  >> conf/spark-defaults.conf
+echo "spark.hadoop.fs.s3a.endpoint=http://${brokkr_mesh_ip[1]}:9000"  >> conf/spark-defaults.conf
 echo "spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem"  >> conf/spark-defaults.conf
 
 echo 'AWS_ACCESS_KEY_ID=labb' >> etc/env
 echo 'AWS_SECRET_ACCESS_KEY=password' >> etc/env
 echo 'AWS_REGION=us-east-1' >> etc/env 
-
-
-# JDBC to 
-echo "spark.jdbc.driver.url=jdbc:mariadb://192.168.8.11:3306/database" >> conf/spark-defaults.conf
-echo "spark.jdbc.driver.class=org.mariadb.jdbc.Driver" >> conf/spark-defaults.conf
-echo "spark.jdbc.host=192.168.8.11" >> conf/spark-defaults.conf
-echo "spark.jdbc.port=3306" >> conf/spark-defaults.conf
-echo "spark.jdbc.user=root" >> conf/spark-defaults.conf
-echo "spark.jdbc.password=password" >> conf/spark-defaults.conf
 
 
 echo "spark.sql.execution.arrow.pyspark.enabled=true" >> conf/spark-defaults.conf
@@ -81,4 +72,5 @@ fi
 
 mv -f spark-slave.service /etc/systemd/system/
 systemctl enable spark-slave
+sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${brokkr_mesh_ip[1]}/g"  /etc/systemd/system/spark-slave.service
 
