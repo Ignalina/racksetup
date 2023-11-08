@@ -34,6 +34,7 @@ dnf -y install ant rocksdb
 
       FILE=/etc/nginx
       if [ -d "$FILE" ]; then
+          sed -i -e "s/SPARK_MASTER_HOST_REPLACE/${brokkr_mesh_ip[1]}/g" /tmp/delta.conf
           mv -f /tmp/delta.conf /etc/nginx/conf.d/
           systemctl restart nginx
       fi
