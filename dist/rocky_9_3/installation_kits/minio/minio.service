@@ -1,0 +1,15 @@
+upstream minio_servers {
+    server v1:9000;
+    server v2:9000;
+    server v3:9000;
+}
+
+server {
+    listen 10.15.15.50:9009;
+    server_name v1;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass       http://minio_servers;
+    }
+}
