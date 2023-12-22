@@ -17,5 +17,6 @@ $brokkr_gotplexe ${interface}eth3.nmconnection --set eth0=${brokkr_mesh_interfac
 
 systemctl start NetworkManager
 nmcli connection reload
+# NOTE gives error if other side is not up
 nmcli con up ${brokkr_mesh_interface_name["eth2"]}
 nmcli con up ${brokkr_mesh_interface_name["eth3"]}
