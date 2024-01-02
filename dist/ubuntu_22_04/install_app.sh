@@ -10,7 +10,7 @@ mesh_machine () {
 mesh_machine_nr () {
   h=$(hostname -s)
   nr=${h: -1}
-  return ${nr}
+  return 1
 }
 
 mesh_gen_hosts () {

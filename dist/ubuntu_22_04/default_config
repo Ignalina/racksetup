@@ -1,4 +1,4 @@
-brokkr_mesh_ip=("10.1.1.0" "10.1.1.93" "10.1.1.94" "10.1.1.95")
+brokkr_mesh_ip=("10.1.1.0" "localhost" "10.1.1.94" "10.1.1.95")
 brokkr_mesh_name=("r9" "r9v1.x14.se" "r9v2.x14.se" "r9v3.x14.se")
 brokkr_mesh_interface=("eth" "eth0" "eth1" "eth2")
 declare -A brokkr_mesh_interface_name
