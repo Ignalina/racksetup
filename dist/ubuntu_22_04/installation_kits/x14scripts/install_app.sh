@@ -22,9 +22,9 @@ mesh_gen_hosts () {
   done
 }
 
-: apt-get update
-: apt-get -y install golang-go
-
+apt-get update
+apt-get -y install golang-go
+go install github.com/belitre/gotpl@latest
 
 brokkr_app=$1
 brokkr_app_param=$2

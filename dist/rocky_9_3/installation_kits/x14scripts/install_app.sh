@@ -24,6 +24,7 @@ mesh_gen_hosts () {
 
 dnf -y update
 dnf -y install golang
+go install github.com/belitre/gotpl@latest
 
 brokkr_app=$1
 brokkr_app_param=$2
