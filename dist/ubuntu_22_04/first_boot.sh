@@ -5,7 +5,7 @@ PATH=${PATH}:${x14scripts}
 echo ${PATH}
 
 
-./install_app.sh init ${config} 
+install_app.sh init ${config} 
 #./install_app.sh ${config} mellanox ${config}
 #./install_app.sh ${config} revert ${config}
 #./install_app.sh datadisk ${config}
