@@ -22,9 +22,6 @@ mesh_gen_hosts () {
   done
 }
 
-dnf -y update
-dnf -y install golang
-
 brokkr_app=$1
 brokkr_app_param=$2
 brokkr_gotplexe=$(go env GOPATH)/bin/gotpl

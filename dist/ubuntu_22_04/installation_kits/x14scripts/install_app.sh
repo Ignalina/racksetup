@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 mesh_machine () {
   h=$(hostname -s)
   interface=interfaces${h: -1}
@@ -10,7 +9,7 @@ mesh_machine () {
 mesh_machine_nr () {
   h=$(hostname -s)
   nr=${h: -1}
-  return 1
+  return ${nr}
 }
 
 mesh_gen_hosts () {
@@ -23,11 +22,17 @@ mesh_gen_hosts () {
   done
 }
 
+: apt-get update
+: apt-get -y install golang-go
+
 
 brokkr_app=$1
 brokkr_app_param=$2
 brokkr_gotplexe=$(go env GOPATH)/bin/gotpl
 
+
+
+source installation_kits/x14scripts/pki.sh
 pushd installation_kits/${brokkr_app}
 source ${brokkr_app_param}
 source install.sh "${@:3}"
