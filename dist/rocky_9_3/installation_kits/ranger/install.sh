@@ -1,10 +1,11 @@
 pushd /tmp
-yum install -y java-1.8.0-openjdk-headless maven
+yum install -y java-1.8.0-openjdk-headless maven gcc bzip2 fontconfig diffutils
 wget https://downloads.apache.org/ranger/2.4.0/apache-ranger-2.4.0.tar.gz 
 tar -zxf apache-ranger-2.4.0.tar.gz
 cd apache-ranger-2.4.0
 export JAVA_HOME=/usr/lib/jvm/jre-1.8.0/
 export PATH=$JAVA_HOME/bin:$PATH
+export MAVEN_OPTS "-Xmx2048m -XX:MaxPermSize=512m"
 mvn clean compile package install
 popd
 
