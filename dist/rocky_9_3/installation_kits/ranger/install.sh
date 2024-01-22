@@ -17,7 +17,7 @@ useradd -M -r -g ranger ranger
 chown -R ranger:ranger /var/lib/x14/ranger
 chown -R ranger:ranger /usr/lib/x14/ranger
 
-cp ranger.service /etc/systemd/system/
-systemctl enable ranger
+#cp ranger.service /etc/systemd/system/
+#systemctl enable ranger
 
-systemctl start ranger.service
+#systemctl start ranger.service
