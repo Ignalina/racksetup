@@ -1,8 +1,8 @@
 pushd /tmp
-yum install -y java-1.8.0-openjdk-headless
+yum install -y java-1.8.0-openjdk-headless maven
 wget https://downloads.apache.org/ranger/2.4.0/apache-ranger-2.4.0.tar.gz 
 tar -zxf apache-ranger-2.4.0.tar.gz
-cd apache apache-ranger-2.4.0
+cd apache-ranger-2.4.0
 export JAVA_HOME=/usr/lib/jvm/jre-1.8.0/
 export PATH=$JAVA_HOME/bin:$PATH
 mvn clean compile package install
