@@ -6,7 +6,7 @@ tar -zxf apache-ranger-2.4.0.tar.gz
 cd apache-ranger-2.4.0
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
-export MAVEN_OPTS "-Xmx2048m -XX:MaxPermSize=512m"
+export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
 mvn  -DskipJSTests clean compile package install
 popd
 
