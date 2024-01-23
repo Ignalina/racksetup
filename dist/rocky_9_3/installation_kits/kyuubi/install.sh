@@ -22,3 +22,13 @@ then
 
    popd
 fi
+
+pushd /tmp
+wget https://dlcdn.apache.org/kyuubi/kyuubi-1.8.0/apache-kyuubi-1.8.0-source.tgz
+tar -zxf apache-kyuubi-1.8.0-source.tgz
+cd apache-kyuubi-1.8.0
+build/mvn clean package -pl :kyuubi-spark-authz_2.12 -DskipTests -Dspark.version=3.5.0 -Dranger.version=2.4.0
+cp ./extensions/spark/kyuubi-spark-authz-shaded/target/kyuubi-spark-authz-shaded_2.12-1.8.0.jar /usr/lib/x14/spark/jars/
+chown spark:x14 /usr/lib/x14/spark/jars/kyuubi-spark-authz-shaded_2.12-1.8.0.jar
+
+popd
