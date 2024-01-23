@@ -9,7 +9,7 @@ dnf -y install ant rocksdb
    pushd /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/
 
    echo 'spark.jars.packages=io.delta:delta-spark_2.12:3.0.0,org.apache.hadoop:hadoop-aws:3.5.0,org.mariadb.jdbc:mariadb-java-client:3.1.3,software.amazon.awssdk:sts:2.20.18,software.amazon.awssdk:s3:2.20.18,software.amazon.awssdk:url-connection-client:2.20.18' >> conf/spark-defaults.conf
-   echo 'spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension' >> conf/spark-defaults.conf
+   echo 'spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension,org.apache.kyuubi.plugin.spark.authz.ranger.RangerSparkExtension' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.delta.warehouse=s3a://delta-catalogue' >> conf/spark-defaults.conf
    echo 'spark.sql.catalog.delta=org.apache.spark.sql.delta.catalog.DeltaCatalog' >> conf/spark-defaults.conf
    echo 'spark.sql.defaultCatalog=delta' >> conf/spark-defaults.conf
