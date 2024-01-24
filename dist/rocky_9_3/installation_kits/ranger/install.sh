@@ -17,12 +17,16 @@ mkdir -p /var/lib/x14/ranger
 cp apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
 tar -xvf ranger-2.4.0-admin.tar.gz
 
+pushd ranger-2.4.0-admin
 
 # Fetch mssql connector
 wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
 tar -xvf mysql-connector-java-8.0.26.tar.gz
 mv mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
 
+
+./setup.sh
+popd
 
 groupadd -r ranger
 useradd -M -r -g ranger ranger
