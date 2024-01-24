@@ -24,8 +24,8 @@ then
 fi
 
 pushd /tmp
-cp ranger-spark-security.xml  /usr/lib/x14/spark/conf/
-chown spark:x14 /usr/lib/x14/spark/conf/ranger-spark-security.xml
+cp ranger-spark-security.xml  /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/conf/
+chown spark:x14 /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/conf/ranger-spark-security.xml
 
 wget https://dlcdn.apache.org/kyuubi/kyuubi-1.8.0/apache-kyuubi-1.8.0-source.tgz
 tar -zxf apache-kyuubi-1.8.0-source.tgz

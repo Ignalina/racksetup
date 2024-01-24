@@ -5,13 +5,13 @@ config=$(realpath default_config)
 PATH=${PATH}:${x14scripts}
 echo ${PATH}
 
-install_app.sh nginx ${config}
+#install_app.sh nginx ${config}
 install_app.sh admindb ${config}
-install_app.sh singleminio ${config}
-install_app.sh spark ${config}
-install_app.sh delta ${config}
-install_app.sh kyuubi ${config}
-install_app.sh ranger ${config}
+#install_app.sh singleminio ${config}
+#install_app.sh spark ${config}
+#install_app.sh delta ${config}
+#install_app.sh kyuubi ${config}
+#install_app.sh ranger ${config}
 
 
 
