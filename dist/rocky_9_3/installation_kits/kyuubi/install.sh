@@ -29,10 +29,10 @@ chown spark:x14 /usr/lib/x14/spark/conf/ranger-spark-security.xml
 
 wget https://dlcdn.apache.org/kyuubi/kyuubi-1.8.0/apache-kyuubi-1.8.0-source.tgz
 tar -zxf apache-kyuubi-1.8.0-source.tgz
-cd apache-kyuubi-1.8.0
+cd apache-kyuubi-1.8.0-source
 build/mvn clean package -pl :kyuubi-spark-authz_2.12 -DskipTests -Dspark.version=3.5.0 -Dranger.version=2.4.0
-cp ./extensions/spark/kyuubi-spark-authz-shaded/target/kyuubi-spark-authz-shaded_2.12-1.8.0.jar /usr/lib/x14/spark/jars/
+cp ./extensions/spark/kyuubi-spark-authz-shaded/target/kyuubi-spark-authz-shaded_2.12-1.8.0.jar /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/
 
-chown spark:x14 /usr/lib/x14/spark/jars/kyuubi-spark-authz-shaded_2.12-1.8.0.jar
+chown spark:x14 /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/kyuubi-spark-authz-shaded_2.12-1.8.0.jar
 
 popd
