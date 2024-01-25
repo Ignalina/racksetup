@@ -11,6 +11,8 @@ mvn  -DskipJSTests clean compile package install
 
 popd
 
+pushd /usr/lib/x14/ranger
+
 cp /tmp/apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
 tar -xvf ranger-2.4.0-admin.tar.gz
 
@@ -27,7 +29,7 @@ mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connec
 
 ./setup.sh
 popd
-
+popd
 
 groupadd -r ranger
 useradd -M -r -g ranger ranger
