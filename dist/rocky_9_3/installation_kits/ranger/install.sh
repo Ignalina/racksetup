@@ -11,22 +11,23 @@ mvn  -DskipJSTests clean compile package install
 
 popd
 
-
-mkdir -p /usr/lib/x14/ranger
-mkdir -p /var/lib/x14/ranger
-cp apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
+cp /tmp/apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
 tar -xvf ranger-2.4.0-admin.tar.gz
 
 pushd ranger-2.4.0-admin
+ls -l 
 
 # Fetch mssql connector
+
+pushd /tmp
 wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
 tar -xvf mysql-connector-java-8.0.26.tar.gz
-mv mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
-
+popd
+mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
 
 ./setup.sh
 popd
+
 
 groupadd -r ranger
 useradd -M -r -g ranger ranger
