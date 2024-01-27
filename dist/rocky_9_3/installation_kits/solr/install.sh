@@ -21,6 +21,8 @@ PATH=\"/usr/lib/jvm/java-1.8.0-openjdk/bin:$PATH\"
 " >> "/usr/lib/x14/solr/solr-8.11.2/bin/solr.in.sh"
 popd
 
+
+
 useradd -M -r -g x14 solr
 chown -R solr:x14 /var/lib/x14/solr
 chown -R solr:x14 /usr/lib/x14/solr

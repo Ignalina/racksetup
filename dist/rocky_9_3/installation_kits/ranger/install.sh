@@ -25,16 +25,20 @@ pushd /tmp
 wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
 tar -xvf mysql-connector-java-8.0.26.tar.gz
 popd
-mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
 
-./setup.sh
-popd
-popd
+mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
+mariadb -u root < create_mariadb_user.sql
 
 groupadd -r ranger
 useradd -M -r -g ranger ranger
 chown -R ranger:ranger /var/lib/x14/ranger
 chown -R ranger:ranger /usr/lib/x14/ranger
+
+./setup.sh
+popd
+popd
+
+
 
 #cp ranger.service /etc/systemd/system/
 #systemctl enable ranger
