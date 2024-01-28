@@ -14,6 +14,7 @@ pushd /usr/lib/x14/solr/solr-8.11.2
 echo "SOLR_PID_DIR=\"/var/lib/x14/solr/solr-8.11.2\"
 SOLR_INCLUDE=\"/usr/lib/x14/solr/solr-8.11.2/solr.in.sh\"
 SOLR_HOME=\"/var/lib/x14/solr/solr-8.11.2/data\"
+SOLR_INSTALL_DIR=\"/usr/lib/x14/solr/solr-8.11.2\"
 LOG4J_PROPS=\"/var/lib/x14/solr/solr-8.11.2/log4j2.xml\"
 SOLR_LOGS_DIR=\"/var/lib/x14/solr/solr-8.11.2/logs\"
 SOLR_PORT=\"8983\"
