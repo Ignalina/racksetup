@@ -38,4 +38,14 @@ systemctl start solr.service
 # If we are the first machine configuure solr cloud once enough machines are up.
 #
 
+mesh_machine_nr
+nr=$?
+
+
+
+
+if [[ ${nr} -eq 1 ]]
+then 
+    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
+fi
 
