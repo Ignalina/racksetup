@@ -1,5 +1,6 @@
 
 pushd /tmp
+yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
 
 wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.3/apache-zookeeper-3.8.3-bin.tar.gz -O zk.tar.gz
 mkdir -p /usr/lib/x14/zookeeper/
@@ -27,6 +28,8 @@ echo "server.3=${brokkr_mesh_ip[3]}:2888:3888" >> /usr/lib/x14/zookeeper/apache-
 echo "autopurge.snapRetainCount=3" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "autopurge.purgeInterval=1" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 
+echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" > /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/java.env
+
 
 adduser -m -r -g x14 zookeeper
 chown -R zookeeper:x14 /usr/lib/x14/zookeeper
@@ -35,6 +38,8 @@ chown -R zookeeper:x14 /var/lib/x14/zookeeper
 cp zookeeper.service /etc/systemd/system/
 systemctl enable zookeeper.service
 systemctl start zookeeper.service
+
+systemctl status zookeeper.service
 
 while ! /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/bin/zkCli.sh -server localhost:2181 'sleep 5'; do  sleep 5; done ;
 
