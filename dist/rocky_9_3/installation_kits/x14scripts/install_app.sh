@@ -13,6 +13,7 @@ mesh_machine_nr () {
 }
 
 mesh_gen_hosts () {
+
   length=${#brokkr_mesh_name[@]}
  
 # use C style for loop syntax to read all values and indexes
@@ -20,6 +21,15 @@ mesh_gen_hosts () {
   do
     echo  "${brokkr_mesh_ip[$j]} ${brokkr_mesh_name[$j]}" >> /etc/hosts
   done
+
+  length=${#brokkr_ethext_name[@]}
+ 
+# use C style for loop syntax to read all values and indexes
+  for (( j=1; j<length; j++ ));
+  do
+    echo  "${brokkr_ethext_ip[$j]} ${brokkr_ethext_name[$j]}" >> /etc/hosts
+  done
+
 }
 
 dnf -y update

@@ -3,7 +3,7 @@
 systemctl stop NetworkManager
 
 # Figure out which machine in mesh
-#
+# NOTE: Hostname is set on prev step (init)
 h=$(hostname -s)
 interface=interfaces${h: -1}
 

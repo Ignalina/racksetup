@@ -25,18 +25,18 @@ mesh_gen_hosts
 ### Set hostname and ip number
 systemctl stop NetworkManager
 
+rm -rf eth0.nmconnection
+
+
 h=$(hostname -s)
 h_number=${h: -1}
-h_interface=${brokkr_eth_ext_interface_name[${h_number}]}
-h_ip=${brokkr_eth_ext_interface_ip[${h_number}]}
+h_interface=${brokkr_ethext_interface_name[${h_number}]}
+h_ip=${brokkr_ethext_interface_ip[${h_number}]}
 
 
-$brokkr_gotplexe eth_ext.nmconnection --set eth_ext=${h_interface} --set eth_ext_ip=${h_ip} > /etc/NetworkManager/system-connections/${brokkr_net_interface_name["eth0"]}.nmconnection
+$brokkr_gotplexe eth0.nmconnection --set ethext_gatway=${brokkr_ethext_gateway}  --set eth0=${brokkr_net_interface_name["eth0"]} --set eth0_ip=${h_ip} > /etc/NetworkManager/system-connections/eth0.nmconnection
 
 systemctl start NetworkManager
 nmcli connection reload
-# NOTE gives error if other side is not up
-#nmcli con up ${brokkr_mesh_interface_name["eth2"]}
-#nmcli con up ${brokkr_mesh_interface_name["eth3"]}
 
 
