@@ -1,8 +1,8 @@
 brokkr_mesh_ip=("10.1.15.0" "10.1.15.50" "10.1.15.51" "10.1.15.52")
 brokkr_mesh_name=("r9" "r9v1.x14.se" "r9v2.x14.se" "r9v3.x14.se")
 
-brokkr_ethext_ip=("10.1.1.0" "10.1.1.50" "10.1.1.51" "10.1.1.52")
-brokkr_ethext_name=("er9" "er9v1.x14.se" "er9v2.x14.se" "er9v3.x14.se")
+brokkr_ethext_ip=("10.1.1.0" "10.1.1.242" "10.1.1.244" "10.1.1.231")
+brokkr_ethext_name=("er9" "node1.x14.se" "node2.x14.se" "node3.x14.se")
 brokkr_ethext_gateway=10.1.1.1
 
 
