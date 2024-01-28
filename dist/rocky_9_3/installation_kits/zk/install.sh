@@ -36,7 +36,11 @@ cp zookeeper.service /etc/systemd/system/
 systemctl enable zookeeper.service
 systemctl start zookeeper.service
 
+bin/zkCli.sh -server localhost:2181
 
+while ! /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/zkCli.sh -server localhost:2181 'sleep 5'; do  sleep 5; done ;
+
+echo "got passed zkcli localhost:2181"
 
 if [[ ${nr} -eq 1 ]]
 then 
