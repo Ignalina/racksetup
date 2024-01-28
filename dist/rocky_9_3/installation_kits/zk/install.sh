@@ -1,6 +1,6 @@
 
 pushd /tmp
-yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
+yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel perl-Time-HiRes
 
 wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.3/apache-zookeeper-3.8.3-bin.tar.gz -O zk.tar.gz
 mkdir -p /usr/lib/x14/zookeeper/
