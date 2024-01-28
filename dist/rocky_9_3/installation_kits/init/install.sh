@@ -30,7 +30,7 @@ h_number=${h: -1}
 h_interface=${brokkr_net_interface_name["eth0"]}
 h_ip=${brokkr_ethext_ip[${h_number}]}
 
-$brokkr_gotplexe eth0.nmconnection --set ethext_gateway=${brokkr_ethext_gateway}  --set eth0=${brokkr_net_interface_name["eth0"]} --set eth0_ip=${h_ip} > /etc/NetworkManager/system-connections/${brokkr_net_interface_name["eth0"]}.nmconnection
-
-nmcli connection up ${brokkr_net_interface_name["eth0"]}
+#$brokkr_gotplexe eth0.nmconnection --set ethext_gateway=${brokkr_ethext_gateway}  --set eth0=${brokkr_net_interface_name["eth0"]} --set eth0_ip=${h_ip} > /etc/NetworkManager/system-connections/${brokkr_net_interface_name["eth0"]}.nmconnection
+nmcli connection add type ethernet con-name ethext ipv4.addresses ${h_ip}/24 ipv4.dns 8.8.8.8 ip4.gateway=${brokkr_ethext_gateway} ipv4.method manual
+nmcli connection up ethext
 
