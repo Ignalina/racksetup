@@ -7,7 +7,7 @@ brokkr_ethext_gateway=10.1.3.1
 
 
 declare -A brokkr_mesh_interface_name
-brokkr_net_interface_name=( ["eth0"]=enp0s3 ["eth1"]=enp1s3 ["eth2"]=enp65s0f0np0 ["eth3"]=enp65s0f1np1 )
+brokkr_net_interface_name=( ["eth0"]=ens3 ["eth1"]=ens4 ["eth2"]=enp65s0f0np0 ["eth3"]=enp65s0f1np1 )
 
 brokkr_md0_device=("nvme1n1" "nvme2n1")
 #brokkr_md0_device=("vdb" "vdc")
