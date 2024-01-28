@@ -31,7 +31,7 @@ h_interface=${brokkr_eth_ext_interface_name[${h_number}]}
 h_ip=${brokkr_eth_ext_interface_ip[${h_number}]}
 
 
-$brokkr_gotplexe eth_ext.nmconnection --set eth_ext=${h_interface} --set eth_ext_ip=${h_ip}
+$brokkr_gotplexe eth_ext.nmconnection --set eth_ext=${h_interface} --set eth_ext_ip=${h_ip} > /etc/NetworkManager/system-connections/${brokkr_net_interface_name["eth0"]}.nmconnection
 
 systemctl start NetworkManager
 nmcli connection reload
