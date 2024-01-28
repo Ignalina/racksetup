@@ -30,7 +30,5 @@ h_number=${h: -1}
 h_interface=${brokkr_net_interface_name["eth0"]}
 h_ip=${brokkr_ethext_ip[${h_number}]}
 
-$brokkr_gotplexe eth0.nmconnection --set ethext_gateway=${brokkr_ethext_gateway}  --set eth0=${brokkr_net_interface_name["eth0"]} --set eth0_ip=${h_ip} > /et>
+$brokkr_gotplexe eth0.nmconnection --set ethext_gateway=${brokkr_ethext_gateway}  --set eth0=${brokkr_net_interface_name["eth0"]} --set eth0_ip=${h_ip} > /etc/NetworkManager/system-connections/${brokkr_net_interface_name["eth0"]}.nmconnection
 
-#systemctl start NetworkManager
-#nmcli connection reload
