@@ -10,6 +10,9 @@ rm -rf /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo_sample.cfg
 popd
 
 
+mesh_machine_nr
+nr=$?
+
 echo "tickTime=2000" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "dataDir=/var/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/ranger" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "clientPort=218" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
@@ -31,3 +34,4 @@ chown -R zookeeper:x14 /var/lib/x14/zookeeper
 cp zookeeper.service /etc/systemd/system/
 systemctl enable zookeeper.service
 systemctl start zookeeper.service
+
