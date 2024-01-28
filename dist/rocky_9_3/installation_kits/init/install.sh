@@ -25,7 +25,7 @@ mesh_gen_hosts
 ### Set hostname and ip number
 systemctl stop NetworkManager
 
-rm -rf eth0.nmconnection
+#rm -rf eth0.nmconnection
 
 
 h=$(hostname -s)
