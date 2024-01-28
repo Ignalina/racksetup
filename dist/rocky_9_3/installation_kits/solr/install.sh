@@ -3,7 +3,8 @@ yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
 
 wget https://www.apache.org/dyn/closer.lua/lucene/solr/8.11.2/solr-8.11.2.tgz?action=download -O solr.tar.gz
 mkdir -p /usr/lib/x14/solr/solr-8.11.2
-mkdir -p /var/lib/x14/solr/solr-8.11.2
+mkdir -p /var/lib/x14/solr/solr-8.11.2/data
+
 tar -zxf solr.tar.gz -C  /usr/lib/x14/solr
 popd
 
@@ -22,8 +23,7 @@ PATH=\"/usr/lib/jvm/java-1.8.0-openjdk/bin:$PATH\"
 popd
 
 
-
-useradd -M -r -g x14 solr
+adduser -m -r -g x14 solr
 chown -R solr:x14 /var/lib/x14/solr
 chown -R solr:x14 /usr/lib/x14/solr
 
