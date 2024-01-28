@@ -1,0 +1,13 @@
+[Unit]
+Description=Apache Zooekeeper 3.8.3
+
+[Service]
+Type=forking
+User=zookeeper
+ExecStart=/usr/lib/x14/zookeeper/zookeeper-3.8.3-bin/bin/zookeeper start
+ExecStop=/usr/lib/x14/zookeeper/zookeeper-3.8.3-bin/bin/zookeeper stop
+Restart=on-failure
+TimeoutSec=180s
+
+[Install]
+WantedBy=multi-user.target
