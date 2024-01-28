@@ -23,7 +23,7 @@ systemctl disable firewalld
 mesh_gen_hosts
 
 ### Set hostname and ip number
-systemctl stop NetworkManager
+#systemctl stop NetworkManager
 
 h=$(hostname -s)
 h_number=${h: -1}
