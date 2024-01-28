@@ -1,6 +1,13 @@
 brokkr_mesh_ip=("10.1.1.0" "10.1.1.10" "10.1.1.20" "10.1.1.30")
 brokkr_mesh_name=("r9" "r9v1.x14.se" "r9v2.x14.se" "r9v3.x14.se")
 brokkr_mesh_interface=("eth" "eth0" "eth1" "eth2")
+
+brokkr_ethext_ip=("10.1.1.0" "10.1.1.10" "10.1.1.20" "10.1.1.30")
+brokkr_ethext_name=("r9" "r9v1.x14.se" "r9v2.x14.se" "r9v3.x14.se")
+brokkr_ethext_interface=("eth" "eth" "eth" "eth")
+
+
+
 declare -A brokkr_mesh_interface_name
 brokkr_mesh_interface_name+=( ["eth0"]=eno1np0 ["eth1"]=eno2np1 ["eth2"]=enp65s0f0np0 ["eth3"]=enp65s0f1np1 )
 brokkr_md0_device=("nvme1n1" "nvme2n1")
