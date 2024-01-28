@@ -36,3 +36,9 @@ cp zookeeper.service /etc/systemd/system/
 systemctl enable zookeeper.service
 systemctl start zookeeper.service
 
+
+
+if [[ ${nr} -eq 1 ]]
+then 
+    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
+fi

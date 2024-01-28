@@ -1,45 +1,50 @@
-pushd /tmp
-yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel maven gcc bzip2 fontconfig diffutils bc tzdata git
+mesh_machine_nr
+nr=$?
 
-wget https://downloads.apache.org/ranger/2.4.0/apache-ranger-2.4.0.tar.gz 
-tar -zxf apache-ranger-2.4.0.tar.gz
-cd apache-ranger-2.4.0
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
-export PATH=$JAVA_HOME/bin:$PATH
-export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
-mvn  -DskipJSTests clean compile package install
+if [[ ${nr} -eq 1 ]]
+then 
+    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
 
-popd
+    pushd /tmp
+    yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel maven gcc bzip2 fontconfig diffutils bc tzdata git
 
-pushd /usr/lib/x14/ranger
+    wget https://downloads.apache.org/ranger/2.4.0/apache-ranger-2.4.0.tar.gz 
+    tar -zxf apache-ranger-2.4.0.tar.gz
+    cd apache-ranger-2.4.0
+       export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+       export PATH=$JAVA_HOME/bin:$PATH
+       export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
+       mvn  -DskipJSTests clean compile package install
+    popd
 
-cp /tmp/apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
-tar -xvf ranger-2.4.0-admin.tar.gz
+    pushd /usr/lib/x14/ranger
 
-pushd ranger-2.4.0-admin
-ls -l 
+       cp /tmp/apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
+       tar -xvf ranger-2.4.0-admin.tar.gz
+
+       pushd ranger-2.4.0-admin
 
 # Fetch mssql connector
 
-pushd /tmp
-wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
-tar -xvf mysql-connector-java-8.0.26.tar.gz
-popd
+          pushd /tmp
+             wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
+             tar -xvf mysql-connector-java-8.0.26.tar.gz
+          popd
 
-mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
-mariadb -u root < create_mariadb_user.sql
+          mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
+          mariadb -u root < create_mariadb_user.sql
 
-adduser -m -r -g x14 ranger
-chown -R ranger:ranger /var/lib/x14/ranger
-chown -R ranger:ranger /usr/lib/x14/ranger
+          adduser -m -r -g x14 ranger
+          chown -R ranger:ranger /var/lib/x14/ranger
+          chown -R ranger:ranger /usr/lib/x14/ranger
 
-./setup.sh
-popd
-popd
+          ./setup.sh
+       popd
+    popd
 
 
+    cp rangeradmin.service /etc/systemd/system/
+    systemctl enable rangeradmin
+    systemctl start rangeradmin.service
 
-#cp ranger.service /etc/systemd/system/
-#systemctl enable ranger
-
-#systemctl start ranger.service
+fi
