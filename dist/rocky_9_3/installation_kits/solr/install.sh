@@ -32,3 +32,10 @@ cp solr.service /etc/systemd/system/
 systemctl enable solr
 
 systemctl start solr.service
+
+
+#
+# If we are the first machine configuure solr cloud once enough machines are up.
+#
+
+
