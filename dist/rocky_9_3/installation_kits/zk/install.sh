@@ -22,9 +22,9 @@ echo "clientPort=218" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/
 
 echo "initLimit=5" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "syncLimit=2" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
-echo "server.1=${brokkr_mesh_ip[1]}:2888:3888" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
-echo "server.2=${brokkr_mesh_ip[2]}:2888:3888" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
-echo "server.3=${brokkr_mesh_ip[3]}:2888:3888" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
+echo "server.1=${brokkr_ethext_ip[1]}:2888:3888" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
+echo "server.2=${brokkr_ethext_ip[2]}:2888:3888" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
+echo "server.3=${brokkr_ethext_ip[3]}:2888:3888" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "autopurge.snapRetainCount=3" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "autopurge.purgeInterval=1" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 
