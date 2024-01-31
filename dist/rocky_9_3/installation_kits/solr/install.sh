@@ -30,7 +30,7 @@ chown -R solr:x14 /var/lib/x14/solr
 chown -R solr:x14 /usr/lib/x14/solr
 
 # upload solr.xml in choor /solr
-server/scripts/cloud-scripts/zkcli.sh -zkhost 10.1.1.231:2181/solr -cmd bootstrap -solrhome /tmp/solr-8.11.2/server/solr
+server/scripts/cloud-scripts/zkcli.sh -zkhost 10.1.1.231:2181/solr -cmd bootstrap -solrhome server/solr
 
 cp solr.service /etc/systemd/system/
 systemctl enable solr
