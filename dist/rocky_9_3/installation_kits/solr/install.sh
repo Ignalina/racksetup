@@ -52,4 +52,4 @@ nr=$?
 
 
 
-./solr start -c -m 1g -z "${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[2]}:2181/solr"
+./solr start -c -m 1g -z "${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr"
