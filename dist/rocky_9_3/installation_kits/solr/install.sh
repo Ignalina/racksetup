@@ -29,8 +29,12 @@ adduser -m -r -g x14 solr
 chown -R solr:x14 /var/lib/x14/solr
 chown -R solr:x14 /usr/lib/x14/solr
 
+if [[ ${nr} -eq 1 ]]
+then 
+    echo "I AM MASTER_HOST EXTETH=${brokkr_exteth_ip[1]}"
 # upload solr.xml in choor /solr
-server/scripts/cloud-scripts/zkcli.sh -zkhost 10.1.1.231:2181/solr -cmd bootstrap -solrhome server/solr
+    server/scripts/cloud-scripts/zkcli.sh -zkhost 10.1.1.231:2181/solr -cmd bootstrap -solrhome server/solr
+fi
 
 cp solr.service /etc/systemd/system/
 systemctl enable solr
@@ -47,8 +51,5 @@ nr=$?
 
 
 
-if [[ ${nr} -eq 1 ]]
-then 
-    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
-fi
 
+./solr start -c -m 1g -z "${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[2]}:2181/solr"
