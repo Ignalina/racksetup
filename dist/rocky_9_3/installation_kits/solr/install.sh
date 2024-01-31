@@ -20,7 +20,7 @@ SOLR_LOGS_DIR=\"/var/lib/x14/solr/solr-8.11.2/logs\"
 SOLR_PORT=\"8983\"
 JAVA_HOME=\"/usr/lib/jvm/java-1.8.0-openjdk\"
 PATH=\"/usr/lib/jvm/java-1.8.0-openjdk/bin:$PATH\"
-ZK_HOST=\"${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181\"
+ZK_HOST=\"${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr\"
 " >> "/usr/lib/x14/solr/solr-8.11.2/bin/solr.in.sh"
 popd
 
