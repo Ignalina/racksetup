@@ -15,7 +15,7 @@ popd
 mesh_machine_nr
 nr=$?
 
-echo "tickTime=2000" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
+echo "tickTime=2000" > /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "dataDir=/var/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/data" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo $nr > /var/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/data/myid
 echo "clientPort=218" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
