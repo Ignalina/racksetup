@@ -18,7 +18,7 @@ nr=$?
 echo "tickTime=2000" > /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "dataDir=/var/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/data" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo $nr > /var/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/data/myid
-echo "clientPort=218" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
+echo "clientPort=2181" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 
 echo "initLimit=5" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
 echo "syncLimit=2" >> /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/conf/zoo.cfg
