@@ -34,6 +34,7 @@ then
     echo "I AM MASTER_HOST EXTETH=${brokkr_exteth_ip[1]}"
 # upload solr.xml in choor /solr
     server/scripts/cloud-scripts/zkcli.sh -zkhost ${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr -cmd bootstrap -solrhome server/solr
+    bin/solr zk cp  server/solr/solr.xml  zk:/solr.xml -z ${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr
 fi
 
 cp solr.service /etc/systemd/system/
