@@ -52,6 +52,8 @@ then
 #          echo "audit_solr_collection=" >> install.properties
 # audit_solr_no_shards
           ./setup.sh
+# this should not be necessary but something if i gave correct input in install.properties	  
+	  cp  /usr/lib/x14/ranger/ranger-2.4.0-admin/mysql-connector-java.jar /usr/lib/x14/ranger/ranger-2.4.0-admin/ews/webapp/WEB-INF/lib/
        popd
     popd
 
