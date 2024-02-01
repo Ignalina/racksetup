@@ -42,6 +42,10 @@ then
           chown -R ranger:ranger /var/lib/x14/ranger
           chown -R ranger:ranger /usr/lib/x14/ranger
 
+          echo "audit_solr_urls=http://${brokkr_ethext_ip[1]}:8983/solr/ranger_audits" >> install.properties
+          echo "audit_solr_zookeepers=${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr" >> install.properties
+#          echo "audit_solr_collection=" >> install.properties
+# audit_solr_no_shards
           ./setup.sh
        popd
     popd
