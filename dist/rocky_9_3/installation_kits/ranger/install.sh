@@ -11,14 +11,14 @@ then
     pushd /tmp
     yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel maven gcc bzip2 fontconfig diffutils bc tzdata git
 
-    wget https://downloads.apache.org/ranger/2.4.0/apache-ranger-2.4.0.tar.gz 
-    tar -zxf apache-ranger-2.4.0.tar.gz
-    cd apache-ranger-2.4.0
-       export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
-       export PATH=$JAVA_HOME/bin:$PATH
-       export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
-       mvn  -DskipJSTests clean compile package install
-    popd
+#    wget https://downloads.apache.org/ranger/2.4.0/apache-ranger-2.4.0.tar.gz 
+#    tar -zxf apache-ranger-2.4.0.tar.gz
+#    cd apache-ranger-2.4.0
+#       export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+#       export PATH=$JAVA_HOME/bin:$PATH
+#       export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
+#       mvn  -DskipJSTests clean compile package install
+#    popd
 
     pushd /usr/lib/x14/ranger
 
