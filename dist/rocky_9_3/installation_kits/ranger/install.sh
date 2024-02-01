@@ -20,6 +20,8 @@ then
        mvn  -DskipJSTests clean compile package install
     popd
     cp install.properties /tmp
+
+    mkdir -p /usr/lib/x14/ranger
     pushd /usr/lib/x14/ranger
 
        cp /tmp/apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
@@ -41,8 +43,8 @@ then
           adduser -m -r -g x14 ranger
           mkdir -p /var/lib/x14/ranger
 
-          chown -R ranger:ranger /var/lib/x14/ranger
-          chown -R ranger:ranger /usr/lib/x14/ranger
+          chown -R ranger:x14 /var/lib/x14/ranger
+          chown -R ranger:x14 /usr/lib/x14/ranger
 
 	  cat /tmp/install.properties >> install.properties
           echo "audit_solr_urls=http://${brokkr_ethext_ip[1]}:8983/solr/ranger_audits" >> install.properties
