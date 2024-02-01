@@ -41,9 +41,7 @@ systemctl start zookeeper.service
 
 systemctl status zookeeper.service
 
-while ! /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/bin/zkCli.sh -server localhost:2181 'sleep 5'; do  sleep 5; done ;
-
-echo "got passed zkcli localhost:2181"
+#while ! /usr/lib/x14/zookeeper/apache-zookeeper-3.8.3-bin/bin/zkCli.sh -server localhost:2181 'sleep 5'; do  sleep 5; done ;
 
 if [[ ${nr} -eq 1 ]]
 then 
