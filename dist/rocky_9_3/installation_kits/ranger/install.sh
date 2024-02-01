@@ -35,6 +35,8 @@ then
           popd
 
           mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
+# CPOY intsall.properties 
+
 
           adduser -m -r -g x14 ranger
           mkdir -p /var/lib/x14/ranger
