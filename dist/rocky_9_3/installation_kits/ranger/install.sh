@@ -32,11 +32,14 @@ then
 # Fetch mssql connector
 
           pushd /tmp
-             wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
-             tar -xvf mysql-connector-java-8.0.26.tar.gz
+#             wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
+
+ #            tar -xvf mysql-connector-java-8.0.26.tar.gz
           popd
 
-          mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
+#          mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
+          wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.33/mysql-connector-java-8.0.33.jar
+          mv mysql-connector-java-8.0.33.jar mysql-connector-java.jar
 # CPOY intsall.properties 
 
 
