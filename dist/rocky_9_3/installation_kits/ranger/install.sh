@@ -38,8 +38,9 @@ then
           popd
 
 #          mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
-          wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.33/mysql-connector-java-8.0.33.jar
-          mv mysql-connector-java-8.0.33.jar mysql-connector-java.jar
+#          wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.33/mysql-connector-java-8.0.33.jar
+          wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar
+          mv mysql-connector-j-8.3.0.jar mysql-connector-java.jar
 # CPOY intsall.properties 
 
 
