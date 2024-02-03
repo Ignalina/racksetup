@@ -33,6 +33,8 @@ then
        send \"y\r\"
        expect eof
     ")
+    # initial setup has been done . turn off so docker build process works etc..
+systemctl stop mariadb
 
 fi
 
