@@ -34,11 +34,12 @@ cd apache-kyuubi-1.8.0-source
 build/mvn clean package -pl :kyuubi-spark-authz_2.12 -DskipTests -Dspark.version=3.5.0 -Dranger.version=2.4.0
 #build/mvn clean package -pl :kyuubi-spark-authz-shaded_2.12 -DskipTests -Dspark.version=3.5.0 -Dranger.version=2.4.0
 #cp ./extensions/spark/kyuubi-spark-authz-shaded/target/kyuubi-spark-authz-shaded_2.12-1.8.0.jar /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/
+#chown spark:x14 /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/kyuubi-spark-authz-shaded_2.12-1.8.0.jar
 
 cp ./extensions/spark/kyuubi-spark-authz/target/kyuubi-spark-authz_2.12-1.8.0.jar /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/
 cp ./extensions/spark/kyuubi-spark-authz/target/scala-2.12/jars/* /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/
 
+chown spark:x14 /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/*
 
-chown spark:x14 /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/kyuubi-spark-authz-shaded_2.12-1.8.0.jar
 
 popd
