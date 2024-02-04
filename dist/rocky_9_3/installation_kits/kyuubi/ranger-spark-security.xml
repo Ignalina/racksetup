@@ -1,7 +1,7 @@
 <configuration>
     <property>
         <name>ranger.plugin.spark.policy.rest.url</name>
-        <value>ranger admin address like http://ranger-admin.org:6080</value>
+        <value>http://10.1.1.253:6080</value>
     </property>
 
     <property>
