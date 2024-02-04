@@ -4,7 +4,7 @@ nr=$?
 if [[ ${nr} -eq 1 ]]
 then 
     echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
-
+    systemctl start mariadb
     mariadb -u root < create_mariadb_user.sql
 
 
@@ -31,18 +31,8 @@ then
 
 # Fetch mssql connector
 
-          pushd /tmp
-#             wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
-
- #            tar -xvf mysql-connector-java-8.0.26.tar.gz
-          popd
-
-#          mv /tmp/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar mysql-connector-java.jar
-#          wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.33/mysql-connector-java-8.0.33.jar
           wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar
           mv mysql-connector-j-8.3.0.jar mysql-connector-java.jar
-# CPOY intsall.properties 
-
 
           adduser -m -r -g x14 ranger
           mkdir -p /var/lib/x14/ranger
@@ -65,5 +55,6 @@ then
     cp rangeradmin.service /etc/systemd/system/
     systemctl enable rangeradmin
     systemctl start rangeradmin.service
-
+    systemctl stop rangeradmin.service
+    systemctl stop mariadb
 fi
