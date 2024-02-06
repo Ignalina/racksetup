@@ -53,9 +53,9 @@ then
     popd
 
 
-    push /usr/lib/x14/ranger/ranger-2.4.0-admin/contrib/solr_for_audit_setup
+    pushd /usr/lib/x14/ranger/ranger-2.4.0-admin/contrib/solr_for_audit_setup
     /usr/lib/x14/solr/solr-8.11.2/bin/solr create_collection -c ranger_audits -d conf -shards 1 -replicationFactor 1
-
+    popd
 
     cp rangeradmin.service /etc/systemd/system/
     systemctl enable rangeradmin
