@@ -6,8 +6,7 @@ then
     echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
     systemctl start mariadb
     mariadb -u root < create_mariadb_user.sql
-
-
+    systemctl start solr
     pushd /tmp
     yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel maven gcc bzip2 fontconfig diffutils bc tzdata git
 
@@ -41,8 +40,10 @@ then
           chown -R ranger:x14 /usr/lib/x14/ranger
 
 	  cat /tmp/install.properties >> install.properties
+          /usr/lib/x14/solr/solr-8.11.2/server/scripts/cloud-scripts/zkcli.sh -zkhost ${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr -cmd bootstrap -solrhome server/ranger_audits
+
           echo "audit_solr_urls=http://${brokkr_ethext_ip[1]}:8983/solr/ranger_audits" >> install.properties
-          echo "audit_solr_zookeepers=${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr" >> install.properties
+          echo "audit_solr_zookeepers=${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/ranger_audits" >> install.properties
 #          echo "audit_solr_collection=" >> install.properties
 # audit_solr_no_shards
           ./setup.sh
@@ -52,9 +53,17 @@ then
     popd
 
 
+    push /usr/lib/x14/ranger/ranger-2.4.0-admin/contrib/solr_for_audit_setup
+    /usr/lib/x14/solr/solr-8.11.2/bin/solr create_collection -c ranger_audits -d conf -shards 1 -replicationFactor 1
+
+
     cp rangeradmin.service /etc/systemd/system/
     systemctl enable rangeradmin
-    systemctl start rangeradmin.service
-    systemctl stop rangeradmin.service
+   
+#    systemctl start rangeradmin.service
+#    systemctl stop rangeradmin.service
+    systemctl stop solr
     systemctl stop mariadb
+    
+
 fi
