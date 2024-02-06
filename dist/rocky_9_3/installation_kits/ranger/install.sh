@@ -40,7 +40,7 @@ then
           chown -R ranger:x14 /usr/lib/x14/ranger
 
 	  cat /tmp/install.properties >> install.properties
-          /usr/lib/x14/solr/solr-8.11.2/server/scripts/cloud-scripts/zkcli.sh -zkhost ${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr -cmd bootstrap -solrhome server/ranger_audits
+          su - solr /usr/lib/x14/solr/solr-8.11.2/server/scripts/cloud-scripts/zkcli.sh -zkhost ${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/solr -cmd bootstrap -solrhome server/ranger_audits
 
           echo "audit_solr_urls=http://${brokkr_ethext_ip[1]}:8983/solr/ranger_audits" >> install.properties
           echo "audit_solr_zookeepers=${brokkr_ethext_ip[1]}:2181,${brokkr_ethext_ip[2]}:2181,${brokkr_ethext_ip[3]}:2181/ranger_audits" >> install.properties
@@ -54,7 +54,7 @@ then
 
 
     pushd /usr/lib/x14/ranger/ranger-2.4.0-admin/contrib/solr_for_audit_setup
-    /usr/lib/x14/solr/solr-8.11.2/bin/solr create_collection -c ranger_audits -d conf -shards 1 -replicationFactor 1
+    su - solr /usr/lib/x14/solr/solr-8.11.2/bin/solr create_collection -c ranger_audits -d conf -shards 1 -replicationFactor 1
     popd
 
     cp rangeradmin.service /etc/systemd/system/
