@@ -2,14 +2,20 @@
 Description=Apache SOLR solr-8.11.2
 
 [Service]
-Type=forking
 User=solr
-Environment=SOLR_INCLUDE=/usr/lib/x14/solr/solr-8.11.2/bin/solr.in.sh
-ExecStart=/usr/lib/x14/solr/solr-8.11.2/bin/solr start
-ExecStop=/usr/lib/x14/solr/solr-8.11.2/bin/solr stop
-Restart=on-failure
 LimitNOFILE=65000
 LimitNPROC=65000
+PIDFile=/var/lib/x14/solr/solr-8.11.2/solr8112-8983.pid
+Environment=SOLR_INCLUDE=/usr/lib/x14/solr/solr-8.11.2/bin/solr.in.sh
+Environment=RUNAS=solr
+
+
+ExecStart=/usr/lib/x14/solr/solr-8.11.2/bin/solr start
+ExecStop=/usr/lib/x14/solr/solr-8.11.2/bin/solr stop
+
+Restart=on-failure
+RestartSec=5
+
 TimeoutSec=180s
 
 [Install]
