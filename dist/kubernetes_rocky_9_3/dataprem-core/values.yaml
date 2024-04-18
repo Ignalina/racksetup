@@ -1,0 +1,5 @@
+# environment defaults internally to development
+# however, consumers can override it using a custom values file.
+environment:
+serviceAccount:
+  name: sample-sa
