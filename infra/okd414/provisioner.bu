@@ -1,0 +1,7 @@
+variant: fcos
+version: 1.5.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCv5HJ54MkWA1PkeLmurLA/KxW5FXpICR+/m7nNjkZJXAmy9sfmKa3f4IApOoVAW42Y1D2tSjH9vuxp82K2XyG399jUHtwG3A9h4tYKYuT5BmBlmTOg57km4jwksQau1dtyd7QXvwzyAc/RKyCT0ekgAt5FNHW6W0OSpBVrenP/qp0H8GMA0fjLuam9gu8/WeaxYVfZ3RbwdOUSEYgcMuchWiagbeLO0yrjrMHDw3VvLCrlHGyQu/RyZiahgMFy6IoglFgu14vvh2k2YnGkwuPJvCkcFPR4Fw3HMX3iiLAiXPoKaShpXjCaaCq1cOgcdy5k/DzB4tkMMovXKIQBLWLwrwSs/vnD0p0ZgZ0Rbeu5V6vV1H6nLr3vz/W4yhVD3fOK73Wa5CNj1SK1bsSG8UCEbWW4PbqMZzwvB86Ntpn60YsaXaftRZTeyafQv80mtRR9FYtHgF4W7f47OkX7XkZNnOyOEintSJN+2lLTInXcgcGRXeQcyU7lGHnBaVUqfek= rickard@LokiLinux
