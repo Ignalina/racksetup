@@ -37,6 +37,4 @@ virt-install --connect="qemu:///system" --name="${VM_NAME}" --vcpus="${VCPUS}" -
         --disk="size=${DISK_GB},backing_store=${IMAGE}" \
         --network bridge=virbr0 \
         --sysinfo type="fwcfg,entry0.name=opt/com.coreos/config,entry0.file=${IGNITION_CONFIG}"
-#        "${IGNITION_DEVICE_ARG[@]}" \
-#        --sysinfo type="fwcfg,entry0.name=opt/com.coreos/config,entry0.file=${IGNITION_CONFIG}"
-#        --network bridge=virbr0 "${IGNITION_DEVICE_ARG[@]}" \
+
