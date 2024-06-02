@@ -1,3 +1,24 @@
+#
+# create ignation file
+#
+function butane () {
+  podman run --rm --interactive --security-opt label=disable --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release --pretty --strict $1 > $2
+}
+
+butane example.bu example.ign
+#
+# fetch image
+#
+FILE=fedora-coreos-40.20240504.3.0-qemu.x86_64.qcow2
+if [ ! -f $FILE ]; then
+    echo "Fetching image file"
+   wget -nc https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/40.20240504.3.0/x86_64/fedora-coreos-40.20240504.3.0-qemu.x86_64.qcow2.xz
+   unxz fedora-coreos-40.20240504.3.0-qemu.x86_64.qcow2.xz
+fi
+#
+# create vm 
+#
+
 IGNITION_CONFIG="$PWD/example.ign"
 IMAGE="$PWD/fedora-coreos-40.20240504.3.0-qemu.x86_64.qcow2"
 VM_NAME="fcos-test-01"
