@@ -4,8 +4,7 @@
 function butane () {
   podman run --rm --interactive --security-opt label=disable --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release --pretty --strict $1 > $2
 }
-rm example.ign
-butane example.bu example.ign
+butane provisioner.bu provisioner.ign
 #
 # fetch image
 #
@@ -18,8 +17,8 @@ fi
 #
 # create vm 
 #
-#sudo chmod a+xwr $PWD/example.ign
-IGNITION_CONFIG="$PWD/example.ign"
+#sudo chmod a+xwr $PWD/provisioner.ign
+IGNITION_CONFIG="$PWD/provisioner.ign"
 IMAGE="$PWD/fedora-coreos-40.20240504.3.0-qemu.x86_64.qcow2"
 VM_NAME="fcos-test-01"
 VCPUS="6"
