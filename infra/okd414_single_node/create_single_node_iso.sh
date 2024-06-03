@@ -2,7 +2,7 @@ OKD_VERSION=4.15.0-0.okd-2024-03-10-010116
 ARCH=x86_64
 
 
-function cores-installer() {
+function coreos-installer() {
   podman run --privileged --pull always --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release $1 $2 $3 $4 $5 $6
 }
 
@@ -29,6 +29,7 @@ echo "pullSecret: '$(<pull-secret.txt)'" >> install-config.yaml
 echo "sshKey: |" >> install-config.yaml
 echo "  $(<~/.ssh/id_rsa.pub)" >> install-config.yaml
 
+rm -rf sno
 mkdir sno
 cp install-config.yaml sno
 ./openshift-install --dir=sno create single-node-ignition-config
