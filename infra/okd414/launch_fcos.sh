@@ -1,6 +1,11 @@
 #
 # create ignation file
 #
+function get_vm_ip {
+ MAC=$(virsh domiflist $1 | awk '{ print $5 }' | tail -2 | head -1)
+ arp -a | grep $MAC | awk '{ print $2 }' | sed 's/[()]//g'
+}
+
 function butane () {
   podman run --rm --interactive --security-opt label=disable --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release --pretty --strict $1 > $2
 }
@@ -36,5 +41,13 @@ virt-install --connect="qemu:///system" --name="${VM_NAME}" --vcpus="${VCPUS}" -
         --os-variant="fedora-coreos-$STREAM" --import --graphics=none \
         --disk="size=${DISK_GB},backing_store=${IMAGE}" \
         --network bridge=virbr0 \
-        --sysinfo type="fwcfg,entry0.name=opt/com.coreos/config,entry0.file=${IGNITION_CONFIG}"
+        --sysinfo type="fwcfg,entry0.name=opt/com.coreos/config,entry0.file=${IGNITION_CONFIG}" &
+
+while ! [[ $(get_vm_ip ${VM_NAME}) ]]; do  sleep 1; done ;
+export target_ip=$(get_vm_ip ${VM_NAME})
+
+scp -o stricthostkeychecking=no {pull-secret.txt,prep_provisioner.sh,~/.ssh/id_rsa.pub} core@$target_ip:.
+ssh -o stricthostkeychecking=no core@$target_ip . prep_provisioner.sh
+
+
 
