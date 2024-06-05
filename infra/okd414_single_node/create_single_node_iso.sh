@@ -1,6 +1,10 @@
 OKD_VERSION=4.15.0-0.okd-2024-03-10-010116
 ARCH=x86_64
 
+function butane () {
+  podman run --rm --interactive --security-opt label=disable --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release --pretty --strict $1 > $2
+}
+
 
 function coreos-installer() {
   podman run --privileged --pull always --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release $1 $2 $3 $4 $5 $6
@@ -33,6 +37,8 @@ rm -rf sno
 mkdir sno
 cp install-config.yaml sno
 ./openshift-install --dir=sno create single-node-ignition-config
+./openshift-install --dir=sno create manifests
+butane 99-worker-custom.bu -o sno/openshift/99-worker-custom.yaml
 
 coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign fcos-live.iso
 
