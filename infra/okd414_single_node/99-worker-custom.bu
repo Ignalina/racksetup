@@ -1,0 +1,43 @@
+variant: openshift
+version: 4.15.0
+metadata:
+  name: raid1-storage
+  labels:
+    machineconfiguration.openshift.io/role: worker
+boot_device:
+  mirror:
+    devices:
+      - /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENX0TA05973N
+      - /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENF0R609001L
+      - /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENX0TA05965D
+storage:
+  disks:
+    - device: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENX0TA05973N
+      partitions:
+        - label: root-1
+          size_mib: 25000 
+        - label: var-1
+    - device: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENF0R609001L
+      partitions:
+        - label: root-2
+          size_mib: 25000 
+        - label: var-2
+    - device: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENX0TA05965D
+      partitions:
+        - label: root-3
+          size_mib: 25000 
+        - label: var-3
+  raid:
+    - name: md-var
+      level: raid1
+      devices:
+        - /dev/disk/by-partlabel/var-1
+        - /dev/disk/by-partlabel/var-2
+        - /dev/disk/by-partlabel/var-3
+
+  filesystems:
+    - device: /dev/md/md-var
+      path: /var
+      format: xfs
+      wipe_filesystem: true
+      with_mount_unit: true
