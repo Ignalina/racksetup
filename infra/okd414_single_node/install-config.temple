@@ -20,4 +20,4 @@ networking:
 platform:
   none: {}
 bootstrapInPlace:
-  installationDisk: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENX0TA05973N
+  installationDisk: /dev/md/md-root

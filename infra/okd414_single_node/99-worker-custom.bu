@@ -28,6 +28,12 @@ storage:
           size_mib: 25000 
         - label: var-3
   raid:
+    - name: md-root
+      level: raid0
+      devices:
+        - /dev/disk/by-partlabel/root-1
+        - /dev/disk/by-partlabel/root-2
+        - /dev/disk/by-partlabel/root-3
     - name: md-var
       level: raid1
       devices:
@@ -36,6 +42,11 @@ storage:
         - /dev/disk/by-partlabel/var-3
 
   filesystems:
+    - device: /dev/md/md-root
+      path: /
+      format: xfs
+      wipe_filesystem: true
+      with_mount_unit: true
     - device: /dev/md/md-var
       path: /var
       format: xfs
