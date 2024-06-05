@@ -42,9 +42,10 @@ rm -rf sno
 mkdir sno
 cp install-config.yaml sno
 ./openshift-install --dir=sno create manifests
-./openshift-install --dir=sno create single-node-ignition-config
 butane 99-worker-custom.bu -o sno/openshift/99-worker-custom.yaml
 
-coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign fcos-live.iso
+./openshift-install --dir=sno create single-node-ignition-config
+
+#coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign fcos-live.iso
 
 
