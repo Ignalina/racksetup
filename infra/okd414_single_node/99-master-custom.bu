@@ -3,7 +3,7 @@ version: 4.15.0
 metadata:
   name: raid1-storage
   labels:
-    machineconfiguration.openshift.io/role: worker
+    machineconfiguration.openshift.io/role: master
 boot_device:
   mirror:
     devices:

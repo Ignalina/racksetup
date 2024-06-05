@@ -42,7 +42,7 @@ rm -rf sno
 mkdir sno
 cp install-config.yaml sno
 ./openshift-install --dir=sno create manifests
-butane 99-worker-custom.bu -o sno/openshift/99-worker-custom.yaml
+butane 99-master-custom.bu -o sno/openshift/99-master-custom.yaml
 
 ./openshift-install --dir=sno create single-node-ignition-config
 
