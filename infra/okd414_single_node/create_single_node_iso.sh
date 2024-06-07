@@ -1,14 +1,16 @@
 OKD_VERSION=4.15.0-0.okd-2024-03-10-010116
 ARCH=x86_64
 
-function butane () {
-  podman run --rm --interactive --security-opt label=disable --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release --pretty --strict $1 > $2
-}
+#function butane () {
+#  podman run --rm --interactive --security-opt label=disable --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release --pretty --strict $1 > $3
+#}
 
 
 function coreos-installer() {
   podman run --privileged --pull always --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release $1 $2 $3 $4 $5 $6
 }
+coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign fcos-live.iso
+exit
 
 if [ ! -f oc ]; then
    curl -L https://github.com/okd-project/okd/releases/download/$OKD_VERSION/openshift-client-linux-$OKD_VERSION.tar.gz -o oc.tar.gz
@@ -41,11 +43,11 @@ cat ca.pem >> install-config.yaml
 rm -rf sno
 mkdir sno
 cp install-config.yaml sno
-./openshift-install --dir=sno create manifests
-butane 99-master-custom.bu -o sno/openshift/99-master-custom.yaml
 
+#./openshift-install --dir=sno create manifests
+
+#butane 01-master-custom.bu -o sno/openshift/01-master-custom.yaml
 ./openshift-install --dir=sno create single-node-ignition-config
-
 coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign fcos-live.iso
-
-
+#butane 01-master-custom.bu -p -r -o 01-master-custom.ign
+#coreos-installer iso customize -f --dest-ignition 01-master-custom.ign fcos-live.iso
