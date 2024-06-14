@@ -47,20 +47,23 @@ cp install-config.yaml sno
 #butane 01-master-custom.bu -o sno/openshift/01-master-custom.yaml
 ./openshift-install --dir=sno create single-node-ignition-config
 coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign fcos-live.iso
-#butane 01-master-custom.bu -p -r -o 01-master-custom.ign
-#coreos-installer iso customize -f --dest-ignition 01-master-custom.ign fcos-live.iso
-cp fcos-live.iso /var/lib/libvirt/images/rhcos-live.x86_64.iso
+##butane 01-master-custom.bu -p -r -o 01-master-custom.ign
+##coreos-installer iso customize -f --dest-ignition 01-master-custom.ign fcos-live.iso
 
-virt-install --name="master-sno" \
-    --vcpus=4 \
-    --ram=16384 \
-    --disk path=${PWD}/master-snp.qcow2,bus=sata,size=120 \
-    --network network=default,model=virtio \
-    --boot menu=on \
-    --console pty,target_type=serial \
-    --cpu host-passthrough \
-    --cdrom /var/lib/libvirt/images/rhcos-live.x86_64.iso \
-    --os-variant "fedora-coreos-stable" &
 
-virsh console master-sno &
+# VIRT TRACK
+#cp fcos-live.iso /var/lib/libvirt/images/rhcos-live.x86_64.iso
+
+#virt-install --name="master-sno" \
+#    --vcpus=4 \
+#    --ram=16384 \
+#    --disk path=${PWD}/master-snp.qcow2,bus=sata,size=120 \
+#    --network network=default,model=virtio \
+#    --boot menu=on \
+#    --console pty,target_type=serial \
+#    --cpu host-passthrough \
+#    --cdrom /var/lib/libvirt/images/rhcos-live.x86_64.iso \
+#    --os-variant "fedora-coreos-stable" &
+#virsh console master-sno &
+
 ./openshift-install --dir=sno wait-for install-complete
