@@ -1,9 +1,33 @@
+#
+# PRE:
+# install butane , by building it or on fedora "sudo dnf install -y butane"
+#
+# Setup upp dns 
+# zone file extract below --->
+# quay  IN      A       10.1.1.108
+# api.okd414      IN      A      10.1.1.111
+# api-int.okd414  IN      A       10.1.1.111
+# *.apps.okd414   IN      A       19.1.1.111
+# <--- end of zone file extract
+
 OKD_VERSION=4.15.0-0.okd-2024-03-10-010116
 ARCH=x86_64
 
-#function butane () {
-#  podman run --rm --interactive --security-opt label=disable --volume ${PWD}:/pwd --workdir /pwd quay.io/coreos/butane:release --pretty --strict $1 > $3
-#}
+function create-vm () {
+cp fcos-live.iso /var/lib/libvirt/images/fcos-live.x86_64.iso
+
+virt-install --name="master-sno" \
+    --vcpus=4 \
+    --ram=16384 \
+    --disk path=${PWD}/master-snp.qcow2,bus=sata,size=120 \
+    --network network=default,model=virtio \
+    --boot menu=on \
+    --console pty,target_type=serial \
+    --cpu host-passthrough \
+    --cdrom /var/lib/libvirt/images/fcos-live.x86_64.iso \
+    --os-variant "fedora-coreos-stable" &
+virsh console master-sno &
+}
 
 
 function coreos-installer() {
@@ -51,19 +75,9 @@ coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign 
 ##coreos-installer iso customize -f --dest-ignition 01-master-custom.ign fcos-live.iso
 
 
-# VIRT TRACK
-#cp fcos-live.iso /var/lib/libvirt/images/rhcos-live.x86_64.iso
+# Remove this if you manually deploy "cfos-live.iso" to your hardware.
+create-vm
 
-#virt-install --name="master-sno" \
-#    --vcpus=4 \
-#    --ram=16384 \
-#    --disk path=${PWD}/master-snp.qcow2,bus=sata,size=120 \
-#    --network network=default,model=virtio \
-#    --boot menu=on \
-#    --console pty,target_type=serial \
-#    --cpu host-passthrough \
-#    --cdrom /var/lib/libvirt/images/rhcos-live.x86_64.iso \
-#    --os-variant "fedora-coreos-stable" &
-#virsh console master-sno &
-
-./openshift-install --dir=sno wait-for install-complete
+# The wait line below only works if IP is resolved by DNS
+# 
+#./openshift-install --dir=sno wait-for install-complete

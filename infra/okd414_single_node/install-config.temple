@@ -20,11 +20,14 @@ networking:
 platform:
   none: {}
 bootstrapInPlace:
-  installationDisk: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENX0TA05973N
-imageContentSources:
-- mirrors:
-  - quay.x14.se:8443/openshift
-  source: quay.io/openshift/okd
-- mirrors:
-  - quay.x14.se:8443/openshift
-  source: quay.io/openshift/okd-content
+  installationDisk: /dev/sda
+## Uncomment below for baremetal with quay setup as local cache
+#bootstrapInPlace:
+#  installationDisk: /dev/disk/by-id/nvme-Samsung_SSD_980_PRO_2TB_S69ENX0TA05973N
+#imageContentSources:
+#- mirrors:
+#  - quay.x14.se:8443/openshift
+#  source: quay.io/openshift/okd
+#- mirrors:
+#  - quay.x14.se:8443/openshift
+#  source: quay.io/openshift/okd-content
