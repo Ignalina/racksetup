@@ -46,8 +46,13 @@ virt-install --connect="qemu:///system" --name="${VM_NAME}" --vcpus="${VCPUS}" -
 while ! [[ $(get_vm_ip ${VM_NAME}) ]]; do  sleep 1; done ;
 export target_ip=$(get_vm_ip ${VM_NAME})
 
-scp -o stricthostkeychecking=no {pull-secret.txt,prep_provisioner.sh,~/.ssh/id_rsa.pub} core@$target_ip:.
-ssh -o stricthostkeychecking=no core@$target_ip . prep_provisioner.sh
+scp -o stricthostkeychecking=no {pull-secret.txt,prep_provisioner.sh,~/.ssh/id_rsa.pub} kni@$target_ip:.
+ssh -o stricthostkeychecking=no kni@$target_ip . prep_provisioner.sh
+
+while ! [[ $(get_vm_ip ${VM_NAME}) ]]; do  sleep 1; done ;
+while ! ssh -o StrictHostKeyChecking=no kni@$target_ip 'sleep 5'; do  sleep 5; done ;
+pwd
+ssh -o stricthostkeychecking=no kni@$target_ip . prep_provisioner2.sh
 
 
 
