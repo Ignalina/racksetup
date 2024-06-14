@@ -1,14 +1,16 @@
 #
 # PRE:
-# install butane , by building it or on fedora "sudo dnf install -y butane"
+
+# 1-install butane , by building it or on fedora "sudo dnf install -y butane"
 #
-# Setup upp dns 
+# 2-Setup upp dns 
 # zone file extract below --->
 # quay  IN      A       10.1.1.108
 # api.okd414      IN      A      10.1.1.111
 # api-int.okd414  IN      A       10.1.1.111
 # *.apps.okd414   IN      A       19.1.1.111
 # <--- end of zone file extract
+# 3 create an pull-secret.txt from https://console.redhat.com/openshift/install/pull-secret 
 
 OKD_VERSION=4.15.0-0.okd-2024-03-10-010116
 ARCH=x86_64
