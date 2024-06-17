@@ -15,6 +15,8 @@
 OKD_VERSION=4.15.0-0.okd-2024-03-10-010116
 ARCH=x86_64
 
+rm -rf fcos-live.iso
+
 function create-vm () {
 cp fcos-live.iso /var/lib/libvirt/images/fcos-live.x86_64.iso
 
@@ -63,23 +65,34 @@ echo "additionalTrustBundle: |" >> install-config.yaml
 cat ca.pem >> install-config.yaml
 
 
-
 rm -rf sno
 mkdir sno
 cp install-config.yaml sno
 
-#./openshift-install --dir=sno create manifests
+##./openshift-install --dir=sno create manifests
 
 #butane 01-master-custom.bu -o sno/openshift/01-master-custom.yaml
+##cp 02-master-killnic.yaml sno/openshift/
+
 ./openshift-install --dir=sno create single-node-ignition-config
 coreos-installer iso ignition embed -fi sno/bootstrap-in-place-for-live-iso.ign fcos-live.iso
+
+
 ##butane 01-master-custom.bu -p -r -o 01-master-custom.ign
 ##coreos-installer iso customize -f --dest-ignition 01-master-custom.ign fcos-live.iso
 
-
 # Remove this if you manually deploy "cfos-live.iso" to your hardware.
-create-vm
+#create-vm
 
 # The wait line below only works if IP is resolved by DNS
 # 
 #./openshift-install --dir=sno wait-for install-complete
+
+
+#
+#  TO INSTALL LSO FOR SNO
+#
+#./oc --kubeconfig=sno/auth/kubeconfig adm new-project openshift-local-storage
+#./oc --kubeconfig=sno/auth/kubeconfig annotate namespace openshift-local-storage openshift.io/node-selector=''
+#./oc --kubeconfig=sno/auth/kubeconfig  annotate namespace openshift-local-storage workload.openshift.io/allowed='management'
+
