@@ -1,12 +1,12 @@
 # racksetup X14 minicompute
 Automated setup for fast data applience.
 
-| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.2 |
-| :------------ |:---------------:| -----:| -----:|
-| Iceberg+Nessie  | y |    n |  y|
-| Delta 3.0.0 | n | n | y|
-| Minio-S3 | y | n | y|
-| Single Minio-S3 | y | y | y|
+| Feature  | Ubuntu 22.04  | Rocky8.7 | Rocky9.2 | Fedora 40 |
+| :------------ |:---------------:| -----:| -----:| -----:|
+| Iceberg+Nessie  | y |    n |  y| ?|
+| Delta 3.0.0 | n | n | y|? |
+| Minio-S3 | y | n | y| ?|
+| Single Minio-S3 | y | y | y| ?|
 
 Optimal setup on baremetall (X14 v2023 using Supermicro+Samsung 9a3/1733/1735+Mellanox ConnectX-6)
 
