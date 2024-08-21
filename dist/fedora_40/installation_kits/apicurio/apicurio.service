@@ -1,0 +1,19 @@
+[Unit]
+Description= Apicurio 
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kafka
+Group=x14
+Type=simple
+SuccessExitStatus=0
+
+WorkingDirectory=/usr/lib/x14/kafka/apicurio-registry/storage/kafkasql/target
+#EnvironmentFile=/usr/lib/x14/kafka_2.12-3.4.0/env
+ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/apicurio/apicurio.pid"
+ExecStart=java -Dregistry.kafka.common.bootstrap.servers=10.1.1.93:9092 -Dquarkus.http.port=8082 -Dquarkus.http.port=8082 -jar /usr/lib/x14/kafka/apicurio-registry/storage/kafkasql/target/apicurio-registry-storage-kafkasql-2.5.0-SNAPSHOT-runner.jar
+#ExecStop=/usr/lib/x14/kafka/kafka_2.12-3.4.0/bin/kafka-server-stop.sh config/kraft/server.properties
+
+[Install]
+WantedBy=multi-user.target

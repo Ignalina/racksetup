@@ -1,0 +1,10 @@
+#install_app.sh zk ${config}
+#install_app.sh solr ${config}
+install_app.sh nginx ${config}
+#install_app.sh admindb ${config}
+install_app.sh singleminio ${config}
+install_app.sh schema-registry ${config}
+install_app.sh spark ${config}
+install_app.sh nessie_iceberg ${config}
+#install_app.sh kyuubi ${config}
+#install_app.sh ranger ${config}

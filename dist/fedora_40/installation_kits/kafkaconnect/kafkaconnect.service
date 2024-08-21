@@ -1,0 +1,17 @@
+[Unit]
+Description=Kafka 3.5.0 icebergsink Scala 2.12
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kafka
+Group=x14
+Type=simple
+SuccessExitStatus=0
+
+WorkingDirectory=/usr/lib/x14/kafka/kafka_2.12-3.5.0
+ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/icebergsink.pid"
+ExecStart=/usr/lib/x14/kafka/kafka_2.12-3.5.0/bin/connect-standalone.sh /usr/lib/x14/kafka/icebergsink/config/icebergsink/standalone.properties /usr/lib/x14/kafka/icebergsink/config/icebergsink/icebergsink.config
+
+[Install]
+WantedBy=multi-user.target

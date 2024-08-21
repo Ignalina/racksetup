@@ -1,0 +1,18 @@
+[Unit]
+Description=kafkaui 0.7.1
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kafka
+Group=x14
+Type=simple
+SuccessExitStatus=0
+
+WorkingDirectory=/usr/lib/x14/kafka/kafkaui
+ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/kafkaui/kafkaui.pid"
+ExecStart=/usr/lib/jvm/java-17-openjdk/bin/java -Dspring.config.additional-location=application-local.yml  --add-opens java.rmi/javax.rmi.ssl=ALL-UNNAMED -jar kafka-ui-api-v0.7.1.jar
+
+
+[Install]
+WantedBy=multi-user.target
