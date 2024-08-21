@@ -1,9 +1,9 @@
 brokkr_mesh_ip=("10.1.2.0" "10.1.2.1" "10.1.2.2" "10.1.2.3")
 brokkr_mesh_name=("r9" "f40v1.x14.se" "f40v2.x14.se" "f40v3.x14.se")
 
-brokkr_ethext_ip=("10.1.1.0" "10.1.1.2" "10.1.1.3" "10.1.1.4")
-brokkr_ethext_name=("ef40" "node1.x14.se" "node2.x14.se" "node3.x14.se")
-brokkr_ethext_gateway=10.1.1.1
+brokkr_ethext_ip=("192.168.122.145" "192.168.122.145" "192.168.122.158" "192.168.122.159")
+brokkr_ethext_name=("ef40" "ef40v1.x14.se" "ef40v2.x14.se" "ef40v3.x14.se")
+brokkr_ethext_gateway=192.168.122.1
 
 
 declare -A brokkr_net_interface_name
