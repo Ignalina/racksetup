@@ -11,9 +11,9 @@ chown -R kafka:x14 /var/lib/x14/kafka/
 
 mkdir kafka
 pushd kafka
-wget https://downloads.apache.org/kafka/3.5.0/kafka_2.12-3.5.0.tgz
-tar -zxf kafka_2.12-3.5.0.tgz
-pushd kafka_2.12-3.5.0
+wget https://downloads.apache.org/kafka/3.6.2/kafka_2.12-3.5.0.tgz
+tar -zxf kafka_2.12-3.6.2.tgz
+pushd kafka_2.12-3.6.2
 
 
 mesh_machine_nr

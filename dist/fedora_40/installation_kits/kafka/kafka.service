@@ -1,5 +1,5 @@
 [Unit]
-Description=Kafka 3.5.0 Scala 2.12
+Description=Kafka 3.6.2 Scala 2.12
 Wants=network-online.target
 After=network-online.target
 
@@ -9,11 +9,11 @@ Group=x14
 Type=simple
 SuccessExitStatus=0
 
-WorkingDirectory=/usr/lib/x14/kafka/kafka_2.12-3.5.0
+WorkingDirectory=/usr/lib/x14/kafka/kafka_2.12-3.6.2
 #EnvironmentFile=/usr/lib/x14/kafka/kafka_2.12-3.4.0/env
 ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kafka/kafka.pid"
-ExecStart=/usr/lib/x14/kafka/kafka_2.12-3.5.0/bin/kafka-server-start.sh config/kraft/server.properties
-ExecStop=/usr/lib/x14/kafka/kafka_2.12-3.5.0/bin/kafka-server-stop.sh config/kraft/server.properties
+ExecStart=/usr/lib/x14/kafka/kafka_2.12-3.6.2/bin/kafka-server-start.sh config/kraft/server.properties
+ExecStop=/usr/lib/x14/kafka/kafka_2.12-3.6.2/bin/kafka-server-stop.sh config/kraft/server.properties
 
 [Install]
 WantedBy=multi-user.target
