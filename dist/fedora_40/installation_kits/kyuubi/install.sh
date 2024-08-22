@@ -5,7 +5,7 @@ then
    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
 
    yum install -y java-11-openjdk-headless zip
-   useradd -s /sbin/nologin -M kyuubi -g x14
+   useradd -s /sbin/nologin  kyuubi -g x14
 
    mkdir -p /var/lib/x14/kyuubi/
    chown kyuubi:x14 /var/lib/x14/kyuubi
