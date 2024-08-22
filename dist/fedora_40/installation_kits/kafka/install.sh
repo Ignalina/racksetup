@@ -11,7 +11,7 @@ chown -R kafka:x14 /var/lib/x14/kafka/
 
 mkdir kafka
 pushd kafka
-wget https://downloads.apache.org/kafka/3.6.2/kafka_2.12-3.5.0.tgz
+wget https://downloads.apache.org/kafka/3.6.2/kafka_2.12-3.6.2.tgz
 tar -zxf kafka_2.12-3.6.2.tgz
 pushd kafka_2.12-3.6.2
 
