@@ -14,7 +14,7 @@ then
    mkdir -p kyuubi
 
    pushd kyuubi
-   wget https://dlcdn.apache.org/kyuubi/kyuubi-1.8.0/apache-kyuubi-1.9.2-bin.tgz
+   wget https://dlcdn.apache.org/kyuubi/kyuubi-1.9.2/apache-kyuubi-1.9.2-bin.tgz
    tar -zxf apache-kyuubi-1.9.2-bin.tgz
 
    popd
