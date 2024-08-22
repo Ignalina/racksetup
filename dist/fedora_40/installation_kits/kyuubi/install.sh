@@ -22,6 +22,7 @@ then
 
    popd
 fi
+cp kyuubi-env.sh /usr/lib/x14/kyuubi/apache-kyuubi-1.9.2-bin/conf/kyuubi-env.sh
 cp kyuubi.service /etc/systemd/system/
 cp ranger-spark-security.xml  /usr/lib/x14/spark/spark-3.5.2-bin-hadoop3/conf/
 chown spark:x14 /usr/lib/x14/spark/spark-3.5.2-bin-hadoop3/conf/ranger-spark-security.xml
