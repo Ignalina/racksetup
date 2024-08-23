@@ -58,8 +58,8 @@ dnf -y install ant rocksdb
 
       useradd -s /sbin/nologin -M nessie -g x14
 
-      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.66.0/nessie-quarkus-0.66.0-runner.jar
-      chmod +x nessie-quarkus-0.66.0-runner.jar
+      wget https://github.com/projectnessie/nessie/releases/download/nessie-0.95.0/nessie-quarkus-0.95.0-runner.jar
+      chmod +x nessie-quarkus-0.95.0-runner.jar
       mkdir /var/lib/x14/nessie
       chown nessie:x14 /var/lib/x14/nessie
 
