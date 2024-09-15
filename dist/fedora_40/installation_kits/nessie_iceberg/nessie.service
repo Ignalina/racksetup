@@ -11,7 +11,6 @@ Restart=always
 RestartSec=5
 
 WorkingDirectory=/usr/lib/x14/nessie/
-#EnvironmentFile=/usr/lib/x14/nessie/etc/env
 ExecStart=java -Dnessie.version.store.type=ROCKSDB -Dnessie.version.store.persist.rocks.database-path=/var/lib/x14/nessie/rocks-nessie -Dquarkus.http.host=10.1.1.93 -jar /usr/lib/x14/nessie/nessie-quarkus-0.96.1-runner.jar
 
 [Install]
