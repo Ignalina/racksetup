@@ -19,6 +19,7 @@ then
 
    popd
    chown -R kyuubi:x14 kyuubi
+   chmod -R g+xwr kyuubi
 
    popd
 fi

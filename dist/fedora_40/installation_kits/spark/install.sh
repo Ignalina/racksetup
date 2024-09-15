@@ -33,6 +33,7 @@ mkdir /var/lib/x14/spark/SPARK_LOCAL_DIRS
 mkdir /var/lib/x14/spark/eventLog.dir
 mkdir /var/lib/x14/spark/SPARK_WORKER_DIR
 chown -R spark:x14 /var/lib/x14/spark/
+chmod -R g+xwr /var/lib/x14/spark/
 
 echo "spark.local.dir=/var/lib/x14/spark/spark.local.dir" >> conf/spark-defaults.conf
 echo "spark.eventLog.dir=/var/lib/x14/spark/eventLog.dir" >> conf/spark-defaults.conf
