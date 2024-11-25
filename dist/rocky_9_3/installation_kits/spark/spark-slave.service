@@ -1,5 +1,5 @@
 [Unit]
-Description=Apache Spark 3.5.0 Slave scala 2.12
+Description=Apache Spark 3.5.3 Slave scala 2.12
 Wants=network-online.target
 After=network-online.target
 
@@ -9,11 +9,11 @@ Group=x14
 Type=forking
 SuccessExitStatus=143
 
-WorkingDirectory=/usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/sbin
-EnvironmentFile=/usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/etc/env
-ExecStartPost=/bin/bash -c "echo $MAINPID > /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/etc/spark-slave.pid"
-ExecStart=/usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/sbin/start-slave.sh spark://SPARK_MASTER_HOST_REPLACE:7077
-ExecStop=/usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/sbin/stop-slave.sh
+WorkingDirectory=/usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/sbin
+EnvironmentFile=/usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/etc/env
+ExecStartPost=/bin/bash -c "echo $MAINPID > /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/etc/spark-slave.pid"
+ExecStart=/usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/sbin/start-slave.sh spark://SPARK_MASTER_HOST_REPLACE:7077
+ExecStop=/usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/sbin/stop-slave.sh
 
 [Install]
 WantedBy=multi-user.target
