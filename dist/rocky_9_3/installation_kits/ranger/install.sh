@@ -10,9 +10,9 @@ then
     pushd /tmp
     yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel maven gcc bzip2 fontconfig diffutils bc tzdata git
 
-    wget https://downloads.apache.org/ranger/2.4.0/apache-ranger-2.4.0.tar.gz 
-    tar -zxf apache-ranger-2.4.0.tar.gz
-    cd apache-ranger-2.4.0
+    wget https://downloads.apache.org/ranger/2.5.0/apache-ranger-2.5.0.tar.gz 
+    tar -zxf apache-ranger-2.5.0.tar.gz
+    cd apache-ranger-2.5.0
        export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
        export PATH=$JAVA_HOME/bin:$PATH
        export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
@@ -23,10 +23,10 @@ then
     mkdir -p /usr/lib/x14/ranger
     pushd /usr/lib/x14/ranger
 
-       cp /tmp/apache-ranger-2.4.0/target/ranger-2.4.0-admin.tar.gz .
-       tar -xvf ranger-2.4.0-admin.tar.gz
+       cp /tmp/apache-ranger-2.5.0/target/ranger-2.5.0-admin.tar.gz .
+       tar -xvf ranger-2.5.0-admin.tar.gz
 
-       pushd ranger-2.4.0-admin
+       pushd ranger-2.5.0-admin
 
 # Fetch mssql connector
 
@@ -48,12 +48,12 @@ then
 # audit_solr_no_shards
           ./setup.sh
 # this should not be necessary but something if i gave correct input in install.properties	  
-	  cp  /usr/lib/x14/ranger/ranger-2.4.0-admin/mysql-connector-java.jar /usr/lib/x14/ranger/ranger-2.4.0-admin/ews/webapp/WEB-INF/lib/
+	  cp  /usr/lib/x14/ranger/ranger-2.5.0-admin/mysql-connector-java.jar /usr/lib/x14/ranger/ranger-2.5.0-admin/ews/webapp/WEB-INF/lib/
        popd
     popd
 
 
-    pushd /usr/lib/x14/ranger/ranger-2.4.0-admin/contrib/solr_for_audit_setup
+    pushd /usr/lib/x14/ranger/ranger-2.5.0-admin/contrib/solr_for_audit_setup
     su solr -c "/usr/lib/x14/solr/solr-8.11.2/bin/solr create_collection -c ranger_audits -d conf -shards 1 -replicationFactor 1"
     popd
 

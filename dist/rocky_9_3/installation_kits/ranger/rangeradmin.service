@@ -1,5 +1,5 @@
 [Unit]
-Description=Apache Ranger 2.4.0
+Description=Apache Ranger 2.5.0
 
 [Service]
 Type=forking
