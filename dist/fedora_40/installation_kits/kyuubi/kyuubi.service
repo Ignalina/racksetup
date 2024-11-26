@@ -1,5 +1,5 @@
 [Unit]
-Description=Kyuubi 1.9.2
+Description=Kyuubi 1.10.0
 Wants=network-online.target
 After=network-online.target
 
@@ -9,10 +9,10 @@ Group=x14
 Type=forking
 SuccessExitStatus=0
 
-WorkingDirectory=/usr/lib/x14/kyuubi/apache-kyuubi-1.9.2-bin
+WorkingDirectory=/usr/lib/x14/kyuubi/apache-kyuubi-1.10.0-bin
 ExecStartPost=/bin/bash -c "echo $MAINPID > /var/lib/x14/kyuubi/kyuubi.pid"
-ExecStart=/usr/lib/x14/kyuubi/apache-kyuubi-1.9.2-bin/bin/kyuubi start
-ExecStop=/usr/lib/x14/kyuubi/apache-kyuubi-1.9.2-bin/bin/kyuubi stop
+ExecStart=/usr/lib/x14/kyuubi/apache-kyuubi-1.10.0-bin/bin/kyuubi start
+ExecStop=/usr/lib/x14/kyuubi/apache-kyuubi-1.10.0-bin/bin/kyuubi stop
 
 [Install]
 WantedBy=multi-user.target

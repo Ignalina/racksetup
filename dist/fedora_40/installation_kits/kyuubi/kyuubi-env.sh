@@ -57,7 +57,7 @@
 ## Examples ##
 
 # export JAVA_HOME=/usr/jdk64/jdk1.8.0_152
-export SPARK_HOME=/usr/lib/x14/spark/spark-3.5.2-bin-hadoop3
+export SPARK_HOME=/usr/lib/x14/spark/spark-3.5.3-bin-hadoop3
 # export FLINK_HOME=/opt/flink
 # export HIVE_HOME=/opt/hive
 # export FLINK_HADOOP_CLASSPATH=/path/to/hadoop-client-runtime-3.3.2.jar:/path/to/hadoop-client-api-3.3.2.jar
