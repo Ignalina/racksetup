@@ -1,7 +1,7 @@
 mesh_machine_nr
 nr=$?
-
-if [[ ${nr} -eq 1 ]]
+echo ${nr} 
+if [[ ${nr} -eq 0 ]]
 then 
     echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
     systemctl start mariadb
