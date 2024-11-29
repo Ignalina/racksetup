@@ -23,25 +23,30 @@ then
    popd
    mv kyuubi.service /etc/systemd/system/
    systemctl enable kyuubi.service
-fi
 
-cp ranger-spark-security.xml  /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/conf/
-chown spark:x14 /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/conf/ranger-spark-security.xml
+   cp kyuubi-env.sh /usr/lib/x14/kyuubi/apache-kyuubi-1.10.0-bin/conf/kyuubi-env.sh
+   chown kyuubi:x14 /usr/lib/x14/kyuubi/apache-kyuubi-1.10.0-bin/conf/kyuubi-env.sh
+   cp kyuubi.service /etc/systemd/system/
 
-pushd /tmp
 
-wget https://dlcdn.apache.org/kyuubi/kyuubi-1.10.0/apache-kyuubi-1.10.0-source.tgz
-tar -zxf apache-kyuubi-1.10.0-source.tgz
-cd apache-kyuubi-1.10.0-source
-build/mvn clean package -pl :kyuubi-spark-authz_2.12 -DskipTests -Dspark.version=3.5.3 -Dranger.version=2.5.0
+   cp ranger-spark-security.xml  /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/conf/
+   chown spark:x14 /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/conf/ranger-spark-security.xml
+
+   pushd /tmp
+
+   wget https://dlcdn.apache.org/kyuubi/kyuubi-1.10.0/apache-kyuubi-1.10.0-source.tgz
+   tar -zxf apache-kyuubi-1.10.0-source.tgz
+   cd apache-kyuubi-1.10.0-source
+   build/mvn clean package -pl :kyuubi-spark-authz_2.12 -DskipTests -Dspark.version=3.5.3 -Dranger.version=2.5.0
 #build/mvn clean package -pl :kyuubi-spark-authz-shaded_2.12 -DskipTests -Dspark.version=3.5.0 -Dranger.version=2.4.0
 #cp ./extensions/spark/kyuubi-spark-authz-shaded/target/kyuubi-spark-authz-shaded_2.12-1.8.0.jar /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/
 #chown spark:x14 /usr/lib/x14/spark/spark-3.5.0-bin-hadoop3/jars/kyuubi-spark-authz-shaded_2.12-1.8.0.jar
 
-cp ./extensions/spark/kyuubi-spark-authz/target/kyuubi-spark-authz_2.12-1.10.0.jar /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/jars/
-cp ./extensions/spark/kyuubi-spark-authz/target/scala-2.12/jars/* /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/jars/
+   cp ./extensions/spark/kyuubi-spark-authz/target/kyuubi-spark-authz_2.12-1.10.0.jar /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/jars/
+   cp ./extensions/spark/kyuubi-spark-authz/target/scala-2.12/jars/* /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/jars/
 
-chown spark:x14 /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/jars/*
+   chown spark:x14 /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/jars/*
 
+  popd
 
-popd
+fi
