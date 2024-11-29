@@ -19,6 +19,12 @@ mv -f /tmp/spark.env etc/env
 mesh_machine_nr
 nr=$?
 
+mv -f conf/spark-env.sh.template conf/spark-env.sh
+echo "SPARK_LOG_DIR=/var/lib/x14/spark/logs" >> conf/spark-env.sh
+
+mv -f conf/spark-defaults.conf.template conf/spark-defaults.conf
+echo "spark.jars.ivy=/var/lib/x14/spark/ivy" >> conf/spark-defaults.conf
+
 mv conf/spark-defaults.conf.template conf/spark-defaults.conf
 echo "spark.sql.streaming.stateStore.providerClass=org.apache.spark.sql.execution.streaming.state.RocksDBStateStoreProvider" >> conf/spark-defaults.conf
 
@@ -72,7 +78,7 @@ popd
 
 
 # TODO in case of first node only
-if [[ ${nr} -eq 1 ]]
+if [[ ${nr} -eq 2 ]]
 then 
     echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
     mv -f spark-master.service /etc/systemd/system/
