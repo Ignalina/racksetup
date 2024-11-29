@@ -1,10 +1,10 @@
 mesh_machine_nr
 nr=$?
-if [[ $nr -eq 1 ]]
+if [[ $nr -eq 2 ]]
 then
    echo "I AM MASTER_HOST=${brokkr_mesh_ip[1]}"
 
-   apt install -y java-11-openjdk-headless zip
+   apt install -y openjdk-11-jdk-headless zip
    useradd -s /sbin/nologin -M kyuubi -g x14
 
    mkdir -p /var/lib/x14/kyuubi/
@@ -21,6 +21,8 @@ then
    chown -R kyuubi:x14 kyuubi
 
    popd
+   mv kyuubi.service /etc/systemd/system/
+   systemctl enable kyuubi.service
 fi
 
 cp ranger-spark-security.xml  /usr/lib/x14/spark/spark-3.5.3-bin-hadoop3/conf/
