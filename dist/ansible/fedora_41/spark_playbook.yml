@@ -1,0 +1,79 @@
+---
+- name: Install Spark on Master and Worker nodes
+  hosts: spark-cluster
+  become: true
+  vars_files:
+     - global_vars.yml
+     - secret_vars.yml
+  tasks:
+    - name: Create Spark group and user
+      group:
+        name: "{{ spark_group }}"
+        state: present
+
+    - name: Create Spark user
+      user:
+        name: "{{ spark_user }}"
+        group: "{{ spark_group }}"
+        shell: /bin/bash
+        create_home: yes
+
+    - name: Download Spark tarball
+      get_url:
+        url: "{{ spark_download_url }}"
+        dest: "/tmp/spark-{{ spark_version }}.tgz"
+
+    - name: Extract Spark tarball
+      unarchive:
+        src: "/tmp/spark-{{ spark_version }}.tgz"
+        dest: "{{ spark_home }}"
+        remote_src: yes
+        owner: "{{ spark_user }}"
+        group: "{{ spark_group }}"
+        creates: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2"
+
+    - name: Set Spark environment variables
+      lineinfile:
+        path: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2/conf/spark-env.sh"
+        line: 'export SPARK_HOME={{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2'
+        create: yes
+        owner: "{{ spark_user }}"
+        group: "{{ spark_group }}"
+        mode: '0644'
+
+    - name: Configure Spark to point to the master node
+      lineinfile:
+        path: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2/conf/spark-defaults.conf"
+        line: 'spark.master {{ spark_master_url }}'
+        create: yes
+        owner: "{{ spark_user }}"
+        group: "{{ spark_group }}"
+        mode: '0644'
+
+    - name: Start Spark master on master node
+      when: inventory_hostname in groups['spark-master']
+      systemd:
+        name: spark-master
+        state: started
+        enabled: yes
+        user: "{{ spark_user }}"
+        group: "{{ spark_group }}"
+        exec_start: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2/sbin/start-master.sh"
+
+    - name: Start Spark worker on worker nodes
+      when: inventory_hostname in groups['spark-workers']
+      systemd:
+        name: spark-worker
+        state: started
+        enabled: yes
+        user: "{{ spark_user }}"
+        group: "{{ spark_group }}"
+        exec_start: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2/sbin/start-worker.sh {{ spark_master_url }}"
+
+    - name: Label Spark worker nodes
+      when: inventory_hostname in groups['spark-workers']
+      command: >
+        curl -X POST -d "worker={{ inventory_hostname }}" -d "label={{ ansible_hostname }}" http://{{ groups['spark-master'][0] }}:8080/label
+      environment:
+        SPARK_HOME: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2"
+        PATH: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2/bin:{{ ansible_env.PATH }}"

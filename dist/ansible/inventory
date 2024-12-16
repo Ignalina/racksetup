@@ -1,0 +1,10 @@
+[spark-master]
+master-node ansible_host=master-node-ip
+
+[spark-workers]
+worker-node-1 ansible_host=worker-node-1-ip
+worker-node-2 ansible_host=worker-node-2-ip
+
+[spark-cluster:children]
+spark-master
+spark-workers

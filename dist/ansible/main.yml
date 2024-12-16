@@ -1,0 +1,8 @@
+  vars_files:
+     - global_vars.yml
+     - secret_vars.yml
+
+- import_playbook: playbook1.yml
+- import_playbook: playbook2.yml
+- import_playbook: playbook3.yml
+
