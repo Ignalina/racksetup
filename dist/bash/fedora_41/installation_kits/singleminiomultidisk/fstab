@@ -1,0 +1,4 @@
+ LABEL=DISK1      /var/lib/x14/minio/mnt/disk1     xfs     defaults,noatime  0       2
+ LABEL=DISK2      /var/lib/x14/minio/mnt/disk2     xfs     defaults,noatime  0       2
+ LABEL=DISK3      /var/lib/x14/minio/mnt/disk3     xfs     defaults,noatime  0       2
+ LABEL=DISK4      /var/lib/x14/minio/mnt/disk4     xfs     defaults,noatime  0       2

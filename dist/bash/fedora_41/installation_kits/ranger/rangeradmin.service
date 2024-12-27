@@ -1,0 +1,19 @@
+[Unit]
+Description=Apache Ranger 2.4.0
+
+[Service]
+Type=forking
+User=ranger
+#Environment=SOLR_INCLUDE=/usr/lib/x14/solr/solr-8.11.2/bin/solr.in.sh
+ExecStart=ranger-admin start
+ExecStop=ranger-admin stop
+Restart=on-failure
+LimitNOFILE=65000
+LimitNPROC=65000
+TimeoutSec=infinity
+TimeoutStartUSec=infinity
+TimeoutStopUSec=infinity
+
+
+[Install]
+WantedBy=multi-user.target

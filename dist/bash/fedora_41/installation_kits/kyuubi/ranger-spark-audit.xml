@@ -1,0 +1,33 @@
+<configuration>
+
+    <property>
+        <name>xasecure.audit.is.enabled</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>xasecure.audit.destination.db</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>xasecure.audit.destination.db.jdbc.driver</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+
+    <property>
+        <name>xasecure.audit.destination.db.jdbc.url</name>
+        <value>jdbc:mysql://10.1.1.253/ranger</value>
+    </property>
+
+    <property>
+        <name>xasecure.audit.destination.db.password</name>
+        <value>changeme</value>
+    </property>
+
+    <property>
+        <name>xasecure.audit.destination.db.user</name>
+        <value>ranger</value>
+    </property>
+
+</configuration>

@@ -1,0 +1,17 @@
+[Unit]
+Description=Project Nessie 0.96.1
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=nessie
+Group=x14
+Type=simple
+Restart=always
+RestartSec=5
+
+WorkingDirectory=/usr/lib/x14/nessie/
+ExecStart=java -Dnessie.version.store.type=ROCKSDB -Dnessie.version.store.persist.rocks.database-path=/var/lib/x14/nessie/rocks-nessie -Dquarkus.http.host=10.1.1.93 -Dquarkus.http.port=9200 -jar /usr/lib/x14/nessie/nessie-quarkus-0.96.1-runner.jar
+
+[Install]
+WantedBy=multi-user.target
