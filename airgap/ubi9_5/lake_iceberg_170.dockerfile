@@ -54,4 +54,5 @@ RUN echo '\
 </ivy-module>' >> ivy.xml
 RUN cat ivy.xml
 RUN wget http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar -O ivy-2.4.0.jar
-RUN java -jar ivy-2.4.0.jar -ivy ivy.xml  -retrieve "/out/m2/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"
+#RUN java -jar ivy-2.4.0.jar -ivy ivy.xml  -retrieve "/out/m2/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"
+RUN java -jar ivy-2.4.0.jar -ivy ivy.xml resolve  -retrieve "/out/m2/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"
