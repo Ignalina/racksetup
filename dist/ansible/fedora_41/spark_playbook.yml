@@ -42,6 +42,7 @@
         mode: '0644'
 
     - name: Configure Spark to point to the master node
+      when: inventory_hostname in groups['spark-workers']
       lineinfile:
         path: "{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2/conf/spark-defaults.conf"
         line: 'spark.master {{ spark_master_url }}'
