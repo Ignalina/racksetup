@@ -1,21 +1,23 @@
 
 org: "ignalina"
-os_version: "fedora_41" 
+os_version: "fedora_41"
+stack_version: "2025_01_01"
+
+
+airgap_home: "~/syncthing/projekt/racksetup/airgap"
 
 org_group: "{{ org }}"
 org_user: "{{ org }}"
-
-install_home: "/opt/{{ org }}/{{ os_version }}"
-airgap_home: "{{ install_home }}/airgap"
+install_home: "/opt/{{ org }}/{{ os_version }}/{{ stack_version }}"
 data_home: "/var/data/{{ org }}"
 logs_home: "/var/logs/{{ org }}"
 pids_home: "{{ data_home }}/pids"
 
 
-{{ spark_home }}/spark-{{ spark_version }}-bin-hadoop3.2
+spark_airgap_archive: "{{ airgap_home }}/archive/spark-{{ spark_version }}-bin-hadoop3.tgz"
+spark_airgap_ivy_cache: "{{ airgap_home }}/.ivy/cache/"
 
 spark_version: "3.5.3"
-spark_airgapl: "{{ airgap_home }}/spark/{{ spark_version }}"
 spark_home: "{{ install_home }}/spark/{{ spark_version }}"
 spark_user: "spark"
 spark_group: "spark"

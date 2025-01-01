@@ -1,7 +1,7 @@
 from registry.access.redhat.com/ubi9/ubi:9.5
 # Ex run like this: prompt> podman  build -v $PWD/out:/out -f lake.dockerfile .
 #
-# This dockerfile airgaps Lake 1.7.0 dependencies to the out/ directory.
+# This dockerfile airgaps Lake 1.7.0 dependencies to the airgap/ directory.
 #   Iceberg 1.7.0
 #   spark 3.5.3
 #   nessie 0.99.0
@@ -17,8 +17,7 @@ from registry.access.redhat.com/ubi9/ubi:9.5
 # Create output folders
 #
 
-RUN mkdir /out/archive /out/m2
-
+RUN mkdir -p /airgap/archive /airgap/.ivy/cache
 #
 # Install tools for container
 #
@@ -28,14 +27,14 @@ RUN dnf -y install wget java-11-openjdk-headless; dnf clean all;
 # Fetch artifacts  
 #
 
-RUN wget https://dlcdn.apache.org/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz -O /out/archive/spark-3.5.3-bin-hadoop3.tgz
-RUN wget https://github.com/projectnessie/nessie/releases/download/nessie-0.99.0/nessie-quarkus-0.99.0-runner.jar -O /out/archive/nessie-quarkus-0.99.0-runner.jar
-RUN wget https://dlcdn.apache.org/kyuubi/kyuubi-1.10.0/apache-kyuubi-1.10.0-bin.tgz -O /out/archive/apache-kyuubi-1.10.0-bin.tgz
+RUN wget https://dlcdn.apache.org/spark/spark-3.5.3/spark-3.5.3-bin-hadoop3.tgz -O /airgap/archive/spark-3.5.3-bin-hadoop3.tgz
+RUN wget https://github.com/projectnessie/nessie/releases/download/nessie-0.99.0/nessie-quarkus-0.99.0-runner.jar -O /airgap/archive/nessie-quarkus-0.99.0-runner.jar
+RUN wget https://dlcdn.apache.org/kyuubi/kyuubi-1.10.0/apache-kyuubi-1.10.0-bin.tgz -O /airgap/archive/apache-kyuubi-1.10.0-bin.tgz
 
-RUN wget https://downloads.apache.org/ranger/2.5.0/apache-ranger-2.5.0.tar.gz -O /out/archive/apache-ranger-2.5.0.tar.gz
-RUN wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar -O /out/archive/mysql-connector-j-8.3.0.jar
+RUN wget https://downloads.apache.org/ranger/2.5.0/apache-ranger-2.5.0.tar.gz -O /airgap/archive/apache-ranger-2.5.0.tar.gz
+RUN wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar -O /airgap/archive/mysql-connector-j-8.3.0.jar
 
-RUN wget https://www.apache.org/dyn/closer.lua/lucene/solr/8.11.2/solr-8.11.2.tgz?action=download -O  /out/archive/solr-8.11.2.tgz
+RUN wget https://www.apache.org/dyn/closer.lua/lucene/solr/8.11.2/solr-8.11.2.tgz?action=download -O  /airgap/archive/solr-8.11.2.tgz
 
 RUN echo '\
 <ivy-module version="2.0">\
@@ -52,7 +51,5 @@ RUN echo '\
        <dependency org="org.apache.kyuubi" name="kyuubi-spark-authz_2.12" rev="1.10.0" />\
    </dependencies>\
 </ivy-module>' >> ivy.xml
-RUN cat ivy.xml
 RUN wget http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar -O ivy-2.4.0.jar
-#RUN java -jar ivy-2.4.0.jar -ivy ivy.xml  -retrieve "/out/m2/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"
-RUN java -jar ivy-2.4.0.jar -ivy ivy.xml resolve  -retrieve "/out/m2/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"
+RUN java -jar ivy-2.4.0.jar -ivy ivy.xml -cache /airgap/.ivy/cache
