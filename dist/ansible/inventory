@@ -1,9 +1,10 @@
 [spark_master]
-master_node ansible_host=192.168.122.31
+master_node ansible_host=192.168.122.207
 
 [spark_workers]
-worker_node_1 ansible_host=192.168.122.75
-worker_node_2 ansible_host=192.168.122.84
+worker_node_1 ansible_host=192.168.122.167
+worker_node_2 ansible_host=192.168.122.165
+worker_node_3 ansible_host=192.168.122.220
 
 [spark_cluster:children]
 spark_master

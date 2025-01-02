@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+     - secret_vars.yml
+  roles:
+    - init
+- hosts: spark_cluster
+  become: true
+  vars_files:
+     - secret_vars.yml
+  roles:
+    - spark
+

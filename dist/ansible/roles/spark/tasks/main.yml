@@ -1,19 +1,8 @@
 ---
-- name: Install Spark on Master and Worker nodes
-  hosts: spark_cluster
-  become: true
-  vars_files:
-     - secret_vars.yml
-  tasks:
-    - name: Create Spark group and user
-      group:
-        name: "{{ spark_group }}"
-        state: present
-
     - name: Create Spark user
       user:
         name: "{{ spark_user }}"
-        group: "{{ spark_group }}"
+        group: "{{ org_group }}"
         shell: /bin/bash
         create_home: yes
       register: spark_user_registered
@@ -29,7 +18,7 @@
         dest: "{{ spark_home }}"
         remote_src: no
         owner: "{{ spark_user }}"
-        group: "{{ spark_group }}"
+        group: "{{ org_group }}"
         creates: "{{ spark_home }}/conf"
 
 
@@ -44,7 +33,7 @@
         dest: "{{ spark_user_registered.home }}"
         remote_src: no
         owner: "{{ spark_user }}"
-        group: "{{ spark_group }}"
+        group: "{{ org_group }}"
         creates: "{{ spark_user_registered.home }}/,ivy/cache"
 
 
@@ -54,7 +43,7 @@
         line: 'export SPARK_HOME={{ spark_home }}'
         create: yes
         owner: "{{ spark_user }}"
-        group: "{{ spark_group }}"
+        group: "{{ org_group }}"
         mode: '0644'
 
     - name: Configure Spark to point to the master node
@@ -64,7 +53,7 @@
         line: 'spark.master {{ spark_master_url }}'
         create: yes
         owner: "{{ spark_user }}"
-        group: "{{ spark_group }}"
+        group: "{{ org_group }}"
         mode: '0644'
 
     - name: Create system systemd spark master service file
