@@ -1,9 +1,8 @@
 ---
 - name: Install Spark on Master and Worker nodes
-  hosts: spark-cluster
+  hosts: spark_cluster
   become: true
   vars_files:
-     - global_vars.yml
      - secret_vars.yml
   tasks:
     - name: Create Spark group and user
@@ -19,31 +18,34 @@
         create_home: yes
       register: spark_user_registered
 
+    - name: ensure spark directory exists
+      file:
+        path: "{{ spark_home }}"
+        state: directory
+
     - name: Extract Spark tarball
       unarchive:
         src: "{{ spark_airgap_archive }}"
         dest: "{{ spark_home }}"
-        remote_src: yes
+        remote_src: no
         owner: "{{ spark_user }}"
         group: "{{ spark_group }}"
-        creates: "{{ spark_home }}"
+        creates: "{{ spark_home }}/conf"
 
-    - name: Create folder for ivy cache
+
+    - name: ensure ivy cache directory exists
       file:
         path: "{{ spark_user_registered.home }}/.ivy/cache"
-        recurse: yes
         state: directory
-        owner: "{{ spark_user }}"
-        group: "{{ spark_group }}"
 
-
-    - name: Copy Sparks friends dependencies
-      ansible.builtin.copy:
+    - name: Extract ivy cache tarball
+      unarchive:
         src: "{{ spark_airgap_ivy_cache }}"
-        dest: "{{ spark_user_registered.home }}/.ivy/cache"
-        remote_src: yes
+        dest: "{{ spark_user_registered.home }}"
+        remote_src: no
         owner: "{{ spark_user }}"
         group: "{{ spark_group }}"
+        creates: "{{ spark_user_registered.home }}/,ivy/cache"
 
 
     - name: Set Spark environment variables
@@ -56,7 +58,7 @@
         mode: '0644'
 
     - name: Configure Spark to point to the master node
-      when: inventory_hostname in groups['spark-workers']
+      when: inventory_hostname in groups['spark_workers']
       lineinfile:
         path: "{{ spark_home }}/conf/spark-defaults.conf"
         line: 'spark.master {{ spark_master_url }}'
@@ -65,30 +67,37 @@
         group: "{{ spark_group }}"
         mode: '0644'
 
+    - name: Create system systemd spark master service file
+      when: inventory_hostname in groups['spark_master']
+      template:
+        src: "spark-master.service.j2"
+        dest: /etc/systemd/system/spark-master.service
+
+    - name: Create system systemd spark slave service file
+      when: inventory_hostname in groups['spark_workers']
+      template:
+        src: "spark-slave.service.j2"
+        dest: /etc/systemd/system/spark-slave.service
+
+
     - name: Start Spark master on master node
-      when: inventory_hostname in groups['spark-master']
+      when: inventory_hostname in groups['spark_master']
       systemd:
         name: spark-master
         state: started
-        enabled: yes
-        user: "{{ spark_user }}"
-        group: "{{ spark_group }}"
-        exec_start: "{{ spark_home }}/sbin/start-master.sh"
+        enabled: true
 
     - name: Start Spark worker on worker nodes
-      when: inventory_hostname in groups['spark-workers']
+      when: inventory_hostname in groups['spark_workers']
       systemd:
         name: spark-worker
         state: started
-        enabled: yes
-        user: "{{ spark_user }}"
-        group: "{{ spark_group }}"
-        exec_start: "{{ spark_home }}/sbin/start-worker.sh {{ spark_master_url }}"
+        enabled: true
 
     - name: Label Spark worker nodes
-      when: inventory_hostname in groups['spark-workers']
+      when: inventory_hostname in groups['spark_workers']
       command: >
-        curl -X POST -d "worker={{ inventory_hostname }}" -d "label={{ ansible_hostname }}" http://{{ groups['spark-master'][0] }}:8080/label
+        curl -X POST -d "worker={{ inventory_hostname }}" -d "label={{ ansible_hostname }}" http://{{ groups['spark_master'][0] }}:8080/label
       environment:
         SPARK_HOME: "{{ spark_home }}"
         PATH: "{{ spark_home }}/bin:{{ ansible_env.PATH }}"

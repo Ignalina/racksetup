@@ -1,10 +1,10 @@
-[spark-master]
-master-node ansible_host=master-node-ip
+[spark_master]
+master_node ansible_host=192.168.122.31
 
-[spark-workers]
-worker-node-1 ansible_host=worker-node-1-ip
-worker-node-2 ansible_host=worker-node-2-ip
+[spark_workers]
+worker_node_1 ansible_host=192.168.122.75
+worker_node_2 ansible_host=192.168.122.84
 
-[spark-cluster:children]
-spark-master
-spark-workers
+[spark_cluster:children]
+spark_master
+spark_workers
