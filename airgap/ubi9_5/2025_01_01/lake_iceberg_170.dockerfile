@@ -21,7 +21,7 @@ RUN mkdir -p /airgap/archive /airgap/.ivy/cache
 #
 # Install tools for container
 #
-RUN dnf -y install wget java-11-openjdk-headless; dnf clean all;
+RUN dnf -y install wget java-11-openjdk-headless zstd tar; dnf clean all;
 
 #
 # Fetch artifacts  
@@ -53,3 +53,4 @@ RUN echo '\
 </ivy-module>' >> ivy.xml
 RUN wget http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar -O ivy-2.4.0.jar
 RUN java -jar ivy-2.4.0.jar -ivy ivy.xml -cache /airgap/.ivy/cache
+RUN tar --zstd -cf  /airgap/.ivy.tar.zst /airgap/.ivy
