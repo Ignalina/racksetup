@@ -4,6 +4,7 @@
   vars_files:
      - secret_vars.yml
   roles:
+    - init_host
     - init
 - hosts: spark_cluster
   become: true
