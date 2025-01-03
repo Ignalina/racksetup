@@ -10,7 +10,7 @@
         shell: /sbin/nologin
         create_home: no
       register: org_user_registered
-    - name: Install neccessary packages for ansible etc..
-      ansible.builtin.command: yum install -y python3-libdnf5 zstd
+    - name: Include taks dependent on OS
+      include_tasks: {{ os_version }}.yaml
     - name: Reboot the machine with all defaults options
       reboot:
