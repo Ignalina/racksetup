@@ -1,6 +1,37 @@
 ---
-     - name: Install the java
-       ansible.builtin.package:
-         name:
-         - java-11-openjdk-headless
-         state: latest
+    - name: ensure installation home exists
+      file:
+        path: "{{ install_home }}"
+        state: directory
+        owner: "{{ org_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+    - name: ensure data home exists
+      file:
+        path: "{{ data_home }}"
+        state: directory
+        owner: "{{ org_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+
+    - name: ensure logs home exists
+      file:
+        path: "{{ logs_home }}"
+        state: directory
+        owner: "{{ org_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+
+    - name: ensure pids home exists
+      file:
+        path: "{{ pids_home }}"
+        state: directory
+        owner: "{{ org_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+
+

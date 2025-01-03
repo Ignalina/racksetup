@@ -11,4 +11,5 @@
      - secret_vars.yml
   roles:
     - spark
+    - iceberg_nessie
 
