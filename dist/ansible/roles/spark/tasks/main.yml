@@ -14,18 +14,25 @@
 
     - name: ensure spark directory exists
       file:
-        path: "{{ spark_home }}"
+        path: "{{ spark_home }}NEWSPARK"
         state: directory
 
     - name: Extract Spark tarball
       unarchive:
         src: "{{ spark_airgap_archive }}"
-        dest: "{{ spark_home }}"
+        dest: "{{ spark_home }}NEWSPARK"
         remote_src: no
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
-        creates: "{{ spark_home }}/conf"
+        creates: "{{ spark_home }}/conff"
 
+    - name: Move foo to bar
+      command: mv {{ spark_home }}NEWSPARK/{{spark_airgap_archive[:-4]|basename}} {{ spark_home }}
+
+    - name: Delete content & directory
+      ansible.builtin.file:
+        state: absent
+        path: "{{ spark_home }}NEWSPARK"
 
     - name: Set Spark environment variables
       lineinfile:
@@ -58,7 +65,6 @@
       template:
         src: "spark-slave.service.j2"
         dest: /etc/systemd/system/spark-slave.service
-
 
     - name: Start Spark master on master node
       when: inventory_hostname in groups['spark_master']
