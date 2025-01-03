@@ -11,6 +11,6 @@
         create_home: no
       register: org_user_registered
     - name: Include taks dependent on OS
-      include_tasks: {{ os_version }}.yaml
+      include_tasks: "{{ os_version }}.yaml"
     - name: Reboot the machine with all defaults options
       reboot:
