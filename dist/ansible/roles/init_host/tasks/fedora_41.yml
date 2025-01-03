@@ -1,3 +1,0 @@
----
-    - name: Install neccessary packages for ansible etc..
-      ansible.builtin.command: yum install -y python3-libdnf5 zstd
