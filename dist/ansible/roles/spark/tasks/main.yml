@@ -79,7 +79,7 @@
     - name: Start Spark worker on worker nodes
       when: inventory_hostname in groups['spark_workers']
       systemd:
-        name: spark-worker
+        name: spark-slave
         state: started
         enabled: true
 
