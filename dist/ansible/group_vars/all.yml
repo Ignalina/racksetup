@@ -11,7 +11,6 @@ data_home: "/var/data/{{ org }}"
 logs_home: "/var/logs/{{ org }}"
 pids_home: "{{ data_home }}/pids"
 
-java11_home: "/usr/lib/jvm/java-11-openjdk-amd64"
-java17_home: "/usr/lib/jvm/java-17-openjdk-amd64"
-
+java11_home: "/usr/lib/jvm/jre-11-openjdk"
+java17_home: "/usr/lib/jvm/jre-17-openjdk"
 
