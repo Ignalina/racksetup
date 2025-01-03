@@ -1,5 +1,5 @@
 org: "ignalina"
-os_version: "fedora_41"
+os_version: "fedora_40"
 stack_version: "2025_01_01"
 
 airgap_home: "/home/rickard/syncthing/projekt/racksetup/airgap"
