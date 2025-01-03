@@ -9,9 +9,9 @@ Group={{ spark_group }}
 Type=forking
 SuccessExitStatus=143
 
-WorkingDirectory="{{ spark_home }}"
-EnvironmentFile="{{ spark_home }}/etc/env"
-ExecStartPost=/bin/bash -c "echo $MAINPID > "{{ spark_home }}/etc/spark-slave.pid"
+WorkingDirectory={{ spark_home }}
+EnvironmentFile={{ spark_home }}/etc/env
+ExecStartPost=/bin/bash -c "echo $MAINPID > {{ spark_home }}/etc/spark-slave.pid"
 ExecStart="{{ spark_home }}/sbin/start-slave.sh {{ spark_master_url }}"
 ExecStop="{{ spark_home }}/sbin/stop-slave.sh {{ spark_master_url }}"
 
