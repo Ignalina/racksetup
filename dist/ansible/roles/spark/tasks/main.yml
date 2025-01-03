@@ -1,4 +1,9 @@
 ---
+    - name: Install java 11
+      ansible.builtin.package:
+        name:
+        - java-11-openjdk-headless
+        state: latest
     - name: Create Spark user
       user:
         name: "{{ spark_user }}"
@@ -22,29 +27,15 @@
         creates: "{{ spark_home }}/conf"
 
 
-    - name: ensure ivy cache directory exists
-      file:
-        path: "{{ spark_user_registered.home }}/.ivy/cache"
-        state: directory
-
-    - name: Extract ivy cache tarball
-      unarchive:
-        src: "{{ spark_airgap_ivy_cache }}"
-        dest: "{{ spark_user_registered.home }}"
-        remote_src: no
-        owner: "{{ spark_user }}"
-        group: "{{ org_group }}"
-        creates: "{{ spark_user_registered.home }}/,ivy/cache"
-
-
     - name: Set Spark environment variables
       lineinfile:
         path: "{{ spark_home }}/conf/spark-env.sh"
-        line: 'export SPARK_HOME={{ spark_home }}'
+        line: "export SPARK_HOME={{ spark_home }} \n export java_HOME={{ java11_home }}"
         create: yes
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
         mode: '0644'
+
 
     - name: Configure Spark to point to the master node
       when: inventory_hostname in groups['spark_workers']

@@ -1,0 +1,16 @@
+---
+    - name: Create organisation group
+      ansible.builtin.group:
+        name: "{{ org_group }}"
+        state: present
+    - name: Create organisation user
+      user:
+        name: "{{ org_user }}"
+        group: "{{ org_group }}"
+        shell: /sbin/nologin
+        create_home: no
+      register: org_user_registered
+    - name: Install neccessary packages for ansible etc..
+      ansible.builtin.command: yum install -y python3-libdnf5 zstd
+     - name: Reboot the machine with all defaults options
+       reboot:
