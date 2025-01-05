@@ -1,5 +1,5 @@
 [Unit]
-Description=Apache Spark {{ spark_version }} Slave scala ?
+Description=Apache Spark {{ spark_version }} Slave scala 12
 Wants=network-online.target
 After=network-online.target
 
@@ -10,8 +10,6 @@ Type=forking
 SuccessExitStatus=143
 
 WorkingDirectory={{ spark_home }}
-EnvironmentFile={{ spark_home }}/etc/env
-ExecStartPost=/bin/bash -c "echo $MAINPID > {{ spark_home }}/etc/spark-slave.pid"
 ExecStart="{{ spark_home }}/sbin/start-slave.sh {{ spark_master_url }}"
 ExecStop="{{ spark_home }}/sbin/stop-slave.sh {{ spark_master_url }}"
 

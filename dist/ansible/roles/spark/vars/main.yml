@@ -6,3 +6,11 @@ spark_version: "3.5.3"
 spark_home: "{{ install_home }}/spark/{{ spark_version }}"
 spark_user: "spark"
 spark_master_url: "spark://{{ hostvars[groups['spark_master'][0]].ansible_host }}:7077"
+spark_master_host: "{{ hostvars[groups['spark_master'][0]].ansible_host }}"
+
+spark_log_dir: "{{ logs_home }}/spark/{{ spark_version }}"
+spark_jars_ivy: "{{ install_home }}/ivy"
+spark_local_dir: "{{ data_home }}/spark{{ spark_version }}/spark.local.dir"
+spark_eventLog_dir: "{{ data_home }}/spark{{ spark_version }}/spark.eventLog.dir"
+spark_worker_dir: "{{ data_home }}/spark{{ spark_version }}/spark.worker.dir"
+

@@ -4,6 +4,7 @@
         name:
         - java-11-openjdk-headless
         state: latest
+
     - name: Create Spark user
       user:
         name: "{{ spark_user }}"
@@ -12,10 +13,13 @@
         create_home: yes
       register: spark_user_registered
 
-    - name: ensure spark directory exists
+    - name: ensure new spark directory exists
       file:
         path: "{{ spark_home }}NEWSPARK"
         state: directory
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
 
     - name: Extract Spark tarball
       unarchive:
@@ -24,24 +28,48 @@
         remote_src: no
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
-        creates: "{{ spark_home }}/conff"
+        creates: "{{ spark_home }}/conf"
 
     - name: Move foo to bar
       command: mv {{ spark_home }}NEWSPARK/{{spark_airgap_archive[:-4]|basename}} {{ spark_home }}
+      args:
+        creates: "{{ spark_home }}/conf"
 
     - name: Delete content & directory
       ansible.builtin.file:
         state: absent
         path: "{{ spark_home }}NEWSPARK"
 
+    - name: ensure spark directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+      loop:
+        - "{{ spark_log_dir }}"
+        - "{{ spark_local_dir }}"
+        - "{{ spark_eventLog_dir }}"
+        - "{{ spark_worker_dir }}"
+
     - name: Set Spark environment variables
       lineinfile:
         path: "{{ spark_home }}/conf/spark-env.sh"
-        line: "export SPARK_HOME={{ spark_home }} \n export java_HOME={{ java11_home }}"
+        line: "SPARK_HOME={{ spark_home }} \njava_HOME={{ java11_home }} \nSPARK_MASTER_HOST={{ groups['spark_master'][0] }} \nSPARK_LOCAL_IP={{ hostvars[inventory_hostname].ansible_host }}"
         create: yes
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
-        mode: '0644'
+        mode: '770'
+
+
+    - name: Create spark-defaults.conf
+      template:
+        src: "spark-defaults.conf.j2"
+        dest: "{{ spark_home }}/conf/spark-defaults.conf"
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
 
 
     - name: Configure Spark to point to the master node
@@ -52,7 +80,8 @@
         create: yes
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
-        mode: '0644'
+        mode: '770'
+
 
     - name: Create system systemd spark master service file
       when: inventory_hostname in groups['spark_master']
