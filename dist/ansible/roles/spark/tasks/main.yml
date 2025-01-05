@@ -3,7 +3,7 @@
       blockinfile:
         dest: /etc/hosts
         block: "{{ lookup('template', 'hosts.j2') }}"
-        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR {{ org }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR SPARK"
 
     - name: Install java 11
       ansible.builtin.package:
@@ -67,11 +67,10 @@
         - "{{ spark_eventLog_dir }}"
         - "{{ spark_worker_dir }}"
 
-    - name: Set Spark environment variables
-      lineinfile:
-        path: "{{ spark_home }}/conf/spark-env.sh"
-        line: "SPARK_HOME={{ spark_home }} \njava_HOME={{ java11_home }} \nSPARK_MASTER_HOST={{ groups['spark_master'][0].ansible_host }} \nSPARK_LOCAL_IP={{ hostvars[inventory_hostname].ansible_host }}"
-        create: yes
+    - name: Create spark-env.sh
+      template:
+        src: "spark-env.sh.j2"
+        dest: "{{ spark_home }}/conf/spark-env.sh"
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
         mode: '770'
@@ -84,7 +83,6 @@
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
         mode: '770'
-
 
     - name: Configure Spark to point to the master node
       when: inventory_hostname in groups['spark_workers']

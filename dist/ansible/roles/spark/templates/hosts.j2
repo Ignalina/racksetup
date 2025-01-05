@@ -1,3 +1,3 @@
 {% for host in groups['spark_cluster'] %}
-{{ hostvars[host]['hostname'] }} {{ hostvars[host]['ansible_host'] }}
+{{ hostvars[host]['ansible_host'] }} {{ hostvars[host]['ext_hostname'] }}
 {% endfor %}
