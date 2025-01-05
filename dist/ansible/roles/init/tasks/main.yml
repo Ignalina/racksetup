@@ -15,7 +15,6 @@
         group: "{{ org_group }}"
         mode: '770'
 
-
     - name: ensure logs home exists
       file:
         path: "{{ logs_home }}"
@@ -23,7 +22,6 @@
         owner: "{{ org_user }}"
         group: "{{ org_group }}"
         mode: '770'
-
 
     - name: ensure pids home exists
       file:
@@ -34,4 +32,6 @@
         mode: '770'
 
 
+SPARK_MASTER_HOST={{ groups['spark_master'][0] }}
+SPARK_LOCAL_IP={{ hostvars[inventory_hostname].ansible_host }}
 

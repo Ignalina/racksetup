@@ -64,7 +64,7 @@
     - name: Set Spark environment variables
       lineinfile:
         path: "{{ spark_home }}/conf/spark-env.sh"
-        line: "SPARK_HOME={{ spark_home }} \njava_HOME={{ java11_home }} \nSPARK_MASTER_HOST={{ groups['spark_master'][0] }} \nSPARK_LOCAL_IP={{ hostvars[inventory_hostname].ansible_host }}"
+        line: "SPARK_HOME={{ spark_home }} \njava_HOME={{ java11_home }} \nSPARK_MASTER_HOST={{ groups['spark_master'][0].ansible_host }} \nSPARK_LOCAL_IP={{ hostvars[inventory_hostname].ansible_host }}"
         create: yes
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
@@ -120,7 +120,7 @@
     - name: Label Spark worker nodes
       when: inventory_hostname in groups['spark_workers']
       command: >
-        curl -X POST -d "worker={{ inventory_hostname }}" -d "label={{ ansible_hostname }}" http://{{ groups['spark_master'][0] }}:8080/label
+        curl -X POST -d "worker={{ inventory_hostname }}" -d "label={{ ansible_hostname }}" http://{{ groups['spark_master'][0].ansible_host }}:8080/label
       environment:
         SPARK_HOME: "{{ spark_home }}"
         PATH: "{{ spark_home }}/bin:{{ ansible_env.PATH }}"
