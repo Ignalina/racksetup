@@ -121,10 +121,3 @@
         state: started
         enabled: true
 
-    - name: Label Spark worker nodes
-      when: inventory_hostname in groups['spark_workers']
-      command: >
-        curl -X POST -d "worker={{ inventory_hostname }}" -d "label={{ ansible_hostname }}" http://{{ groups['spark_master'][0].ansible_host }}:8080/label
-      environment:
-        SPARK_HOME: "{{ spark_home }}"
-        PATH: "{{ spark_home }}/bin:{{ ansible_env.PATH }}"

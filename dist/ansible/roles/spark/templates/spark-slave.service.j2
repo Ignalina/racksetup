@@ -10,8 +10,8 @@ Type=forking
 SuccessExitStatus=143
 
 WorkingDirectory={{ spark_home }}
-ExecStart="{{ spark_home }}/sbin/start-slave.sh {{ spark_master_url }}"
-ExecStop="{{ spark_home }}/sbin/stop-slave.sh {{ spark_master_url }}"
+ExecStart={{ spark_home }}/sbin/start-slave.sh {{ spark_master_url }}
+ExecStop={{ spark_home }}/sbin/stop-slave.sh {{ spark_master_url }}
 
 [Install]
 WantedBy=multi-user.target
