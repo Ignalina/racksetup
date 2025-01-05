@@ -13,6 +13,14 @@
         create_home: yes
       register: spark_user_registered
 
+    - name: ensure ivy cache directory exists
+      file:
+        path: "{{ spark_user_registered.home }}/.ivy/cache"
+        state: directory
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
     - name: ensure new spark directory exists
       file:
         path: "{{ spark_home }}NEWSPARK"

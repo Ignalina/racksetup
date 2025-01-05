@@ -1,8 +1,17 @@
 ---
-    - name: ensure ivy cache directory exists
-      file:
-        path: "{{ spark_user_registered.home }}/.ivy/cache"
-        state: directory
+    - name: Stop Spark master on master node
+      when: inventory_hostname in groups['spark_master']
+      systemd:
+        name: spark-master
+        state: stopped
+        enabled: true
+
+    - name: Stop Spark worker on worker nodes
+      when: inventory_hostname in groups['spark_workers']
+      systemd:
+        name: spark-slave
+        state: stopped
+        enabled: true
 
     - name: Extract ivy cache tarball
       unarchive:
@@ -23,6 +32,12 @@
         group: "{{ org_group }}"
         mode: '0644'
 
+    - name: Start Spark master on worker nodes
+      when: inventory_hostname in groups['spark_master']
+      systemd:
+        name: spark-master
+        state: started
+        enabled: true
 
     - name: Start Spark worker on worker nodes
       when: inventory_hostname in groups['spark_workers']
