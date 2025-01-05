@@ -30,8 +30,3 @@
         owner: "{{ org_user }}"
         group: "{{ org_group }}"
         mode: '770'
-
-
-SPARK_MASTER_HOST={{ groups['spark_master'][0] }}
-SPARK_LOCAL_IP={{ hostvars[inventory_hostname].ansible_host }}
-

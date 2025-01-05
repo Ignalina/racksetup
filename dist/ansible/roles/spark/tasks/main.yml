@@ -1,4 +1,10 @@
 ---
+    - name: Insert hostnames and ip in /etc/hosts file
+      blockinfile:
+        dest: /etc/hosts
+        block: "{{ lookup('template', 'hosts.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR {{ org }}"
+
     - name: Install java 11
       ansible.builtin.package:
         name:
