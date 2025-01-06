@@ -1,0 +1,11 @@
+---
+kyuubi_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/apache-kyuubi-{{ kyuubi_version }}-bin.tgz"
+
+kyuubi_version: "1.10.0"
+kyuubi_home: "{{ install_home }}/kyuubi/{{ spark_version }}"
+kyuubi_user: "kyuubi"
+kyyubi_jdbc_url: "spark://{{ kyuubi_master_host }}:10009"
+
+
+kyuubi_log_dir: "{{ logs_home }}/kyuubi/{{ kyuubi_version }}"
+

@@ -1,0 +1,17 @@
+[Unit]
+Description=Kyuubi {{ kyuubi_version }}
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{ kyuubi_user }}
+Group={{ org_group }}
+Type=forking
+SuccessExitStatus=0
+
+WorkingDirectory=/usr/lib/x14/kyuubi/apache-kyuubi-{{ kyuubi_version }}-bin
+ExecStart=/usr/lib/x14/kyuubi/apache-kyuubi-{{ kyuubi_version }}-bin/bin/kyuubi start
+ExecStop=/usr/lib/x14/kyuubi/apache-kyuubi-{{ kyuubi_version }}-bin/bin/kyuubi stop
+
+[Install]
+WantedBy=multi-user.target

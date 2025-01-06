@@ -1,0 +1,59 @@
+---
+    - name: Install java 11
+      ansible.builtin.package:
+        name:
+        - java-11-openjdk-headless
+        state: latest
+
+    - name: Create kyuubi user
+      user:
+        name: "{{ kyuubi_user }}"
+        group: "{{ org_group }}"
+        shell: /bin/bash
+        create_home: yes
+      register: kyuubi_user_registered
+
+    - name: Extract kyyubi tarball
+      unarchive:
+        src: "{{ kyuubi_airgap_archive }}"
+        dest: "{{ kyuubi_home }}NEWKYUUBI"
+        remote_src: no
+        owner: "{{ kyuubi_user }}"
+        group: "{{ org_group }}"
+        creates: "{{ kyuubi_home }}/conf"
+
+    - name: Move foo to bar
+      command: mv {{ kyuubi_home }}NEWKYUUBI/{{kyuubi_airgap_archive[:-4]|basename}} {{ kyuubi_home }}
+      args:
+        creates: "{{ kyuubi_home }}/conf"
+
+    - name: Delete content & directory
+      ansible.builtin.file:
+        state: absent
+        path: "{{ spark_home }}NEWKYUUBI"
+
+    - name: ensure kyuubi directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+      loop:
+        - "{{ kyuubi_log_dir }}"
+
+    - name: Create kyuubi-env.sh
+      template:
+        src: "kyuubi-env.sh.j2"
+        dest: "{{ kyuubi_home }}/conf/kyuubi-env.sh"
+        owner: "{{ kyuubi_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+
+    - name: Create system systemd spark master service file
+      when: inventory_hostname in groups['spark_cluster']
+      template:
+        src: "kyuubi.service.j2"
+        dest: /etc/systemd/system/kyuubi.service
+
