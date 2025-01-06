@@ -52,8 +52,15 @@
 
 
     - name: Create system systemd spark master service file
-      when: inventory_hostname in groups['spark_cluster']
+      when: inventory_hostname in groups['spark_master']
       template:
         src: "kyuubi.service.j2"
         dest: /etc/systemd/system/kyuubi.service
+
+    - name: Start kyuubi on spark master node
+      when: inventory_hostname in groups['spark_master']
+      systemd:
+        name: kyuubi
+        state: started
+        enabled: true
 

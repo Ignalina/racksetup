@@ -1,11 +1,20 @@
 [spark_master]
-master_node ansible_host=192.168.122.80
+master_node ansible_host=192.168.122.12 ext_hostname=spark1.x14.se
 
 [spark_workers]
-worker_node_1 ansible_host=192.168.122.114
-worker_node_2 ansible_host=192.168.122.3
-worker_node_3 ansible_host=192.168.122.198
+worker_node_1 ansible_host=192.168.122.178 ext_hostname=spark2.x14.se
+worker_node_2 ansible_host=192.168.122.74 ext_hostname=spark3.x14.se
+worker_node_3 ansible_host=192.168.122.216 ext_hostname=spark4.x14.se
 
 [spark_cluster:children]
 spark_master
 spark_workers
+
+[minio_master]
+minio_master ansible_host=192.168.122.12 ext_hostname=spark1.x14.se
+
+[nessie_master]
+nessie_master ansible_host=192.168.122.12 ext_hostname=spark1.x14.se
+
+[kyuubi_master]
+nessie_master ansible_host=192.168.122.12 ext_hostname=spark1.x14.se

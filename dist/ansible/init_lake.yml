@@ -6,6 +6,12 @@
   roles:
     - init_host
     - init
+- hosts: minio_master
+  become: true
+  vars_files:
+     - secret_vars.yml
+  roles:
+    - minio
 - hosts: nessie_master
   become: true
   vars_files:
@@ -19,4 +25,6 @@
   roles:
     - spark
     - iceberg
+    - kyuubi
+
 

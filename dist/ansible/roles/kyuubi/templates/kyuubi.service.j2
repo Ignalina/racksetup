@@ -9,9 +9,9 @@ Group={{ org_group }}
 Type=forking
 SuccessExitStatus=0
 
-WorkingDirectory=/usr/lib/x14/kyuubi/apache-kyuubi-{{ kyuubi_version }}-bin
-ExecStart=/usr/lib/x14/kyuubi/apache-kyuubi-{{ kyuubi_version }}-bin/bin/kyuubi start
-ExecStop=/usr/lib/x14/kyuubi/apache-kyuubi-{{ kyuubi_version }}-bin/bin/kyuubi stop
+WorkingDirectory={{ kyuubi_home }}
+ExecStart={{ kyuubi_home }}/bin/kyuubi start
+ExecStop={{ kyuubi_home }}/bin/kyuubi stop
 
 [Install]
 WantedBy=multi-user.target

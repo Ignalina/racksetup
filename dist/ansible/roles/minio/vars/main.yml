@@ -4,8 +4,8 @@ minio_version: "20241218131544.0.0-1.x86_64"
 minio_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/minio-{{ minio_version }}.rpm"
 
 
-minio_api: "{{ hostvars[groups['minio_master'][0]].ansible_host }}:9001"
-minio_web: "{{ hostvars[groups['minio_master'][0]].ansible_host }}:9000"
+minio_api: "{{ minio_host }}:9001"
+minio_web: "{{ minio_host }}:9000"
 
 minio_log_dir: "{{ logs_home }}/minio/{{ minio_version }}"
 
