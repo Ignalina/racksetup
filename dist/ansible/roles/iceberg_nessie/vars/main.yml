@@ -1,0 +1,16 @@
+---
+nessie_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/nessie-quarkus-{{ nessie_version }}-runner.jar"
+iceberg_nessie_airgap_ivy_cache: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/.ivy.tar.zst"
+nessie_user: "nessie"
+
+iceberg_version: "1.7.0"
+nessie_version: "0.99.0"
+nessie_home: "{{ install_home }}/nessie/{{ nessie_version }}"
+nessie_database_path: {{ data_home }}/nessie/{{ nessie_version }}/rocks-nessie
+
+nessie_host: "{{ hostvars[groups['nessie_master'][0]].ansible_host }}"
+nessie_quarkus_host: "{{ nessie_host }}"
+nessie_url: "{{ nessie_host }}:19120"
+
+nessie_log_dir: "{{ logs_home }}/nessie/{{ nessie_version }}"
+

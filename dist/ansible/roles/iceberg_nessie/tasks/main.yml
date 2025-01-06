@@ -13,27 +13,95 @@
         state: stopped
         enabled: true
 
+    - name: Install java 11
+      ansible.builtin.package:
+        name:
+        - java-11-openjdk-headless
+        state: latest
+
+
+    - name: Create nessie user
+      user:
+        name: "{{ nessie_user }}"
+        group: "{{ org_group }}"
+        shell: /bin/bash
+        create_home: yes
+      register: nessie_user_registered
+
+
     - name: Extract ivy cache tarball
       unarchive:
-        src: "{{ spark_airgap_ivy_cache }}"
+        src: "{{ iceberg_nessie_airgap_ivy_cache }}"
         dest: "{{ spark_user_registered.home }}"
         remote_src: no
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"
-        creates: "{{ spark_user_registered.home }}/,ivy/cache"
+        creates: "{{ spark_user_registered.home }}/airgap/.ivy/cache"
 
-    - name: Move existing cache ivy files to the new ivy directory
-      command: "mv {{ spark_user_registered.home }}/.ivy/* {{ spark_user_registered.home }}/airgap/.ivy/"
+    - name: copy existing ivy files to new directory
+      copy:
+        src: "{{ spark_user_registered.home }}/.ivy/"
+        dest: "{{ spark_user_registered.home }}/airgap/.ivy/"
+        remote_src: yes
 
-    - name: Delete content & directory
+    - name: Delete now obselete ivy content & directory
       ansible.builtin.file:
         state: absent
-        path: {{ spark_user_registered.home }}/.ivy
+        path: "{{ spark_user_registered.home }}/.ivy"
 
-    - name: Finally move backk ALL ivy cached content
+    - name: Finally move back ALL ivy cached content
       command: mv {{ spark_user_registered.home }}/airgap/.ivy {{ spark_user_registered.home }}/.ivy
       args:
         creates: "{{ spark_user_registered.home }}/.ivy"
+
+    - name: Delete now obselete ivy content & directory
+      ansible.builtin.file:
+        state: absent
+        path: "{{ spark_user_registered.home }}/airgap"
+
+    - name: ensure nessie directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ nessie_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+      loop:
+        - "{{ nessie_log_dir }}"
+        - "{{ nessie_home }}"
+        - "{{ nessie_database_path }}"
+
+
+    - name: copy nessie runnable
+      copy:
+        src: "{{ nessie_airgap_archive }}"
+        dest: "{{ nessie_home }}/"
+        remote_src: yes
+        owner: "{{ nessie_user }}"
+        group: "{{ org_group }}"
+        mode: '700'
+
+    - name: Create system systemd nessie service file
+      when: inventory_hostname in groups['nessie_master']
+      template:
+        src: "nessie.service.j2"
+        dest: /etc/systemd/system/nessie.service
+
+    - name: Start nessie
+      when: inventory_hostname in groups['nessie_master']
+      systemd:
+        name: nessie
+        state: started
+        enabled: true
+
+    - name: Insert icebergs deaults in spark-defaults
+      blockinfile:
+        dest: {{ spark_home }}/conf/spark-defaults.conf
+        block: "{{ lookup('template', 'spark-defaults.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR SPARK ICEBERG DEFAULTS"
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
 
     - name: Start Spark master on worker nodes
       when: inventory_hostname in groups['spark_master']
