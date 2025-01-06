@@ -13,22 +13,6 @@
         state: stopped
         enabled: true
 
-    - name: Install java 11
-      ansible.builtin.package:
-        name:
-        - java-11-openjdk-headless
-        state: latest
-
-
-    - name: Create nessie user
-      user:
-        name: "{{ nessie_user }}"
-        group: "{{ org_group }}"
-        shell: /bin/bash
-        create_home: yes
-      register: nessie_user_registered
-
-
     - name: Extract ivy cache tarball
       unarchive:
         src: "{{ iceberg_nessie_airgap_ivy_cache }}"
@@ -59,34 +43,6 @@
         state: absent
         path: "{{ spark_user_registered.home }}/airgap"
 
-    - name: ensure nessie directories exists
-      file:
-        path: "{{ item }}"
-        state: directory
-        owner: "{{ nessie_user }}"
-        group: "{{ org_group }}"
-        mode: '770'
-      loop:
-        - "{{ nessie_log_dir }}"
-        - "{{ nessie_home }}"
-        - "{{ nessie_database_path }}"
-
-
-    - name: copy nessie runnable
-      copy:
-        src: "{{ nessie_airgap_archive }}"
-        dest: "{{ nessie_home }}/"
-        remote_src: yes
-        owner: "{{ nessie_user }}"
-        group: "{{ org_group }}"
-        mode: '700'
-
-    - name: Create system systemd nessie service file
-      when: inventory_hostname in groups['nessie_master']
-      template:
-        src: "nessie.service.j2"
-        dest: /etc/systemd/system/nessie.service
-
     - name: Start nessie
       when: inventory_hostname in groups['nessie_master']
       systemd:
@@ -94,10 +50,10 @@
         state: started
         enabled: true
 
-    - name: Insert icebergs deaults in spark-defaults
+    - name: Insert nessie catalog into into spark-defaults
       blockinfile:
-        dest: {{ spark_home }}/conf/spark-defaults.conf
-        block: "{{ lookup('template', 'spark-defaults.j2') }}"
+        dest: "{{ spark_home }}/conf/spark-defaults.conf"
+        block: "{{ lookup('template', 'spark-defaults.conf.j2') }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK FOR SPARK ICEBERG DEFAULTS"
         owner: "{{ spark_user }}"
         group: "{{ org_group }}"

@@ -1,0 +1,48 @@
+---
+    - name: Install java 11
+      ansible.builtin.package:
+        name:
+        - java-11-openjdk-headless
+        state: latest
+
+    - name: Create nessie user
+      user:
+        name: "{{ nessie_user }}"
+        group: "{{ org_group }}"
+        shell: /bin/bash
+        create_home: yes
+      register: nessie_user_registered
+
+    - name: ensure nessie directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ nessie_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+      loop:
+        - "{{ nessie_log_dir }}"
+        - "{{ nessie_home }}"
+        - "{{ nessie_database_path }}"
+
+
+    - name: copy nessie runnable
+      copy:
+        src: "{{ nessie_airgap_archive }}"
+        dest: "{{ nessie_home }}/"
+        owner: "{{ nessie_user }}"
+        group: "{{ org_group }}"
+        mode: '700'
+
+    - name: Create system systemd nessie service file
+      when: inventory_hostname in groups['nessie_master']
+      template:
+        src: "nessie.service.j2"
+        dest: /etc/systemd/system/nessie.service
+
+    - name: Start nessie
+      when: inventory_hostname in groups['nessie_master']
+      systemd:
+        name: nessie
+        state: started
+        enabled: true

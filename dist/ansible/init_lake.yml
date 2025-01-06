@@ -6,11 +6,17 @@
   roles:
     - init_host
     - init
+- hosts: nessie_master
+  become: true
+  vars_files:
+     - secret_vars.yml
+  roles:
+    - nessie
 - hosts: spark_cluster
   become: true
   vars_files:
      - secret_vars.yml
   roles:
     - spark
-    - iceberg_nessie
+    - iceberg
 

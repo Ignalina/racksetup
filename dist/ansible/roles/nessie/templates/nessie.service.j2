@@ -1,0 +1,17 @@
+[Unit]
+Description=Project Nessie {{ nessie_version }}
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{  nessie_user }}
+Group= {{ org }}
+Type=simple
+Restart=always
+RestartSec=5
+
+WorkingDirectory={{ nessie_home }}
+ExecStart={{ java11_home }}/bin/java -Dnessie.version.store.type=ROCKSDB -Dnessie.version.store.persist.rocks.database-path={{ nessie_database_path }} -Dquarkus.http.host={{ nessie_quarkus_host }} -Dquarkus.http.port=9200 -jar {{ nessie_home }}/nessie-quarkus-{{ nessie_version }}-runner.jar
+
+[Install]
+WantedBy=multi-user.target
