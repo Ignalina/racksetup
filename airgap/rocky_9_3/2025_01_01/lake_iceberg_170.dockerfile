@@ -40,6 +40,7 @@ RUN wget https://downloads.apache.org/ranger/2.5.0/apache-ranger-2.5.0.tar.gz -O
 RUN wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar -O /airgap/archive/mysql-connector-j-8.3.0.jar
 
 RUN wget https://www.apache.org/dyn/closer.lua/lucene/solr/8.11.2/solr-8.11.2.tgz?action=download -O  /airgap/archive/solr-8.11.2.tgz
+RUN wget https://dl.min.io/server/minio/release/linux-amd64/minio-20241218131544.0.0-1.x86_64.rpm -O /airgap/archive/minio-20241218131544.0.0-1.x86_64.rpm
 
 RUN echo '\
 <ivy-module version="2.0">\

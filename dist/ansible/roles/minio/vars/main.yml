@@ -1,10 +1,8 @@
 ---
-minio_version: "0.7.0"
+minio_version: "20241218131544.0.0-1.x86_64"
 
-minio_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/nessie-quarkus-{{ minio_version }}-tar.gz"
-minio_user: "minio"
+minio_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/minio-{{ minio_version }}.rpm"
 
-nessie_home: "{{ install_home }}/nessie/{{ minio_version }}"
 
 minio_api: "{{ hostvars[groups['minio_master'][0]].ansible_host }}:9001"
 minio_web: "{{ hostvars[groups['minio_master'][0]].ansible_host }}:9000"
