@@ -1,8 +1,8 @@
 ---
-    - name: Install java 11
+    - name: Install java 21
       ansible.builtin.package:
         name:
-        - java-11-openjdk-headless
+        - java-21-openjdk-headless
         state: latest
 
     - name: Create nessie user
