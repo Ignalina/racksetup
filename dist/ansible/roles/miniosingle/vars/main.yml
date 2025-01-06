@@ -2,8 +2,9 @@
 minio_version: "20241218131544.0.0-1.x86_64"
 
 minio_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/minio-{{ minio_version }}.rpm"
-
-
+minio_volumes: "/var/lib/x14/minio/mnt/disk1/minio"
+minio_user: "minio-user"
+minio_group: "minio-user"
 minio_api: "{{ minio_host }}:9001"
 minio_web: "{{ minio_host }}:9000"
 

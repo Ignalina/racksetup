@@ -17,3 +17,12 @@
         shell: /sbin/nologin
         create_home: no
       register: minio_user_registered
+    - name: ensure minio directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ minio_user }}"
+        group: "{{ minio_group }}"
+        mode: '770'
+      loop:
+        - "{{ minio_volumes }}"
