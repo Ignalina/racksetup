@@ -2,6 +2,6 @@
     - include_tasks: "{{ role_path }}/tasks/{{ os_version }}.yml"
     - name: Insert minio defaults
       blockinfile:
-        dest: "/etc/default/conf/minio.conf"
+        dest: "/etc/default/minio.conf"
         block: "{{ lookup('template', 'minio.conf.j2') }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK FOR MINIO DEFAULTS"
