@@ -1,5 +1,10 @@
 ---
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: "{{ minio_airgap_archive }}"
+        dest: "/tmp/{{ minio_airgap_archive| basename }}"
+
     - name: Install package
-      yum:
-        name: "{{ minio_airgap_archive }}"
-        state: present
+      command: "rpm -i /tmp/{{ minio_airgap_archive| basename }}"
+      args:
+        creates: /usr/local/bin/minio

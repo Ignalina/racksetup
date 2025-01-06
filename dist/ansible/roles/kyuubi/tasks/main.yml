@@ -13,6 +13,15 @@
         create_home: yes
       register: kyuubi_user_registered
 
+    - name: ensure new kyuubi directory exists
+      file:
+        path: "{{ kyuubi_home }}NEWKYUUBI"
+        state: directory
+        owner: "{{ kyuubi_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+
     - name: Extract kyyubi tarball
       unarchive:
         src: "{{ kyuubi_airgap_archive }}"

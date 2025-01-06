@@ -5,3 +5,4 @@
         dest: "/etc/default/minio.conf"
         block: "{{ lookup('template', 'minio.conf.j2') }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK FOR MINIO DEFAULTS"
+        create: yes
