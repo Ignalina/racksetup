@@ -11,7 +11,7 @@
   vars_files:
      - secret_vars.yml
   roles:
-    - minio
+    - miniosingle
 - hosts: nessie_master
   become: true
   vars_files:

@@ -1,0 +1,19 @@
+---
+    - include_tasks: "{{ role_path }}/tasks/{{ os_version }}.yml"
+    - name: Insert minio defaults
+      blockinfile:
+        dest: "/etc/default/minio"
+        block: "{{ lookup('template', 'minio.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR MINIO DEFAULTS"
+        create: yes
+    - name: Create minio group
+      ansible.builtin.group:
+        name: "minio-user"
+        state: present
+    - name: Create minio user
+      user:
+        name: "minio-user"
+        group: "minio-user"
+        shell: /sbin/nologin
+        create_home: no
+      register: minio_user_registered
