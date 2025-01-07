@@ -102,7 +102,7 @@
         dest: /etc/systemd/system/spark-master.service
 
     - name: Create system systemd spark slave service file
-      when: inventory_hostname in groups['spark_workers']
+      when: inventory_hostname in groups['spark_workers'] or inventory_hostname in groups['spark_master']
       template:
         src: "spark-slave.service.j2"
         dest: /etc/systemd/system/spark-slave.service
@@ -115,7 +115,7 @@
         enabled: true
 
     - name: Start Spark worker on worker nodes
-      when: inventory_hostname in groups['spark_workers']
+      when: inventory_hostname in groups['spark_workers'] or inventory_hostname in groups['spark_master']
       systemd:
         name: spark-slave
         state: started
