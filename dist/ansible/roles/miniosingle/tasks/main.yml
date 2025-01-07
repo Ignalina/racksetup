@@ -25,4 +25,10 @@
         group: "{{ minio_group }}"
         mode: '770'
       loop:
-        - "{{ minio_volumes }}"
+        - "{{ minio_volumes }}"        
+    - name: Start minio server
+      when: inventory_hostname in groups['minio_master']
+      systemd:
+        name: minio
+        state: started
+        enabled: true
