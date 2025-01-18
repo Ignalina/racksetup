@@ -1,6 +1,6 @@
 org: "ignalina"
-os_version: "fedora_40"
-stack_version: "2025_01_01"
+os_version: "ubi_95"
+stack_version: "2025_01_18"
 
 airgap_home: "/home/rickard/syncthing/projekt/racksetup/airgap"
 
@@ -14,7 +14,6 @@ pids_home: "{{ data_home }}/pids"
 java11_home: "/usr/lib/jvm/jre-11"
 java17_home: "/usr/lib/jvm/jre-17"
 java21_home: "/usr/lib/jvm/jre-21"
-
 
 
 spark_master_host: "{{ hostvars[groups['spark_master'][0]].ansible_host }}"
