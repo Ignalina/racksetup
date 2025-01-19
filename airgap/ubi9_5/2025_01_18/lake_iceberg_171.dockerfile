@@ -3,12 +3,13 @@ from registry.access.redhat.com/ubi9/ubi:9.5
 #
 # This dockerfile airgaps Lake 1.7.0 dependencies to the airgap/ directory.
 #   Iceberg 1.7.1
-#   spark 3.5.4
-#   nessie 0.101.3
-#   awssdk 2.29.29
-#   hadoop-aws 3.4.1
-#   kyuubi 1.10.1
+#   Spark 3.5.4
+#   Nessie 0.101.3
+#   Awssdk 2.29.29
+#   Hadoop-aws 3.4.1
+#   Kyuubi 1.10.1
 #   minio 20250118003137
+#   Doris 3.0.3
 #   TODO Ranger
 
 #
@@ -34,6 +35,9 @@ RUN wget https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.3.0/mysql-
 
 RUN wget https://www.apache.org/dyn/closer.lua/lucene/solr/8.11.2/solr-8.11.2.tgz?action=download -O  /airgap/archive/solr-8.11.2.tgz
 RUN wget https://dl.min.io/server/minio/release/linux-amd64/minio-20250118003137.0.0-1.x86_64.rpm -O /airgap/archive/minio-20250118003137.0.0-1.x86_64.rpm
+
+
+RUN wget https://apache-doris-releases.oss-accelerate.aliyuncs.com/apache-doris-3.0.3-bin-x64.tar.gz -O /airgap/archive/apache-doris-3.0.3-bin-x64.tar.gz
 
 RUN echo '\
 <ivy-module version="2.0">\
