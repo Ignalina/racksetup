@@ -1,0 +1,94 @@
+---
+    - name: Insert hostnames and ip in /etc/hosts file
+      blockinfile:
+        dest: /etc/hosts
+        block: "{{ lookup('template', 'hosts.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
+
+    - name: Install java 17
+      ansible.builtin.package:
+        name:
+        - java-17-openjdk-headless
+        state: latest
+
+      name: set swappines
+    - sysctl:
+        name: vm.swappiness
+        value: '0'
+        state: present
+
+    - name: Create Doris user
+      user:
+        name: "{{ doris_user }}"
+        group: "{{ org_group }}"
+        shell: /bin/bash
+        create_home: yes
+      register: doris_user_registered
+
+    - name: ensure new doris directory exists
+      file:
+        path: "{{ doris_home }}NEWDORIS"
+        state: directory
+        owner: "{{ doris_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+    - name: Extract Doris tarball
+      unarchive:
+        src: "{{ doris_airgap_archive }}"
+        dest: "{{ doris_home }}NEWDORIS"
+        remote_src: no
+        owner: "{{ doris_user }}"
+        group: "{{ org_group }}"
+        creates: "{{ doris_home }}/be"
+
+
+    - name: Move to correct directory name
+      command: mv {{ doris_home }}NEWDORIS/{{doris_airgap_archive[:-6]|basename}} {{ doris_home }}
+      args:
+        creates: "{{ doris_home }}/be"
+
+    - name: Delete content & directory
+      ansible.builtin.file:
+        state: absent
+        path: "{{ doris_home }}NEWDORIS"
+
+
+    - name: ensure doris directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ doris_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+      loop:
+        - "{{ doris_log_dir }}"
+        - "{{ doris_local_dir }}"
+        - "{{ doris_worker_dir }}"
+
+
+    - name: Create system systemd doris fe master service file
+      when: inventory_hostname in groups['doris_fe_master']
+      template:
+        src: "doris-fe-master.service.j2"
+        dest: /etc/systemd/system/doris-fe-master.service
+
+    - name: Create system systemd doris be node service file
+      when: inventory_hostname in groups['doris_be_nodes'] or inventory_hostname in groups['doris_fe_master']
+      template:
+        src: "doris-be.service.j2"
+        dest: /etc/systemd/system/spark-slave.service
+
+    - name: Start Doris FE master on master node
+      when: inventory_hostname in groups['doris_fe_master']
+      systemd:
+        name: doris-fe-master
+        state: started
+        enabled: true
+
+    - name: Start doris BE worker on worker nodes
+      when: inventory_hostname in groups['doris_be_nodes'] or inventory_hostname in groups['doris_fe_master']
+      systemd:
+        name: doris-be
+        state: started
+        enabled: true

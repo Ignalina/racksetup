@@ -1,0 +1,3 @@
+{% for host in groups['doris_cluster'] %}
+{{ hostvars[host]['ansible_host'] }} {{ hostvars[host]['ext_hostname'] }}
+{% endfor %}

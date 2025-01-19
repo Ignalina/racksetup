@@ -21,3 +21,5 @@ nessie_host: "{{ hostvars[groups['nessie_master'][0]].ansible_host }}"
 minio_host: "{{ hostvars[groups['minio_master'][0]].ansible_host }}"
 ranger_host: "{{ hostvars[groups['ranger_master'][0]].ansible_host }}"
 kyuubi_host: "{{ hostvars[groups['kyuubi_master'][0]].ansible_host }}"
+
+doris_fe_master_host: "{{ hostvars[groups['doris_fe_master'][0]].ansible_host }}"

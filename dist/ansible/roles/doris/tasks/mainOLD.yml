@@ -1,0 +1,119 @@
+---
+    - name: Insert hostnames and ip in /etc/hosts file
+      blockinfile:
+        dest: /etc/hosts
+        block: "{{ lookup('template', 'hosts.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
+
+    - name: Install java 17
+      ansible.builtin.package:
+        name:
+        - java-17-openjdk-headless
+        state: latest
+
+      name: set swappines
+    - sysctl:
+        name: vm.swappiness
+        value: '0'
+        state: present
+
+
+    - name: Create Doris user
+      user:
+        name: "{{ doris_user }}"
+        group: "{{ org_group }}"
+        shell: /bin/bash
+        create_home: yes
+      register: doris_user_registered
+
+    - name: ensure ivy cache directory exists
+      file:
+        path: "{{ spark_user_registered.home }}/.ivy/cache"
+        state: directory
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+    - name: ensure new spark directory exists
+      file:
+        path: "{{ spark_home }}NEWSPARK"
+        state: directory
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+    - name: Extract Spark tarball
+      unarchive:
+        src: "{{ doris_airgap_archive }}"
+        dest: "{{ doris_home }}NEWDORIS"
+        remote_src: no
+        owner: "{{ doris_user }}"
+        group: "{{ org_group }}"
+        creates: "{{ doris_home }}/conf"
+
+
+    - name: ensure spark directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ doris_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+      loop:
+        - "{{ doris_log_dir }}"
+        - "{{ doris_local_dir }}"
+
+    - name: Create spark-env.sh
+      template:
+        src: "spark-env.sh.j2"
+        dest: "{{ spark_home }}/conf/spark-env.sh"
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+
+    - name: Create spark-defaults.conf
+      template:
+        src: "spark-defaults.conf.j2"
+        dest: "{{ spark_home }}/conf/spark-defaults.conf"
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+    - name: Configure Spark to point to the master node
+      when: inventory_hostname in groups['spark_workers']
+      lineinfile:
+        path: "{{ spark_home }}/conf/spark-defaults.conf"
+        line: 'spark.master {{ spark_master_url }}'
+        create: yes
+        owner: "{{ spark_user }}"
+        group: "{{ org_group }}"
+        mode: '770'
+
+
+    - name: Create system systemd spark master service file
+      when: inventory_hostname in groups['spark_master']
+      template:
+        src: "spark-master.service.j2"
+        dest: /etc/systemd/system/spark-master.service
+
+    - name: Create system systemd spark slave service file
+      when: inventory_hostname in groups['spark_workers'] or inventory_hostname in groups['spark_master']
+      template:
+        src: "spark-slave.service.j2"
+        dest: /etc/systemd/system/spark-slave.service
+
+    - name: Start Spark master on master node
+      when: inventory_hostname in groups['spark_master']
+      systemd:
+        name: spark-master
+        state: started
+        enabled: true
+
+    - name: Start Spark worker on worker nodes
+      when: inventory_hostname in groups['spark_workers'] or inventory_hostname in groups['spark_master']
+      systemd:
+        name: spark-slave
+        state: started
+        enabled: true
+

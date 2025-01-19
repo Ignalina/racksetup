@@ -1,0 +1,21 @@
+[Unit]
+Description=Apache Spark {{ spark_version }} Slave scala 12
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{ spark_user }}
+Group={{ org_group }}
+Type=forking
+SuccessExitStatus=143
+
+WorkingDirectory={{ spark_home }}
+ExecStart="{{ spark_home }}/sbin/start-master.sh"
+ExecStop="{{ spark_home }}/sbin/stop-master.sh"
+
+
+[Install]
+WantedBy=multi-user.target
+
+
+
