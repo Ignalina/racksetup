@@ -84,3 +84,6 @@ SPARK_HOME={{ spark_home }}
 JAVA_HOME={{ java11_home }}
 SPARK_MASTER_HOST={{ hostvars['master_node'].ansible_host }}
 SPARK_LOCAL_IP={{ hostvars[inventory_hostname].ansible_host }}
+AWS_ACCESS_KEY_ID=iceberg
+AWS_SECRET_ACCESS_KEY=changeme
+AWS_REGION=us-east-1
