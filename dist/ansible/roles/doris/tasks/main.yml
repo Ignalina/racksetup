@@ -77,7 +77,7 @@
       when: inventory_hostname in groups['doris_be_nodes'] or inventory_hostname in groups['doris_fe_master']
       template:
         src: "doris-be.service.j2"
-        dest: /etc/systemd/system/spark-slave.service
+        dest: /etc/systemd/system/doris-be.service
 
     - name: Start Doris FE master on master node
       when: inventory_hostname in groups['doris_fe_master']
