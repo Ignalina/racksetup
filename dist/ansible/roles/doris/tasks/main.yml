@@ -5,6 +5,15 @@
         block: "{{ lookup('template', 'hosts.j2') }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
 
+    - name: Insert hostnames and ip in /etc/hosts file
+      blockinfile:
+        dest: /etc/security/limits.conf
+        block: "{{ lookup('template', 'limits.conf.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
+
+    - name: Reboot the machine with all defaults options
+      reboot:
+
     - name: Install java 17
       ansible.builtin.package:
         name:
@@ -16,6 +25,11 @@
         name: vm.swappiness
         value: '0'
         state: present
+
+    - name: set vm.max_map_count to 2200000 in sysctl
+      sysctl: name={{ item.key }} value={{ item.value }}
+      with_items:
+        -   { key: "vm.max_map_count", value: "2200000" }
 
     - name: Create Doris user
       user:
@@ -42,11 +56,21 @@
         group: "{{ org_group }}"
         creates: "{{ doris_home }}/be"
 
+    - name: 
+      ansible.builtin.find:
+        paths: "{{ doris_home }}NEWDORIS"
+        file_type: directory
+        recurse: no
+      register: newdoris_dir_registered
 
-    - name: Move to correct directory name
-      command: mv {{ doris_home }}NEWDORIS/{{doris_airgap_archive[:-6]|basename}} {{ doris_home }}
+    - name: move to correct path
+      command: mv {{ item.path }} {{ doris_home }}
       args:
         creates: "{{ doris_home }}/be"
+      with_items: "{{ newdoris_dir_registered.files }}"
+
+
+
 
     - name: Delete content & directory
       ansible.builtin.file:

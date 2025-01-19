@@ -1,0 +1,7 @@
+---
+- hosts: doris_cluster
+  become: true
+  vars_files:
+     - secret_vars.yml
+  roles:
+    - doris
