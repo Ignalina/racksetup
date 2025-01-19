@@ -11,5 +11,9 @@
         create_home: no
       register: org_user_registered
     - include_tasks: "{{ role_path }}/tasks/{{ os_version }}.yml"
+    - name: Put SELinux in permissive mode, logging actions that would be blocked.
+      ansible.posix.selinux:
+        policy: targeted
+        state: permissive
     - name: Reboot the machine with all defaults options
       reboot:

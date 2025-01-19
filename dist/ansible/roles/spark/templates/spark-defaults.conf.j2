@@ -51,5 +51,7 @@ spark.hadoop.fs.s3a.secret.key: !vault |
           6335663462336331660a366263363734613261343134626338383962333737363931653061666235
           3030
 
-spark.hadoop.fs.s3a.endpoint=http://{{ minio_host }}:9401"
+spark.hadoop.fs.s3a.endpoint=http://{{ minio_host }}:9401
 spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
+spark.driver.extraJavaOptions=-Daws.region=why
+spark.executor.extraJavaOptions=-Daws.region=why

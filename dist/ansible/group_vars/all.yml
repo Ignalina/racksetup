@@ -1,5 +1,5 @@
 org: "ignalina"
-os_version: "ubi_95"
+os_version: "ubi_9_5"
 stack_version: "2025_01_18"
 
 airgap_home: "/home/rickard/syncthing/projekt/racksetup/airgap"

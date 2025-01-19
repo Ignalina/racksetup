@@ -2,7 +2,7 @@
 spark_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/spark-{{ spark_version }}-bin-hadoop3.tgz"
 spark_airgap_ivy_cache: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/.ivy.tar.zst"
 
-spark_version: "3.5.3"
+spark_version: "3.5.4"
 spark_home: "{{ install_home }}/spark/{{ spark_version }}"
 spark_user: "spark"
 spark_master_url: "spark://{{ spark_master_host }}:7077"
