@@ -1,3 +1,4 @@
+grubby --args="transparent_hugepage=never" --update-kernel ALL
 ---
     - name: Insert hostnames and ip in /etc/hosts file
       blockinfile:
@@ -10,9 +11,6 @@
         dest: /etc/security/limits.conf
         block: "{{ lookup('template', 'limits.conf.j2') }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
-
-    - name: Reboot the machine with all defaults options
-      reboot:
 
     - name: Install java 17
       ansible.builtin.package:
@@ -30,6 +28,18 @@
       sysctl: name={{ item.key }} value={{ item.value }}
       with_items:
         -   { key: "vm.max_map_count", value: "2200000" }
+
+
+    - name: Make sure ntp service unit is running
+      ansible.builtin.systemd_service:
+        enabled: true
+        state: started
+        name: ntp
+
+    - include_tasks: "{{ role_path }}/tasks/{{ os_version }}.yml"
+
+    - name: Reboot the machine with all defaults options
+      reboot:
 
     - name: Create Doris user
       user:
