@@ -4,7 +4,7 @@ from registry.access.redhat.com/ubi9/ubi:9.5
 # This dockerfile airgaps Lake 1.7.0 dependencies to the airgap/ directory.
 #   Iceberg 1.7.1
 #   Spark 3.5.4
-#   Nessie 0.101.3
+#   Nessie 0.102.1
 #   Awssdk 2.29.29
 #   Hadoop-aws 3.4.1
 #   Kyuubi 1.10.1
@@ -27,7 +27,7 @@ RUN dnf -y install wget java-11-openjdk-headless zstd tar; dnf clean all;
 #
 
 RUN wget https://dlcdn.apache.org/spark/spark-3.5.4/spark-3.5.4-bin-hadoop3.tgz -O /airgap/archive/spark-3.5.4-bin-hadoop3.tgz
-RUN wget https://github.com/projectnessie/nessie/releases/download/nessie-0.101.3/nessie-quarkus-0.101.3-runner.jar -O /airgap/archive/nessie-quarkus-0.101.3-runner.jar
+RUN wget https://github.com/projectnessie/nessie/releases/download/nessie-0.102.1/nessie-quarkus-0.102.1-runner.jar -O /airgap/archive/nessie-quarkus-0.102.1-runner.jar
 RUN wget https://dlcdn.apache.org/kyuubi/kyuubi-1.10.1/apache-kyuubi-1.10.1-bin.tgz -O /airgap/archive/apache-kyuubi-1.10.1-bin.tgz
 RUN wget https://repo1.maven.org/maven2/org/apache/kyuubi/kyuubi-spark-authz_2.12/1.10.1/kyuubi-spark-authz_2.12-1.10.1.jar -O /airgap/archive/kyuubi-spark-authz_2.12-1.10.1.jar
 RUN wget https://downloads.apache.org/ranger/2.5.0/apache-ranger-2.5.0.tar.gz -O /airgap/archive/apache-ranger-2.5.0.tar.gz
@@ -46,7 +46,7 @@ RUN echo '\
        <dependency org="software.amazon.awssdk" name="bundle" rev="2.29.29" />\
        <dependency org="org.apache.hadoop" name="hadoop-aws" rev="3.4.1" />\
        <dependency org="org.mariadb.jdbc" name="mariadb-java-client" rev="3.1.3" />\
-       <dependency org="org.projectnessie.nessie-integrations" name="nessie-spark-extensions-3.5_2.12" rev="0.101.3" />\
+       <dependency org="org.projectnessie.nessie-integrations" name="nessie-spark-extensions-3.5_2.12" rev="0.102.1" />\
        <dependency org="org.apache.iceberg" name="iceberg-spark-runtime-3.5_2.12" rev="1.7.1" />\
        <dependency org="software.amazon.awssdk" name="sts" rev="2.29.29" />\
        <dependency org="software.amazon.awssdk" name="s3" rev="2.29.29" />\

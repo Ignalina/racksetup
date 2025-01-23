@@ -3,10 +3,9 @@ doris_version: "3.0.3"
 doris_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/apache-doris-{{ doris_version }}-bin-x64.tar.gz"
 doris_home: "{{ install_home }}/doris/{{ doris_version }}"
 doris_user: "doris"
-doris_master_url: "spark://{{ spark_master_host }}:7077"
+doris_fe_master_urö: "http://{{ doris_fe_master_host }}"
 
 
 doris_log_dir: "{{ logs_home }}/doris/{{ doris_version }}"
-doris_local_dir: "{{ data_home }}/doris{{ doris_version }}/doris.local.dir"
-doris_worker_dir: "{{ data_home }}/doris{{ doris_version }}/doris.worker.dir"
-
+doris_meta_created_dir: "{{ data_home }}/doris/doris_meta"
+doris_be_storage_root_path_dir: "{{ data_home }}/doris/be_storage_root_path"

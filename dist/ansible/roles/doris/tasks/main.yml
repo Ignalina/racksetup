@@ -97,8 +97,8 @@ grubby --args="transparent_hugepage=never" --update-kernel ALL
         mode: '770'
       loop:
         - "{{ doris_log_dir }}"
-        - "{{ doris_local_dir }}"
-        - "{{ doris_worker_dir }}"
+        - "{{ doris_meta_created_dir }}"
+        - "{{ doris_be_storage_root_path_dir }}"
 
 
     - name: Create system systemd doris fe master service file
