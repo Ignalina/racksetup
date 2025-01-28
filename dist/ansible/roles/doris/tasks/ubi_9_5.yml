@@ -4,5 +4,5 @@
 
 - name: install sql client
   when: inventory_hostname in groups['doris_fe_master']
-  shell: yum install -y mariadb-client
+  shell: yum install -y mysql
 

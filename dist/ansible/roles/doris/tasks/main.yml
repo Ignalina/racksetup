@@ -11,10 +11,10 @@
         block: "{{ lookup('template', 'limits.conf.j2') }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
 
-    - name: Install java 17
+    - name: Install jdk 17
       ansible.builtin.package:
         name:
-        - java-17-openjdk-headless
+        - java-17-openjdk-devel
         state: latest
 
       name: set swappines
@@ -28,12 +28,11 @@
       with_items:
         -   { key: "vm.max_map_count", value: "2200000" }
 
-
     - name: Make sure ntp service unit is running
       ansible.builtin.systemd_service:
         enabled: true
         state: started
-        name: ntp
+        name: chronyd
 
     - include_tasks: "{{ role_path }}/tasks/{{ os_version }}.yml"
 
@@ -97,12 +96,24 @@
         - "{{ doris_meta_created_dir }}"
         - "{{ doris_be_storage_root_path_dir }}"
 
+    - name: Create fe config
+      when: inventory_hostname in groups['doris_fe_master']
+      template:
+        src: "fe.conf.j2"
+        dest: "{{ doris_home }}/fe/conf/fe.conf"
 
     - name: Create system systemd doris fe master service file
       when: inventory_hostname in groups['doris_fe_master']
       template:
         src: "doris-fe-master.service.j2"
         dest: /etc/systemd/system/doris-fe-master.service
+
+
+    - name: Create be config
+      when: inventory_hostname in groups['doris_be_nodes']
+      template:
+        src: "be.conf.j2"
+        dest: "{{ doris_home }}/be/conf/be.conf"
 
     - name: Create system systemd doris be node service file
       when: inventory_hostname in groups['doris_be_nodes'] or inventory_hostname in groups['doris_fe_master']
@@ -124,6 +135,7 @@
         dest: /tmp/be.msql
         block: "{{ lookup('template', 'be.sql.j2') }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
+        create: true
 
     - name: register all BE
       when: inventory_hostname in groups['doris_fe_master']

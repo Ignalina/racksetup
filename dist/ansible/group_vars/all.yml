@@ -15,6 +15,10 @@ java11_home: "/usr/lib/jvm/jre-11"
 java17_home: "/usr/lib/jvm/jre-17"
 java21_home: "/usr/lib/jvm/jre-21"
 
+jdk11_home: "/usr/lib/jvm/java-11-openjdk"
+jdk17_home: "/usr/lib/jvm/java-17-openjdk"
+jdk21_home: "/usr/lib/jvm/java-21-openjdk"
+
 
 spark_master_host: "{{ hostvars[groups['spark_master'][0]].ansible_host }}"
 nessie_host: "{{ hostvars[groups['nessie_master'][0]].ansible_host }}"
