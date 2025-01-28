@@ -9,3 +9,4 @@ doris_fe_master_urö: "http://{{ doris_fe_master_host }}"
 doris_log_dir: "{{ logs_home }}/doris/{{ doris_version }}"
 doris_meta_created_dir: "{{ data_home }}/doris/doris_meta"
 doris_be_storage_root_path_dir: "{{ data_home }}/doris/be_storage_root_path"
+doris_priority_networks: 192.168.122.0/24

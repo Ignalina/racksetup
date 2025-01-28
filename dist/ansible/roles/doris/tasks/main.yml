@@ -1,4 +1,3 @@
-grubby --args="transparent_hugepage=never" --update-kernel ALL
 ---
     - name: Insert hostnames and ip in /etc/hosts file
       blockinfile:
@@ -80,8 +79,6 @@ grubby --args="transparent_hugepage=never" --update-kernel ALL
       with_items: "{{ newdoris_dir_registered.files }}"
 
 
-
-
     - name: Delete content & directory
       ansible.builtin.file:
         state: absent
@@ -120,9 +117,22 @@ grubby --args="transparent_hugepage=never" --update-kernel ALL
         state: started
         enabled: true
 
+
+    - name: create sql to register all BE
+      when: inventory_hostname in groups['doris_fe_master']
+      blockinfile:
+        dest: /tmp/be.msql
+        block: "{{ lookup('template', 'be.sql.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
+
+    - name: register all BE
+      when: inventory_hostname in groups['doris_fe_master']
+      shell: mysql -h {{ doris_fe_master_host }}  -P 9030 -u root << /tmp/be.sql
+
     - name: Start doris BE worker on worker nodes
-      when: inventory_hostname in groups['doris_be_nodes'] or inventory_hostname in groups['doris_fe_master']
+      when: inventory_hostname in groups['doris_be_nodes']
       systemd:
         name: doris-be
         state: started
         enabled: true
+

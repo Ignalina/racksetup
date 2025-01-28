@@ -31,4 +31,3 @@ doris_be_node_3 ansible_host=192.168.122.106 ext_hostname=spark3.iceberg.se
 [doris_cluster:children]
 doris_fe_master
 doris_be_nodes
-

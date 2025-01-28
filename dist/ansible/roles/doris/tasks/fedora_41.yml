@@ -1,3 +1,6 @@
 ---
 - name: install dependencies
   shell: grubby --update-kernel ALL --args "selinux=0 transparent_hugepage=never"; yum install -y zstd
+- name: install sql client
+  when: inventory_hostname in groups['doris_fe_master']
+  shell: dnf install -y mariadb
