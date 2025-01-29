@@ -1,4 +1,4 @@
 {% for host in groups['doris_be_nodes'] %}
-ALTER SYSTEM ADD BACKEND "{{ hostvars[host]['ansible_host'] }}:9050"
+ALTER SYSTEM ADD BACKEND "{{ hostvars[host]['ansible_host'] }}:9050";
 {% endfor %}
 
