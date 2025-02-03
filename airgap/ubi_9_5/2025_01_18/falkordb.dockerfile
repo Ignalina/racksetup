@@ -17,3 +17,11 @@ RUN git clone --recurse-submodules -j8 --depth 1 --branch v4.6.1 https://github.
 RUN cd FalkorDB; make
 RUN gzip -c /home/maker/FalkorDB/bin/linux-x64-release/src/falkordb.so  > /airgap/archive/falkordb_v4.6.1.so.gz
 RUN export HOME=/home/maker;. ./pipvenv/bin/activate  ;pip download -d /airgap/python falkordb;
+RUN mkdir dummy;mkdir src;echo "fn main() {    println!("Hello, world!");}" > src/main.rs
+RUN echo $'[package]\n\
+    name = "dummy"\n\
+    version = "0.1.0"\n\
+    edition = "2021"\n\
+    [dependencies]\n\
+    falkordb = { version = "0.1.10" }' > Cargo.toml
+RUN cargo vendor /airgap/rust
