@@ -64,7 +64,7 @@
         group: "{{ org_group }}"
         creates: "{{ doris_home }}/be"
 
-    - name: 
+    - name:
       ansible.builtin.find:
         paths: "{{ doris_home }}NEWDORIS"
         file_type: directory
@@ -108,6 +108,30 @@
         src: "doris-fe-master.service.j2"
         dest: /etc/systemd/system/doris-fe-master.service
 
+    - name: Create fe follower config
+      when: inventory_hostname in groups['doris_fe_follower']
+      template:
+        src: "fe.conf.j2"
+        dest: "{{ doris_home }}/fe/conf/fe.conf"
+
+    - name: Create system systemd doris fe follower service file
+      when: inventory_hostname in groups['doris_fe_follower']
+      template:
+        src: "doris-fe-follower.service.j2"
+        dest: /etc/systemd/system/doris-fe-follower.service
+
+    - name: Create fe observer config
+      when: inventory_hostname in groups['doris_fe_follower']
+      template:
+        src: "fe.conf.j2"
+        dest: "{{ doris_home }}/fe/conf/fe.conf"
+
+    - name: Create system systemd doris fe observer service file
+      when: inventory_hostname in groups['doris_fe_observer']
+      template:
+        src: "doris-fe-observer.service.j2"
+        dest: /etc/systemd/system/doris-fe-observer.service
+
 
     - name: Create be config
       when: inventory_hostname in groups['doris_be_nodes']
@@ -128,6 +152,30 @@
         state: started
         enabled: true
 
+    - name: create sql to register all FE followers
+      when: inventory_hostname in groups['doris_fe_master']
+      blockinfile:
+        dest: /tmp/fe_followers.msql
+        block: "{{ lookup('template', 'fe_followers.sql.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
+        create: true
+
+    - name: register all FE followers
+      when: inventory_hostname in groups['doris_fe_master']
+      shell: mysql -h {{ doris_fe_master_host }}  -P 9030 -u root << /tmp/fe_followers.sql
+
+    - name: create sql to register all FE observers
+      when: inventory_hostname in groups['doris_fe_master']
+      blockinfile:
+        dest: /tmp/fe_observers.msql
+        block: "{{ lookup('template', 'fe_observers.sql.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DORIS"
+        create: true
+
+    - name: register all FE observers
+      when: inventory_hostname in groups['doris_fe_master']
+      shell: mysql -h {{ doris_fe_master_host }}  -P 9030 -u root << /tmp/fe_observers.sql
+
 
     - name: create sql to register all BE
       when: inventory_hostname in groups['doris_fe_master']
@@ -140,6 +188,20 @@
     - name: register all BE
       when: inventory_hostname in groups['doris_fe_master']
       shell: mysql -h {{ doris_fe_master_host }}  -P 9030 -u root << /tmp/be.sql
+
+    - name: Start doris FE followers
+      when: inventory_hostname in groups['doris_fe_followers']
+      systemd:
+        name: doris-fe-follower
+        state: started
+        enabled: true
+
+    - name: Start doris FE observer
+      when: inventory_hostname in groups['doris_fe_observers']
+      systemd:
+        name: doris-fe-observer
+        state: started
+        enabled: true
 
     - name: Start doris BE worker on worker nodes
       when: inventory_hostname in groups['doris_be_nodes']

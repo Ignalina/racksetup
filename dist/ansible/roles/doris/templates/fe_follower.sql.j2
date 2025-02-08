@@ -1,0 +1,4 @@
+{% for host in groups['doris_fe_followers'] %}
+ALTER SYSTEM ADD FOLLOWER "{{ hostvars[host]['ansible_host'] }}:9050";
+{% endfor %}
+
