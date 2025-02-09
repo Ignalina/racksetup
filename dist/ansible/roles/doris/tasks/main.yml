@@ -109,25 +109,25 @@
         dest: /etc/systemd/system/doris-fe-master.service
 
     - name: Create fe follower config
-      when: inventory_hostname in groups['doris_fe_follower']
+      when: inventory_hostname in groups['doris_fe_followers']
       template:
         src: "fe.conf.j2"
         dest: "{{ doris_home }}/fe/conf/fe.conf"
 
     - name: Create system systemd doris fe follower service file
-      when: inventory_hostname in groups['doris_fe_follower']
+      when: inventory_hostname in groups['doris_fe_followers']
       template:
         src: "doris-fe-follower.service.j2"
         dest: /etc/systemd/system/doris-fe-follower.service
 
     - name: Create fe observer config
-      when: inventory_hostname in groups['doris_fe_follower']
+      when: inventory_hostname in groups['doris_fe_followers']
       template:
         src: "fe.conf.j2"
         dest: "{{ doris_home }}/fe/conf/fe.conf"
 
     - name: Create system systemd doris fe observer service file
-      when: inventory_hostname in groups['doris_fe_observer']
+      when: inventory_hostname in groups['doris_fe_observers']
       template:
         src: "doris-fe-observer.service.j2"
         dest: /etc/systemd/system/doris-fe-observer.service
