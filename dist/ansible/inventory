@@ -1,33 +1,42 @@
 [spark_master]
-master_node ansible_host=192.168.122.231 ext_hostname=spark1.iceberg.se
+master_node ansible_host=192.168.122.171 ext_hostname=spark1.iceberg.se
 
 [spark_workers]
-worker_node_1 ansible_host=192.168.122.19 ext_hostname=spark1.iceberg.se
-worker_node_2 ansible_host=192.168.122.199 ext_hostname=spark2.iceberg.se
-worker_node_3 ansible_host=192.168.122.106 ext_hostname=spark3.iceberg.se
+worker_node_1 ansible_host=192.168.122.171 ext_hostname=spark1.iceberg.se
+worker_node_2 ansible_host=192.168.122.12 ext_hostname=spark2.iceberg.se
+worker_node_3 ansible_host=192.168.122.28 ext_hostname=spark3.iceberg.se
 
 [spark_cluster:children]
 spark_master
 spark_workers
 
 [minio_master]
-minio_master ansible_host=192.168.122.106 ext_hostname=spark3.iceberg.se
+minio_master ansible_host=192.168.122.28 ext_hostname=spark3.iceberg.se
 
 [nessie_master]
-nessie_master ansible_host=192.168.122.231 ext_hostname=spark1.iceberg.se
+nessie_master ansible_host=192.168.122.171 ext_hostname=spark1.iceberg.se
 
 [kyuubi_master]
-nessie_master ansible_host=192.168.122.231 ext_hostname=spark1.iceberg.se
+nessie_master ansible_host=192.168.122.171 ext_hostname=spark1.iceberg.se
 
 
 [doris_fe_master]
-doris_fe_master ansible_host=192.168.122.231 ext_hostname=spark1.iceberg.se
+doris_fe_master ansible_host=192.168.122.149 ext_hostname=doris1.iceberg.se
+
+[doris_fe_followers]
+doris_fe_follower_1 ansible_host=192.168.122.172 ext_hostname=doris2.iceberg.se
+doris_fe_follower_2 ansible_host=192.168.122.37 ext_hostname=doris3.iceberg.se
+
+
+[doris_fe_observers]
+doris_fe_observer_1 ansible_host=192.168.122.113 ext_hostname=doris4.iceberg.se
 
 [doris_be_nodes]
-doris_be_node_1 ansible_host=192.168.122.19 ext_hostname=spark2.iceberg.se
-doris_be_node_2 ansible_host=192.168.122.199 ext_hostname=spark2.iceberg.se
-doris_be_node_3 ansible_host=192.168.122.106 ext_hostname=spark3.iceberg.se
+doris_be_node_1 ansible_host=192.168.122.132 ext_hostname=doris5.iceberg.se
+doris_be_node_2 ansible_host=192.168.122.102 ext_hostname=doris6.iceberg.se
 
 [doris_cluster:children]
 doris_fe_master
+doris_fe_followers
+doris_fe_observers
 doris_be_nodes

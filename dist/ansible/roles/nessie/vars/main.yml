@@ -2,7 +2,7 @@
 nessie_airgap_archive: "{{ airgap_home }}/{{ os_version }}/{{ stack_version }}/airgap/archive/nessie-quarkus-{{ nessie_version }}-runner.jar"
 nessie_user: "nessie"
 
-nessie_version: "0.101.3"
+nessie_version: "0.102.4"
 nessie_home: "{{ install_home }}/nessie/{{ nessie_version }}"
 nessie_database_path: "{{ data_home }}/nessie/{{ nessie_version }}/rocks-nessie"
 

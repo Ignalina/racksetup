@@ -1,0 +1,9 @@
+ARG UV_INDEX_URL=NONE
+FROM localhost/ignalina/fedora_41_maker_base_uv_python_311:v1
+USER root
+RUN dnf -y group install "development-tools"
+RUN dnf -y install cmake m4 automake  libtool autoconf openssl-devel-engine 
+#RUN dnf -y install clang git rust cargo unzip wget; dnf clean all;
+RUN git clone --recurse-submodules -j8 https://github.com/FalkorDB/FalkorDB.git
+RUN cd FalkorDB;make
+
