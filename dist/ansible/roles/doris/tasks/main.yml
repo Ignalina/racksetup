@@ -140,7 +140,7 @@
         dest: "{{ doris_home }}/be/conf/be.conf"
 
     - name: Create system systemd doris be node service file
-      when: inventory_hostname in groups['doris_be_nodes'] or inventory_hostname in groups['doris_fe_master']
+      when: inventory_hostname in groups['doris_be_nodes']
       template:
         src: "doris-be.service.j2"
         dest: /etc/systemd/system/doris-be.service
