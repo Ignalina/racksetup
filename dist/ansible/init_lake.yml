@@ -1,11 +1,4 @@
 ---
-- hosts: all
-  become: true
-  vars_files:
-     - secret_vars.yml
-  roles:
-    - init_host
-    - init
 - hosts: minio_master
   become: true
   vars_files:
