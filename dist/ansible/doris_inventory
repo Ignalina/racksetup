@@ -1,17 +1,17 @@
 [doris_fe_master]
-doris_fe_master ansible_host=192.168.122.251 ext_hostname=doris1.iceberg.se
+doris_fe_master ansible_host=192.168.122.26 ext_hostname=doris1.iceberg.se
 
 [doris_fe_followers]
-doris_fe_follower_1 ansible_host=192.168.122.11 ext_hostname=doris2.iceberg.se
-doris_fe_follower_2 ansible_host=192.168.122.58 ext_hostname=doris3.iceberg.se
+doris_fe_follower_1 ansible_host=192.168.122.50 ext_hostname=doris2.iceberg.se
+doris_fe_follower_2 ansible_host=192.168.122.146 ext_hostname=doris3.iceberg.se
 
 
 [doris_fe_observers]
-doris_fe_observer_1 ansible_host=192.168.122.205 ext_hostname=doris4.iceberg.se
+doris_fe_observer_1 ansible_host=192.168.122.190 ext_hostname=doris4.iceberg.se
 
 [doris_be_nodes]
-doris_be_node_1 ansible_host=192.168.122.100 ext_hostname=doris5.iceberg.se
-doris_be_node_2 ansible_host=192.168.122.164 ext_hostname=doris6.iceberg.se
+doris_be_node_1 ansible_host=192.168.122.73 ext_hostname=doris5.iceberg.se
+doris_be_node_2 ansible_host=192.168.122.45 ext_hostname=doris6.iceberg.se
 
 [doris_cluster:children]
 doris_fe_master

@@ -2,11 +2,12 @@
 - name: Put SELinux in permissive mode, logging actions that would be blocked.
   ansible.posix.selinux:
      state: permissive
-     policy: targeted
+     policy: targeted 
+  register: selinuxdisabled
 - name: Reboot if required
   reboot:
      reboot_timeout: 300
-  when: reboot_required
+  when: selinuxdisabled is changed
 - name: install dependecies
   shell: yum install -y zstd
 
